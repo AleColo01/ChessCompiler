@@ -1,0 +1,51 @@
+1. NOTAZIONE ALGEBRICA ESTESA
+	Iniziale Pezzo, casella iniziale e casella destinazione con un trattino in mezzo [Cg1-f3]
+
+2. NOTAZIONE ALGEBRICA ABBREVIATA 
+	Iniziale Pezzo e casella destinazione: solo se un pezzo può compiere tale mossa [Cf3]
+	
+	**Il pedone può essere omesso ( scrivo solo casella di destinazione )
+	**Se più pezzi dello stesso tipo possono arrivare alla stessa casella, si indica la colonna di partenza
+		o la riga in modo da togliere ambiguità [Cac3] [T3b4]
+	**Se solo la colonna o solo la riga non basta, si indica la casella di partenza [Cc3d5]
+		
+3. ARROCCO 
+	Arrocco corto [O-O]
+	Arrocco lungo [O-O-O]
+	
+4. SCACCO
+	Se con una mossa si da scacco al re, si aggiunge un + alla fine della mossa	[Ta7-a5+]
+	Se due pezzi danno scacco in una sola mossa, si aggiungono due ++ alla fine della mossa	[Af3-c4++]
+	Lo scacco matto si indica con # [Dh5#]
+	
+5. CATTURA	
+	Se un pezzo ne cattura un altro si indica con : o con x [Ac3:g7][A:g7][Ac3xg7]
+	L'en passant si indica con ep dopo la mossa, ma non è obbligatorio [dxe3 ep]
+	Una mossa non può inizare con x o :, quindi o metti P o metti la colonna
+	
+6. PROMOZIONE
+	si usano scritture come [e7-e8=D] o [e8=D]
+	se c'è scacco [e8=D+]
+	
+-------------------------------------------
+.Si va da un minimo di 3 caratteri [Qa1] ad un massimo di 11 caratteri [Pd4xe3 ep++]
+.I pezzi si indicano in maiuscolo, le caselle in minuscolo
+.I caratteri ammessi sono 
+	a, b, c, d, e, f, g, h, p, 1, 2, 3, 4, 5, 6, 7, 8, P, T, A, C, D, R, O, -, +, :, x, =, # e lo spazio
+
+--------------------------------------------
+ESTENSIONI
+
+preambolo opzionale che descrive lo stato iniziale della scacchiera per simulare la partita da un punto avanzato
+fornito elenco pezzi con la loro posizione e di chi è il turno
+
+
+
+
+
+
+
+
+
+
+
