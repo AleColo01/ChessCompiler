@@ -1,0 +1,5 @@
+INDEX VERSION 1.132+C:\Users\doubl\Desktop\Uni\Linguaggi Formali\Progetto\Chess\Code\.metadata\.plugins\org.eclipse.jdt.core
+3475571856.index
+4024820843.index
+1865797976.index
+2621378377.index
