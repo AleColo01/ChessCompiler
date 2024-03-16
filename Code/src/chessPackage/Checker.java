@@ -1,3 +1,5 @@
+package chessPackage;
+
 public class Checker {
 	private String lastMove = "";
 	

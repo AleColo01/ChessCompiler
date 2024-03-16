@@ -2,26 +2,24 @@ Tutti i valori possono avere un +, ++ o # alla fine
 I : possono essere sostituiti da x
 Non puoi iniziare con x o : quindi in notazione breve hai sempre almeno [dxe3] per il pedone che mangia
 
-O - O 			(arrocco corto) caso particolare
-O - O - O 		(arrocco lungo) caso particolare
-e 7 - e 8 		(pedone estesa) aggiungo P
-e 8 			(pedone corta) aggiungo P
-e 7 - e 8 = D 		(promozione) aggiungo P
-e 8 = D 		(promozione) aggiungo P
-d x e 3   e p 		(en passant) aggiungo P, rimuovo ep
-P d x e 3   e p		(en passant) rimuovo ep
-P d 4 x e 3   e p	(en passant) rimuovo ep
-P e 7 - e 8 = D 	(promozione estesa) salvo D
-P e 8 = D 		(promozione) salvo D
+O - O 			(arrocco corto) OK
+O - O - O 		(arrocco lungo) OK
 
+e 7 - e 8 		(pedone estesa) 
+e 8 			(pedone corta) 
 A c 3 x g 7 		(cattura estesa) 
-C g 1 - f 3 		(estesa)
-
+C g 1 - f 3 		(estesa) OK
 C f 3 			(corta)
-
 C g f 3 		(corta con colonna)
 C 1 f 3 		(corta con riga)
 A x g 7 		(cattura)
-
 P d x e 3   		(pedone cattura) 
 C g 1 f 3 		(corta con riga e colonna)
+
+e 7 - e 8 = D 		(promozione) 
+e 8 = D 		(promozione) 
+d x e 3   e p 		(en passant) 
+P d x e 3   e p		(en passant) 
+P d 4 x e 3   e p	(en passant) 
+P e 7 - e 8 = D 	(promozione estesa) 
+P e 8 = D 		(promozione) 

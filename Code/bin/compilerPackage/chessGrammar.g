@@ -28,13 +28,15 @@ EQUALS : '=';
 HASH : '#';
 TAKE : ('x' | ':');
 CASTLE : 'O';
-EP : 'ep';
+EP : ' ep';
 
-startRule: longNotation | castleRule;
-longNotation: PIECE COLUMN ROW (TAKE | MINUS) COLUMN ROW;
-//ARROCCO
+startRule: (moveFrom? moveTo (enPassant | promotion)? (check | checkmate)? ) | castleRule;
+
+moveFrom: (PIECE COLUMN ROW | PIECE COLUMN | PIECE ROW | COLUMN ROW | COLUMN | ROW | PIECE)(TAKE | MINUS)?;  
+moveTo	: COLUMN ROW;
+enPassant: EP;
+check	: PLUS PLUS?;
+checkmate : HASH;
+promotion : EQUALS PIECE;		 		
 castleRule: CASTLE MINUS CASTLE (MINUS CASTLE)?;	 
 
-/*------------------------------------------------------------------
- * PARSER RULES
- *------------------------------------------------------------------*/
