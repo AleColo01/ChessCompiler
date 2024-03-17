@@ -91,44 +91,10 @@ public class Checker {
         if (toCol != '_') toColIndex = toCol - 'a';
         if (toRow != '_') toRowIndex = 7 - (Character.getNumericValue(toRow) - 1);
 
-        if (fromColIndex == -1 && fromRowIndex == -1) {
-            for (int r = 0; r < 8; r++) {
-                for (int c = 0; c < 8; c++) {
-                    if (chessboardPanel.getBoard()[r][c].equals("" + pieceType + turn) && canReach(chessboardPanel, turn, pieceType, r, c, toRowIndex, toColIndex)) {
-                        fromColIndex = c;
-                        fromRowIndex = r;
-                        break;
-                    }
-                    if (chessboardPanel.getBoard()[r][c].equals("" + pieceType + turn) && canTake(chessboardPanel, turn, pieceType, r, c, toRowIndex, toColIndex)) {
-                        fromColIndex = c;
-                        fromRowIndex = r;
-                        break;
-                    }
-                }
-            }
-        } else if (fromColIndex == -1) {
-            for (int c = 0; c < 8; c++) {
-                if (chessboardPanel.getBoard()[fromRowIndex][c].equals("" + pieceType + turn) && canReach(chessboardPanel, turn, pieceType, fromRowIndex, c, toRowIndex, toColIndex)) {
-                    fromColIndex = c;
-                    break;
-                }
-                if (chessboardPanel.getBoard()[fromRowIndex][c].equals("" + pieceType + turn) && canTake(chessboardPanel, turn, pieceType, fromRowIndex, c, toRowIndex, toColIndex)) {
-                    fromColIndex = c;
-                    break;
-                }
-            }
-        } else if (fromRowIndex == -1) {
-            for (int r = 0; r < 8; r++) {
-                if (chessboardPanel.getBoard()[r][fromColIndex].equals("" + pieceType + turn) && canReach(chessboardPanel, turn, pieceType, r, fromColIndex, toRowIndex, toColIndex)) {
-                    fromRowIndex = r;
-                    break;
-                }
-                if (chessboardPanel.getBoard()[r][fromColIndex].equals("" + pieceType + turn) && canTake(chessboardPanel, turn, pieceType, r, fromColIndex, toRowIndex, toColIndex)) {
-                    fromRowIndex = r;
-                    break;
-                }
-            }
-        }
+        int[] res = calculateMissingInfo(fromColIndex,fromRowIndex,toColIndex,toRowIndex,pieceType,turn,chessboardPanel);
+        
+        fromColIndex = res[1];
+        fromRowIndex = res[0];
         
         if (fromColIndex == -1 || fromRowIndex == -1) {
             System.out.println("Non valida: " + turn + " " + move);
@@ -311,7 +277,7 @@ public class Checker {
                 break;
         }
 
-        if (accepted) {
+        if (accepted) { // aggiungi e non give up king
             if (chessboardPanel.getBoard()[rowTo][colTo].equals("")) return true;
             if (turn == 'N') {
                 if (chessboardPanel.getBoard()[rowTo][colTo].endsWith("B")) return true;
@@ -326,6 +292,7 @@ public class Checker {
 
     public boolean canTake(ChessboardPanel chessboardPanel, char turn, char piece, int rowFrom, int colFrom, int rowTo, int colTo) {
         if (rowFrom == rowTo && colFrom == colTo) return false;
+     // aggiungi e non give up king prima di tornare true ( aggiungi flag)
         switch (piece) {
             case 'P':
                 if (turn == 'N' && rowTo <= rowFrom) {
@@ -366,5 +333,70 @@ public class Checker {
         }
 
         return false;
+    }
+    
+    //TODO Gionny
+    /*
+    private boolean giveupKing() { // controlla se dopo questa mossa è in scacco il tuo re
+    	//clona chessboard
+    	//svuota casella di partenza
+    	//riempi casella finale
+        if (turn == 'B') {
+            for (int r = 0; r < 8; r++) {
+                for (int c = 0; c < 8; c++) {
+                	//se casella non vuota e c'è un pezzo avversario
+                		//se lo raggiunge ritorna true (usa can Take)
+                }
+            }
+        }
+        //idem per nero
+    	return false;
+    }
+    */
+    
+    protected int[] calculateMissingInfo(int fromColIndex, int fromRowIndex, int toColIndex, int toRowIndex, char pieceType, char turn, ChessboardPanel chessboardPanel) {
+
+        if (fromColIndex == -1 && fromRowIndex == -1) {
+            for (int r = 0; r < 8; r++) {
+                for (int c = 0; c < 8; c++) {
+                    if (chessboardPanel.getBoard()[r][c].equals("" + pieceType + turn) && canReach(chessboardPanel, turn, pieceType, r, c, toRowIndex, toColIndex)) {
+                        fromColIndex = c;
+                        fromRowIndex = r;
+                        break;
+                    }
+                    if (chessboardPanel.getBoard()[r][c].equals("" + pieceType + turn) && canTake(chessboardPanel, turn, pieceType, r, c, toRowIndex, toColIndex)) {
+                        fromColIndex = c;
+                        fromRowIndex = r;
+                        break;
+                    }
+                }
+            }
+        } else if (fromColIndex == -1) {
+            for (int c = 0; c < 8; c++) {
+                if (chessboardPanel.getBoard()[fromRowIndex][c].equals("" + pieceType + turn) && canReach(chessboardPanel, turn, pieceType, fromRowIndex, c, toRowIndex, toColIndex)) {
+                    fromColIndex = c;
+                    break;
+                }
+                if (chessboardPanel.getBoard()[fromRowIndex][c].equals("" + pieceType + turn) && canTake(chessboardPanel, turn, pieceType, fromRowIndex, c, toRowIndex, toColIndex)) {
+                    fromColIndex = c;
+                    break;
+                }
+            }
+        } else if (fromRowIndex == -1) {
+            for (int r = 0; r < 8; r++) {
+                if (chessboardPanel.getBoard()[r][fromColIndex].equals("" + pieceType + turn) && canReach(chessboardPanel, turn, pieceType, r, fromColIndex, toRowIndex, toColIndex)) {
+                    fromRowIndex = r;
+                    break;
+                }
+                if (chessboardPanel.getBoard()[r][fromColIndex].equals("" + pieceType + turn) && canTake(chessboardPanel, turn, pieceType, r, fromColIndex, toRowIndex, toColIndex)) {
+                    fromRowIndex = r;
+                    break;
+                }
+            }
+        }
+        int[] res = new int[2];
+        res[0] = fromRowIndex;
+        res[1] = fromColIndex;
+    	return res;
     }
 }

@@ -10,7 +10,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-class ChessboardPanel extends JPanel {
+public class ChessboardPanel extends JPanel {
     /**
 	 * CP1
 	 */
