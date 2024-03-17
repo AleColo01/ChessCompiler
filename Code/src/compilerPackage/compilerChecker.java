@@ -74,14 +74,14 @@ public class compilerChecker extends Checker {
 	}
 	
 	private boolean checkTake(){
-		return super.canTake(cp, turn, piece, rowFrom, colFrom, rowTo, colTo);
+		return super.canTake(cp, turn, piece, rowFrom, colFrom, rowTo, colTo, true);
 	}
 	
 	private boolean isUnique() {
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
             	if(cp.getBoard()[r][c].equals("" + piece + turn) 
-            			&& (super.canTake(cp, turn, piece, r, c, rowTo, colTo) || super.canReach(cp, turn, piece, r, c, rowTo, colTo)) 
+            			&& (super.canTake(cp, turn, piece, r, c, rowTo, colTo, true) || super.canReach(cp, turn, piece, r, c, rowTo, colTo, true)) 
             			&& (r!=rowFrom || c!=rowFrom)) { 
             		return false;
             	}

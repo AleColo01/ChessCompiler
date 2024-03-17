@@ -151,7 +151,8 @@ public class Checker {
         }
     }
 
-    public boolean canReach(ChessboardPanel chessboardPanel, char turn, char piece, int rowFrom, int colFrom, int rowTo, int colTo) {
+    public boolean canReach(ChessboardPanel chessboardPanel, char turn, char piece, int rowFrom, int colFrom, int rowTo, int colTo, boolean checkGiveupKing) {
+    	if(checkGiveupKing && giveupKing(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo)) return false;
         boolean accepted = false;
         switch (piece) {
             case 'P':
@@ -164,6 +165,7 @@ public class Checker {
                 if (Math.abs(rowTo - rowFrom) == 1 && Math.abs(colTo - colFrom) == 0 && chessboardPanel.getBoard()[rowTo][colTo].equals("")) {
                     accepted = true;
                 }
+                
                 if (Math.abs(rowTo - rowFrom) == 2 && Math.abs(colTo - colFrom) == 0 && chessboardPanel.getBoard()[rowTo][colTo].equals("")) {
                     if (turn == 'N' && rowFrom != 1) {
                         return false;
@@ -243,13 +245,13 @@ public class Checker {
                 break;
             case 'D':
                 if (Math.abs(rowTo - rowFrom) == 0 && colTo != colFrom) {
-                    return canReach(chessboardPanel, turn, 'T', rowFrom, colFrom, rowTo, colTo);
+                    return canReach(chessboardPanel, turn, 'T', rowFrom, colFrom, rowTo, colTo,checkGiveupKing);
                 }
                 if (Math.abs(colTo - colFrom) == 0 && rowTo != rowFrom) {
-                    return canReach(chessboardPanel, turn, 'T', rowFrom, colFrom, rowTo, colTo);
+                    return canReach(chessboardPanel, turn, 'T', rowFrom, colFrom, rowTo, colTo,checkGiveupKing);
                 }
                 if (Math.abs(rowTo - rowFrom) == Math.abs(colTo - colFrom)) {
-                    return canReach(chessboardPanel, turn, 'A', rowFrom, colFrom, rowTo, colTo);
+                    return canReach(chessboardPanel, turn, 'A', rowFrom, colFrom, rowTo, colTo,checkGiveupKing);
                 }
                 break;
             case 'R':
@@ -257,7 +259,7 @@ public class Checker {
                     if (turn == 'N') {
                         for (int r = 0; r < 8; r++) {
                             for (int c = 0; c < 8; c++) {
-                                if (chessboardPanel.getBoard()[r][c].endsWith("B") && canTake(chessboardPanel, 'B', chessboardPanel.getBoard()[r][c].charAt(0), r, c, rowTo, colTo)) {
+                                if (chessboardPanel.getBoard()[r][c].endsWith("B") && canTake(chessboardPanel, 'B', chessboardPanel.getBoard()[r][c].charAt(0), r, c, rowTo, colTo,true)) {
                                     return false;
                                 }
                             }
@@ -266,7 +268,7 @@ public class Checker {
                     if (turn == 'B') {
                         for (int r = 0; r < 8; r++) {
                             for (int c = 0; c < 8; c++) {
-                                if (chessboardPanel.getBoard()[r][c].endsWith("N") && canTake(chessboardPanel, 'B', chessboardPanel.getBoard()[r][c].charAt(0), r, c, rowTo, colTo)) {
+                                if (chessboardPanel.getBoard()[r][c].endsWith("N") && canTake(chessboardPanel, 'B', chessboardPanel.getBoard()[r][c].charAt(0), r, c, rowTo, colTo,true)) {
                                     return false;
                                 }
                             }
@@ -277,7 +279,7 @@ public class Checker {
                 break;
         }
         
-        if (accepted && !giveupKing(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo)) { 
+        if (accepted) { 
             if (chessboardPanel.getBoard()[rowTo][colTo].equals("")) return true;
             if (turn == 'N') {
                 if (chessboardPanel.getBoard()[rowTo][colTo].endsWith("B")) return true;
@@ -290,7 +292,8 @@ public class Checker {
         return false;
     }
 
-    public boolean canTake(ChessboardPanel chessboardPanel, char turn, char piece, int rowFrom, int colFrom, int rowTo, int colTo) {
+    public boolean canTake(ChessboardPanel chessboardPanel, char turn, char piece, int rowFrom, int colFrom, int rowTo, int colTo, boolean checkGiveupKing) {
+    	if(checkGiveupKing && giveupKing(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo)) return false;
         if (rowFrom == rowTo && colFrom == colTo) return false;
         switch (piece) {
             case 'P':
@@ -303,63 +306,57 @@ public class Checker {
                 if (Math.abs(rowTo - rowFrom) == 1 && Math.abs(colTo - colFrom) == 1) {
                     char colonna = (char) ('a' + colTo);
                     if (turn == 'N') {
-                        if (chessboardPanel.getBoard()[rowTo][colTo].endsWith("B")) 
-                        	if (!giveupKing(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo)) return true;
+                        if (chessboardPanel.getBoard()[rowTo][colTo].endsWith("B"))  {
+                        	return true;
+                        }
                         if(lastMove.equals("P"+colonna+"2-"+colonna+"4")) {
                         	chessboardPanel.getBoard()[4][colTo] = "";
-                        	if (!giveupKing(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo)) return true;
+                        	return true;
                         }
                     }
                     if (turn == 'B') {
-                        if (chessboardPanel.getBoard()[rowTo][colTo].endsWith("N"))                         	
-                        	if (!giveupKing(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo)) return true;
+                        if (chessboardPanel.getBoard()[rowTo][colTo].endsWith("N"))              
+                        	return true;
                         if(lastMove.equals("P"+colonna+"7-"+colonna+"5")) {
                         	chessboardPanel.getBoard()[3][colTo] = "";
-                        	if (!giveupKing(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo)) return true;
+                        	return true;
                         }
                     }
                     if (chessboardPanel.getBoard()[rowTo][colTo].equals("")) return false;
-                }                
+                }          
                 break;
             case 'T':
-                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo);
+                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo,checkGiveupKing);
             case 'C':
-                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo);
+                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo,checkGiveupKing);
             case 'A':
-                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo);
+                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo,checkGiveupKing);
             case 'D':
-                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo);
+                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo,checkGiveupKing);
             case 'R':
-                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo);
+                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo,checkGiveupKing);
         }
-
         return false;
     }
     
     protected boolean giveupKing(ChessboardPanel chessboardPanel, char turn, char piece, int rowFrom, int colFrom, int rowTo, int colTo) { 
-    	ChessboardPanel cp = chessboardPanel;
-    	int[] kp = kingPosition(cp,turn);
-    	cp.getBoard()[rowFrom][colFrom] = "";
-    	cp.getBoard()[rowTo][colTo] = piece+""+turn;
-        if (turn == 'B') {
-            for (int r = 0; r < 8; r++) {
-                for (int c = 0; c < 8; c++) {
-                	if(!cp.getBoard()[r][c].equals("") && canTake(cp, 'N', cp.getBoard()[r][c].charAt(0), rowFrom, colFrom, kp[0], kp[1])) {
-                		return true;	
-                	}
-
+    	int kingRow = kingPosition(chessboardPanel,turn)[0];
+    	int kingCol = kingPosition(chessboardPanel,turn)[1];
+    	String oldPosition = chessboardPanel.getBoard()[rowTo][colTo];
+    	chessboardPanel.getBoard()[rowFrom][colFrom] = "";
+    	chessboardPanel.getBoard()[rowTo][colTo] = ""+piece+turn;
+    	
+        for (int r = 0; r < 8; r++) {
+        	for (int c = 0; c < 8; c++) {
+        		if(!chessboardPanel.getBoard()[r][c].equals("") && chessboardPanel.getBoard()[r][c].charAt(1)!=turn && canTake(chessboardPanel, oppositeTurn(turn), chessboardPanel.getBoard()[r][c].charAt(0), r, c, kingRow, kingCol, false)) {
+        			chessboardPanel.getBoard()[rowFrom][colFrom] = ""+piece+turn;
+                    chessboardPanel.getBoard()[rowTo][colTo] = oldPosition;
+                	return true;	
                 }
-            }
+             }
         }
-        if (turn == 'N') {
-            for (int r = 0; r < 8; r++) {
-                for (int c = 0; c < 8; c++) {
-                	if(!cp.getBoard()[r][c].equals("") && canTake(cp, 'B', cp.getBoard()[r][c].charAt(0), rowFrom, colFrom, kp[0], kp[1])){
-                		return true;	
-                	}
-                }
-            }
-        }
+        chessboardPanel.getBoard()[rowFrom][colFrom] = ""+piece+turn;
+        chessboardPanel.getBoard()[rowTo][colTo] = oldPosition;
     	return false;
     }
     
@@ -367,12 +364,12 @@ public class Checker {
     	int pos[] = new int[2];
          for (int r = 0; r < 8; r++) {
               for (int c = 0; c < 8; c++) {
-            	  if(turn=='N' && chessboardPanel.getBoard()[r][c]=="RN") {
+            	  if(turn=='N' && chessboardPanel.getBoard()[r][c].equals("RN")) {
             		  pos[0]=r;
             		  pos[1]=c;
             		  return pos;
             	  }
-            	  if(turn=='B' && chessboardPanel.getBoard()[r][c]=="RB") {
+            	  if(turn=='B' && chessboardPanel.getBoard()[r][c].equals("RB")) {
             		  pos[0]=r;
             		  pos[1]=c;
             		  return pos;
@@ -382,17 +379,22 @@ public class Checker {
          return pos;
     }
     
+    private char oppositeTurn(char turn) {
+    	if(turn == 'B')
+    		return 'N';
+    	else return 'B';
+    }
     protected int[] calculateMissingInfo(int fromColIndex, int fromRowIndex, int toColIndex, int toRowIndex, char pieceType, char turn, ChessboardPanel chessboardPanel) {
 
         if (fromColIndex == -1 && fromRowIndex == -1) {
             for (int r = 0; r < 8; r++) {
                 for (int c = 0; c < 8; c++) {
-                    if (chessboardPanel.getBoard()[r][c].equals("" + pieceType + turn) && canReach(chessboardPanel, turn, pieceType, r, c, toRowIndex, toColIndex)) {
+                    if (chessboardPanel.getBoard()[r][c].equals("" + pieceType + turn) && canReach(chessboardPanel, turn, pieceType, r, c, toRowIndex, toColIndex, true)) {
                         fromColIndex = c;
                         fromRowIndex = r;
                         break;
                     }
-                    if (chessboardPanel.getBoard()[r][c].equals("" + pieceType + turn) && canTake(chessboardPanel, turn, pieceType, r, c, toRowIndex, toColIndex)) {
+                    if (chessboardPanel.getBoard()[r][c].equals("" + pieceType + turn) && canTake(chessboardPanel, turn, pieceType, r, c, toRowIndex, toColIndex,true)) {
                         fromColIndex = c;
                         fromRowIndex = r;
                         break;
@@ -401,22 +403,22 @@ public class Checker {
             }
         } else if (fromColIndex == -1) {
             for (int c = 0; c < 8; c++) {
-                if (chessboardPanel.getBoard()[fromRowIndex][c].equals("" + pieceType + turn) && canReach(chessboardPanel, turn, pieceType, fromRowIndex, c, toRowIndex, toColIndex)) {
+                if (chessboardPanel.getBoard()[fromRowIndex][c].equals("" + pieceType + turn) && canReach(chessboardPanel, turn, pieceType, fromRowIndex, c, toRowIndex, toColIndex, true)) {
                     fromColIndex = c;
                     break;
                 }
-                if (chessboardPanel.getBoard()[fromRowIndex][c].equals("" + pieceType + turn) && canTake(chessboardPanel, turn, pieceType, fromRowIndex, c, toRowIndex, toColIndex)) {
+                if (chessboardPanel.getBoard()[fromRowIndex][c].equals("" + pieceType + turn) && canTake(chessboardPanel, turn, pieceType, fromRowIndex, c, toRowIndex, toColIndex,true)) {
                     fromColIndex = c;
                     break;
                 }
             }
         } else if (fromRowIndex == -1) {
             for (int r = 0; r < 8; r++) {
-                if (chessboardPanel.getBoard()[r][fromColIndex].equals("" + pieceType + turn) && canReach(chessboardPanel, turn, pieceType, r, fromColIndex, toRowIndex, toColIndex)) {
+                if (chessboardPanel.getBoard()[r][fromColIndex].equals("" + pieceType + turn) && canReach(chessboardPanel, turn, pieceType, r, fromColIndex, toRowIndex, toColIndex, true)) {
                     fromRowIndex = r;
                     break;
                 }
-                if (chessboardPanel.getBoard()[r][fromColIndex].equals("" + pieceType + turn) && canTake(chessboardPanel, turn, pieceType, r, fromColIndex, toRowIndex, toColIndex)) {
+                if (chessboardPanel.getBoard()[r][fromColIndex].equals("" + pieceType + turn) && canTake(chessboardPanel, turn, pieceType, r, fromColIndex, toRowIndex, toColIndex,true)) {
                     fromRowIndex = r;
                     break;
                 }
