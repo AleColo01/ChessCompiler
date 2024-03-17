@@ -335,24 +335,49 @@ public class Checker {
         return false;
     }
     
-    //TODO Gionny
-    /*
-    private boolean giveupKing() { // controlla se dopo questa mossa è in scacco il tuo re
-    	//clona chessboard
-    	//svuota casella di partenza
-    	//riempi casella finale
+    protected boolean giveupKing(ChessboardPanel chessboardPanel, char turn, char piece, int rowFrom, int colFrom, int rowTo, int colTo) { // controlla se dopo questa mossa è in scacco il tuo re
+    	ChessboardPanel cp = chessboardPanel;
+    	int[] kp = kingPosition(cp,turn);
+    	cp.getBoard()[rowFrom][colFrom] = "";
+    	cp.getBoard()[rowTo][colTo] = piece+""+turn;
+    	 
         if (turn == 'B') {
             for (int r = 0; r < 8; r++) {
                 for (int c = 0; c < 8; c++) {
-                	//se casella non vuota e c'è un pezzo avversario
-                		//se lo raggiunge ritorna true (usa can Take)
+                	if(!cp.getBoard()[r][c].equals("") && canTake(cp, 'N', cp.getBoard()[r][c].charAt(0), rowFrom, colFrom, kp[0], kp[1]))
+                		return true;
                 }
             }
         }
-        //idem per nero
+        if (turn == 'N') {
+            for (int r = 0; r < 8; r++) {
+                for (int c = 0; c < 8; c++) {
+                	if(!cp.getBoard()[r][c].equals("") && canTake(cp, 'B', cp.getBoard()[r][c].charAt(0), rowFrom, colFrom, kp[0], kp[1]))
+                		return true;
+                }
+            }
+        }
     	return false;
     }
-    */
+    
+        private int[] kingPosition(ChessboardPanel chessboardPanel, char turn) {
+        	int pos[] = null;
+             for (int r = 0; r < 8; r++) {
+                  for (int c = 0; c < 8; c++) {
+                	  if(turn=='N' && chessboardPanel.getBoard()[r][c]=="RN") {
+                		  pos[0]=r;
+                		  pos[1]=c;
+                		  return pos;
+                	  }
+                	  if(turn=='B' && chessboardPanel.getBoard()[r][c]=="RB") {
+                		  pos[0]=r;
+                		  pos[1]=c;
+                		  return pos;
+                	  }
+                  }
+             }
+             return pos;
+        }
     
     protected int[] calculateMissingInfo(int fromColIndex, int fromRowIndex, int toColIndex, int toRowIndex, char pieceType, char turn, ChessboardPanel chessboardPanel) {
 
