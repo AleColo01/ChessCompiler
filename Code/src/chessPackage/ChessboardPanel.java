@@ -34,18 +34,18 @@ public class ChessboardPanel extends JPanel {
         pieceImageMap = new HashMap<>();
         try {
             // Caricamento delle immagini dei pezzi
-            pieceImageMap.put("TB", ImageIO.read(getClass().getResource("/pieces/white_rook.png")));
-            pieceImageMap.put("CB", ImageIO.read(getClass().getResource("/pieces/white_knight.png")));
-            pieceImageMap.put("AB", ImageIO.read(getClass().getResource("/pieces/white_bishop.png")));
-            pieceImageMap.put("DB", ImageIO.read(getClass().getResource("/pieces/white_queen.png")));
-            pieceImageMap.put("RB", ImageIO.read(getClass().getResource("/pieces/white_king.png")));
-            pieceImageMap.put("PB", ImageIO.read(getClass().getResource("/pieces/white_pawn.png")));
-            pieceImageMap.put("TN", ImageIO.read(getClass().getResource("/pieces/black_rook.png")));
-            pieceImageMap.put("CN", ImageIO.read(getClass().getResource("/pieces/black_knight.png")));
-            pieceImageMap.put("AN", ImageIO.read(getClass().getResource("/pieces/black_bishop.png")));
-            pieceImageMap.put("DN", ImageIO.read(getClass().getResource("/pieces/black_queen.png")));
-            pieceImageMap.put("RN", ImageIO.read(getClass().getResource("/pieces/black_king.png")));
-            pieceImageMap.put("PN", ImageIO.read(getClass().getResource("/pieces/black_pawn.png")));
+            pieceImageMap.put("RW", ImageIO.read(getClass().getResource("/pieces/white_rook.png")));
+            pieceImageMap.put("NW", ImageIO.read(getClass().getResource("/pieces/white_knight.png")));
+            pieceImageMap.put("BW", ImageIO.read(getClass().getResource("/pieces/white_bishop.png")));
+            pieceImageMap.put("QW", ImageIO.read(getClass().getResource("/pieces/white_queen.png")));
+            pieceImageMap.put("KW", ImageIO.read(getClass().getResource("/pieces/white_king.png")));
+            pieceImageMap.put("PW", ImageIO.read(getClass().getResource("/pieces/white_pawn.png")));
+            pieceImageMap.put("RB", ImageIO.read(getClass().getResource("/pieces/black_rook.png")));
+            pieceImageMap.put("NB", ImageIO.read(getClass().getResource("/pieces/black_knight.png")));
+            pieceImageMap.put("BB", ImageIO.read(getClass().getResource("/pieces/black_bishop.png")));
+            pieceImageMap.put("QB", ImageIO.read(getClass().getResource("/pieces/black_queen.png")));
+            pieceImageMap.put("KB", ImageIO.read(getClass().getResource("/pieces/black_king.png")));
+            pieceImageMap.put("PB", ImageIO.read(getClass().getResource("/pieces/black_pawn.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }

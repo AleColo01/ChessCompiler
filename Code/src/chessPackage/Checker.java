@@ -24,7 +24,7 @@ public class Checker {
     	/*
     	 * ADD PIECE if not explicit
     	 */
-        char[] Pieces = {'P', 'T', 'C', 'A', 'D', 'R'};
+        char[] Pieces = {'P', 'R', 'N', 'B', 'Q', 'K'};
 
         boolean checkChar = false;
         for (char c : Pieces) {
@@ -116,7 +116,7 @@ public class Checker {
     	 */
         if (fromColIndex == -1 || fromRowIndex == -1) {
         	String name = "black";
-        	if(turn == 'B') name = "white";
+        	if(turn == 'W') name = "white";
             System.out.println("Invalid move by " + name + ": " + move);
             return false;
         }
@@ -146,28 +146,28 @@ public class Checker {
         if (move.equals("O-O")) { //short castle
             if (turn == 'B') { // white side
                 chessboardPanel.getBoard()[7 - 0][4] = "";
-                chessboardPanel.getBoard()[7 - 0][6] = "RB";
+                chessboardPanel.getBoard()[7 - 0][6] = "KW";
                 chessboardPanel.getBoard()[7 - 0][7] = "";
-                chessboardPanel.getBoard()[7 - 0][5] = "TB";
+                chessboardPanel.getBoard()[7 - 0][5] = "RW";
             } else { // black side
                 chessboardPanel.getBoard()[7 - 7][4] = "";
-                chessboardPanel.getBoard()[7 - 7][6] = "RN";
+                chessboardPanel.getBoard()[7 - 7][6] = "KB";
                 chessboardPanel.getBoard()[7 - 7][7] = "";
-                chessboardPanel.getBoard()[7 - 7][5] = "TN";
+                chessboardPanel.getBoard()[7 - 7][5] = "RB";
             }
             chessboardPanel.repaint();
             return;
         } else if (move.equals("O-O-O")) { //long castle
             if (turn == 'B') { // white side
                 chessboardPanel.getBoard()[7 - 0][4] = "";
-                chessboardPanel.getBoard()[7 - 0][2] = "RB";
+                chessboardPanel.getBoard()[7 - 0][2] = "KW";
                 chessboardPanel.getBoard()[7 - 0][0] = "";
-                chessboardPanel.getBoard()[7 - 0][3] = "TB";
+                chessboardPanel.getBoard()[7 - 0][3] = "RW";
             } else { // black side
                 chessboardPanel.getBoard()[7 - 7][4] = "";
-                chessboardPanel.getBoard()[7 - 7][2] = "RN";
+                chessboardPanel.getBoard()[7 - 7][2] = "KB";
                 chessboardPanel.getBoard()[7 - 7][0] = "";
-                chessboardPanel.getBoard()[7 - 7][3] = "TN";
+                chessboardPanel.getBoard()[7 - 7][3] = "RB";
             }
             chessboardPanel.repaint();
             return;
@@ -179,17 +179,17 @@ public class Checker {
 	 */
     public boolean canReach(ChessboardPanel chessboardPanel, char turn, char piece, int rowFrom, int colFrom, int rowTo, int colTo, boolean checkGiveupKing) {
     	//if the ally king is checked after this move, it is invalid
-    	if(piece != 'R' && checkGiveupKing && giveupKing(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo)) return false;
+    	if(piece != 'K' && checkGiveupKing && giveupKing(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo)) return false;
         
     	boolean accepted = false;
         switch (piece) {
             case 'P': //PAWN
             	//Black can only move down
-                if (turn == 'N' && rowTo <= rowFrom) { 
+                if (turn == 'B' && rowTo <= rowFrom) { 
                     return false;
                 }
                 //White can only move up
-                if (turn == 'B' && rowTo >= rowFrom) { 
+                if (turn == 'W' && rowTo >= rowFrom) { 
                     return false;
                 }
                 //Move forward by one step
@@ -198,10 +198,10 @@ public class Checker {
                 }
                //Move forward by two steps, only first move of each piece
                 if (Math.abs(rowTo - rowFrom) == 2 && Math.abs(colTo - colFrom) == 0 && chessboardPanel.getBoard()[rowTo][colTo].equals("")) {
-                    if (turn == 'N' && rowFrom != 1) {
+                    if (turn == 'B' && rowFrom != 1) {
                         return false;
                     }
-                    if (turn == 'B' && rowFrom != 6) {
+                    if (turn == 'W' && rowFrom != 6) {
                         return false;
                     }
                     //check if no piece is in between cellFrom and cellTo
@@ -217,7 +217,7 @@ public class Checker {
 
                 }
                 break;
-            case 'T': //ROOK
+            case 'R': //ROOK
             	//If the tower is moving vertically, check noone is in between
                 if (Math.abs(rowTo - rowFrom) == 0 && colTo != colFrom) {
                 	int startCol, endCol;
@@ -255,7 +255,7 @@ public class Checker {
                 	accepted = true;
                 }
                 break;
-            case 'C': //KNIGHT
+            case 'N': //KNIGHT
             	//Can move in a L-shape in any direction
                 if (Math.abs(rowTo - rowFrom) == 1 && Math.abs(colTo - colFrom) == 2) {
                     accepted = true;
@@ -264,7 +264,7 @@ public class Checker {
                     accepted = true;
                 }
                 break;
-            case 'A': //BISHOP
+            case 'B': //BISHOP
             	//Can move only diagonally, check none is in between
             	if (Math.abs(rowTo - rowFrom) == Math.abs(colTo - colFrom)) {
             	    int rowDiff = rowTo - rowFrom;
@@ -281,7 +281,7 @@ public class Checker {
             	    accepted = true;
             	}
                 break;
-            case 'D':
+            case 'Q':
             	//Move as a Tower, vertically
                 if (Math.abs(rowTo - rowFrom) == 0 && colTo != colFrom) {
                     if (colTo > colFrom) {
@@ -332,7 +332,7 @@ public class Checker {
             	    accepted = true;
                 }
                 break;
-            case 'R': //KING
+            case 'K': //KING
                 if (Math.abs(rowTo - rowFrom) <= 1 && Math.abs(colTo - colFrom) <= 1 && (Math.abs(rowTo - rowFrom) + Math.abs(colTo - colFrom)) > 0) {
                     //Check it doesn't move in a protected cell
                 	for (int r = 0; r < 8; r++) {
@@ -367,22 +367,22 @@ public class Checker {
      */
     public boolean canTake(ChessboardPanel chessboardPanel, char turn, char piece, int rowFrom, int colFrom, int rowTo, int colTo, boolean checkGiveupKing) {
     	//if the ally king is checked after this move, it is invalid
-    	if(piece != 'R' && checkGiveupKing && giveupKing(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo)) return false;
+    	if(piece != 'K' && checkGiveupKing && giveupKing(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo)) return false;
     	//If it's not moving, it's invalid
         if (rowFrom == rowTo && colFrom == colTo) return false;
         
         switch (piece) {
             case 'P': //PAWN
-                if (turn == 'N' && rowTo <= rowFrom) { //cannot move up
+                if (turn == 'B' && rowTo <= rowFrom) { //cannot move up
                     return false;
                 }
-                if (turn == 'B' && rowTo >= rowFrom) { //cannot move down
+                if (turn == 'W' && rowTo >= rowFrom) { //cannot move down
                     return false;
                 }
                 //accepted only if it's capturing a piece diagonally by one cell
                 if (Math.abs(rowTo - rowFrom) == 1 && Math.abs(colTo - colFrom) == 1) {
                     char colonna = (char) ('a' + colTo);
-                    if (turn == 'N') { //Black
+                    if (turn == 'B') { //Black
                     	//normal capture
                         if (chessboardPanel.getBoard()[rowTo][colTo].endsWith("B"))  {
                         	return true;
@@ -393,7 +393,7 @@ public class Checker {
                         	return true;
                         }
                     }
-                    if (turn == 'B') { //White
+                    if (turn == 'W') { //White
                     	//normal capture
                         if (chessboardPanel.getBoard()[rowTo][colTo].endsWith("N"))              
                         	return true;
@@ -408,15 +408,15 @@ public class Checker {
                 }          
                 break;
             //For everything else is the same as canReach
-            case 'T':
-                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo, false);
-            case 'C':
-                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo, false);
-            case 'A':
-                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo, false);
-            case 'D':
-                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo, false);
             case 'R':
+                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo, false);
+            case 'N':
+                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo, false);
+            case 'B':
+                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo, false);
+            case 'Q':
+                return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo, false);
+            case 'K':
                 return canReach(chessboardPanel, turn, piece, rowFrom, colFrom, rowTo, colTo, false);
         }
         return false;
@@ -456,11 +456,11 @@ public class Checker {
     }
     
     //Search for ally king position
-    private int[] kingPosition(ChessboardPanel chessboardPanel, char turn) {
+    protected int[] kingPosition(ChessboardPanel chessboardPanel, char turn) {
     	int pos[] = new int[2];
          for (int r = 0; r < 8; r++) {
               for (int c = 0; c < 8; c++) {
-            	  if(chessboardPanel.getBoard()[r][c].equals("R"+turn)) {
+            	  if(chessboardPanel.getBoard()[r][c].equals("K"+turn)) {
             		  pos[0]=r;
             		  pos[1]=c;
             		  return pos;
@@ -470,11 +470,11 @@ public class Checker {
          return pos;
     }
     
-    //Return oppostire turn color
-    private char oppositeTurn(char turn) {
-    	if(turn == 'B')
-    		return 'N';
-    	else return 'B';
+    //Return opposite turn color
+    protected char oppositeTurn(char turn) {
+    	if(turn == 'W')
+    		return 'B';
+    	else return 'W';
     }
     
     /*

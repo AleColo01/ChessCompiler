@@ -11,7 +11,7 @@ public class Chessboard {
     private static JButton nextMoveButton;
     private static JLabel nextMoveLabel; // Added label to display next move
     private static JFrame frame;
-    private static char turn = 'B';
+    private static char turn = 'W';
     private static String nextMove = null;
     private static int moveNumber = 1; // Contatore per il numero della mossa
     private static Checker chk = new Checker();
@@ -21,7 +21,7 @@ public class Chessboard {
      */
     public static void main(String[] args) {
         try {
-            moveReader = new BufferedReader(new FileReader("res/moves2.txt"));
+            moveReader = new BufferedReader(new FileReader("res/moves.txt"));
         } catch (FileNotFoundException e) {
             System.err.println("File 'moves.txt' not found.");
             System.exit(1);
@@ -56,8 +56,8 @@ public class Chessboard {
                 if (nextMove != null) { // Se c'è una mossa memorizzata, eseguila
                     try {
                         if (chk.movePiece(chessboardPanel, nextMove, turn)) {
-                            if (turn == 'B') turn = 'N';
-                            else turn = 'B';
+                            if (turn == 'W') turn = 'B';
+                            else turn = 'W';
                         }
                         moveNumber++; // Incrementa il numero della mossa
                         nextMove = moveReader.readLine(); // Leggi la prossima mossa per la successiva pressione del pulsante
@@ -89,14 +89,14 @@ public class Chessboard {
 
         // Matrice rappresentante la disposizione iniziale degli scacchi
         String[][] initialBoard = {
-            {"TN", "CN", "AN", "DN", "RN", "AN", "CN", "TN"},
-            {"PN", "PN", "PN", "PN", "PN", "PN", "PN", "PN"},
-            {"", "", "", "", "", "", "", ""},
-            {"", "", "", "", "", "", "", ""},
-            {"", "", "", "", "", "", "", ""},
-            {"", "", "", "", "", "", "", ""},
+            {"RB", "NB", "BB", "QB", "KB", "BB", "NB", "RB"},
             {"PB", "PB", "PB", "PB", "PB", "PB", "PB", "PB"},
-            {"TB", "CB", "AB", "DB", "RB", "AB", "CB", "TB"}
+            {"", "", "", "", "", "", "", ""},
+            {"", "", "", "", "", "", "", ""},
+            {"", "", "", "", "", "", "", ""},
+            {"", "", "", "", "", "", "", ""},
+            {"PW", "PW", "PW", "PW", "PW", "PW", "PW", "PW"},
+            {"RW", "NW", "BW", "QW", "KW", "BW", "NW", "RW"}
         };
 
         ChessboardPanel chessboardPanel = new ChessboardPanel(initialBoard);
