@@ -21,7 +21,7 @@ public class Chessboard {
      */
     public static void main(String[] args) {
         try {
-            moveReader = new BufferedReader(new FileReader("res/moves.txt"));
+            moveReader = new BufferedReader(new FileReader("res/moves2.txt"));
         } catch (FileNotFoundException e) {
             System.err.println("File 'moves.txt' not found.");
             System.exit(1);
