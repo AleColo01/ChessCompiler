@@ -8,7 +8,7 @@ import compilerPackage.chessGrammarParser;
 
 import org.antlr.runtime.*;
 
-public class SimpleCalcParserTester {
+public class ChessGrammarParserTester {
 
 	public void test(String file) throws IOException {
 
@@ -28,7 +28,7 @@ public class SimpleCalcParserTester {
 			
 		    parser.startRule();
 		    
-			System.out.println ("\n\nParsing con ANTLR terminato con successo\n\n");
+			System.out.println ("\nParsing con ANTLR terminato con successo\n\n");
 
 		} catch (Exception e) {
 			System.out.println ("Test ANTLR abortito");

@@ -8,7 +8,7 @@ import compilerPackage.chessGrammarParser;
 
 import org.antlr.runtime.*;
 
-public class SimpleCalcLexerTester {
+public class ChessGrammarLexerTester {
 	
 		public void test(String file) throws IOException{
 		  	String fileIn = file;
