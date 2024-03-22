@@ -2,7 +2,7 @@ grammar chessGrammar;
 
 options {
   language = Java;
-  k = 1;		
+  k = 4;		
 }
 
 @lexer::header{
@@ -20,7 +20,7 @@ package compilerPackage;
 compilerChecker cc = new compilerChecker();
 }
 
-PIECE : ('T' | 'A' | 'C' | 'D' | 'R' | 'P');
+PIECE : ('R' | 'B' | 'N' | 'Q' | 'K' | 'P');
 COLUMN  : 'a'..'h' ;
 ROW  : '1'..'8' ;
 MINUS : '-';
@@ -30,12 +30,20 @@ HASH : '#';
 TAKE : ('x' | ':');
 CASTLE : 'O';
 EP : ' ep';
-NEWLINE	: '\n';
+NEWLINE	: '\r';
 
 //FRAGMENTED RULES
-moveFrom: (PIECE COLUMN ROW | PIECE COLUMN | PIECE ROW | COLUMN ROW | COLUMN | ROW | PIECE)(TAKE | MINUS)? ;  
-moveTo	: COLUMN ROW;
-enPassant: EP {};
+moveFromOld:((PIECE COLUMN ROW | PIECE COLUMN | PIECE ROW | COLUMN ROW | COLUMN | ROW | PIECE)(TAKE | MINUS)?)?(COLUMN ROW);
+moveFrom
+	:  (PIECE COLUMN? ROW? (TAKE | MINUS)?) |
+	   (COLUMN TAKE)	
+
+;
+moveTo	: 
+	c=COLUMN 
+	r=ROW
+;
+enPassant: EP;
 check	: PLUS PLUS?;
 checkmate : HASH;
 promotion : EQUALS PIECE;		 		

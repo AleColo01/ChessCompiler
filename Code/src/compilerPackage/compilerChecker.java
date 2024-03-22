@@ -7,17 +7,18 @@ public class compilerChecker extends Checker {
 	public char turn = 'W'; 
 	
 	//resetted each turn
-	private char piece; 
-	private int rowTo; 
-	private int colTo;
-	private int rowFrom; 
-	private int colFrom; 
-	private char take; // x : to take, - to divide in extended notation
-	private String castle;
-	private char promotion;
-	private boolean enpassant;
-	private int checks;
-	private boolean checkMate;
+	public char piece; 
+	public int rowTo; 
+	public int colTo;
+	public int rowFrom; 
+	public int colFrom; 
+	public char take; // x : to take, - to divide in extended notation
+	public String castle;
+	public char promotion;
+	public boolean enpassant;
+	public int checks;
+	public boolean checkMate;
+	
 	//notation
 	private boolean missingCol;
 	private boolean missingRow;
@@ -26,6 +27,7 @@ public class compilerChecker extends Checker {
 	private String lastMove = "";
 	
 	//moved piece for castle
+	//TODO check if they are moved and change this
 	private boolean movedKB = false; //king black
 	private boolean movedRBlong = false; //rook black for long castle
 	private boolean movedRBshort = false; //rook black for short castle
