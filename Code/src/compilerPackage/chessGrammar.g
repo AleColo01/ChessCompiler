@@ -6,14 +6,15 @@ options {
 }
 
 @lexer::header{
-package compilerPackage;
+package compilerPackage.output;
 }
 
 @lexer::members{
 }
 
 @header{
-package compilerPackage;
+package compilerPackage.output;
+import compilerPackage.*;
 }
  
 @members {
@@ -30,10 +31,9 @@ HASH : '#';
 TAKE : ('x' | ':');
 CASTLE : 'O';
 EP : ' ep';
-NEWLINE	: '\r';
+NEWLINE	: '\r'? '\n';
 
 //FRAGMENTED RULES
-moveFromOld:((PIECE COLUMN ROW | PIECE COLUMN | PIECE ROW | COLUMN ROW | COLUMN | ROW | PIECE)(TAKE | MINUS)?)?(COLUMN ROW);
 moveFrom
 	:  (PIECE COLUMN? ROW? (TAKE | MINUS)?) |
 	   (COLUMN TAKE)	
@@ -50,6 +50,11 @@ promotion : EQUALS PIECE;
 castleRule: CASTLE MINUS CASTLE (MINUS CASTLE)?;	
 
 //COMPLETE RULE to check with Java class
-startRule 
+startRuleOld 
 	: (((moveFrom? moveTo (enPassant | promotion)? (check | checkmate)? ) | castleRule)  NEWLINE)*; 
 
+startRule 
+    : (move NEWLINE)* EOF;
+    
+move
+    : (moveFrom? moveTo (enPassant | promotion)? (check | checkmate)?) | castleRule;
