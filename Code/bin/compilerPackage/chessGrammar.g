@@ -6,14 +6,14 @@ options {
 }
 
 @lexer::header{
-package compilerPackage.output;
+package compilerPackage;
 }
 
 @lexer::members{
 }
 
 @header{
-package compilerPackage.output;
+package compilerPackage;
 import compilerPackage.*;
 }
  
@@ -40,8 +40,7 @@ moveFrom
 
 ;
 moveTo	: 
-	c=COLUMN 
-	r=ROW
+	COLUMN ROW
 ;
 enPassant: EP;
 check	: PLUS PLUS?;
@@ -50,11 +49,8 @@ promotion : EQUALS PIECE;
 castleRule: CASTLE MINUS CASTLE (MINUS CASTLE)?;	
 
 //COMPLETE RULE to check with Java class
-startRuleOld 
-	: (((moveFrom? moveTo (enPassant | promotion)? (check | checkmate)? ) | castleRule)  NEWLINE)*; 
-
 startRule 
-    : (move NEWLINE)* EOF;
+    : (move (NEWLINE | EOF))*;
     
 move
     : (moveFrom? moveTo (enPassant | promotion)? (check | checkmate)?) | castleRule;
