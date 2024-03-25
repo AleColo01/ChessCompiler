@@ -27,7 +27,6 @@ public class ChessGrammarParserTester {
 			chessGrammarParser parser = new chessGrammarParser(tokens);
 			
 		    parser.startRule();
-		    
 			System.out.println ("\nParsing con ANTLR terminato con successo\n\n");
 
 		} catch (Exception e) {

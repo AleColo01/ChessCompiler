@@ -1,4 +1,6 @@
 package compilerPackage;
+import org.antlr.runtime.Token;
+
 import chessPackage.Checker;
 import chessPackage.ChessboardPanel;
 
@@ -7,17 +9,17 @@ public class compilerChecker extends Checker {
 	public char turn = 'W'; 
 	
 	//resetted each turn
-	public char piece; 
-	public int rowTo; 
-	public int colTo;
-	public int rowFrom; 
-	public int colFrom; 
-	public char take; // x : to take, - to divide in extended notation
-	public String castle;
-	public char promotion;
-	public boolean enpassant;
-	public int checks;
-	public boolean checkMate;
+	private char piece; 
+	private int rowTo; 
+	private int colTo;
+	private int rowFrom; 
+	private int colFrom; 
+	private char take; // x : to take, - to divide in extended notation
+	private String castle;
+	private char promotion;
+	private boolean enpassant;
+	private int checks;
+	private boolean checkMate;
 	
 	//notation
 	private boolean missingCol;
@@ -82,9 +84,10 @@ public class compilerChecker extends Checker {
 		//non devo avere dubbi su quale pezzo muovere
 		if(!isUnique()) flagValid = false;
 		
+		System.out.println(""+turn+piece+rowFrom+colFrom+rowTo+colTo);
 		//il proprio re non sia sotto scacco
 		if(super.giveupKing(cp, turn, piece, rowFrom, colFrom, rowTo, colTo)) flagValid = false;
-		
+
 		//indicatore di promozione corretto e valido
 		if(!ispromotionValid()) flagValid = false;
 		
@@ -93,13 +96,13 @@ public class compilerChecker extends Checker {
     	pos = super.kingPosition(cp, oppositeTurn(turn));
     	int kingRow = pos[0];
     	int kingCol = pos[1];
-		if( countChecks(turn,kingRow,kingCol) != checks ) flagValid = false;
+		if(!checkMate && countChecks(turn,kingRow,kingCol) != checks ) flagValid = false;
 		
 		//indicatore scacco matto corretto
-		if( checks > 0 && canKingMove() ) flagValid = false;
+		if(checkMate && countChecks(turn,kingRow,kingCol) > 0 && canKingMove() ) flagValid = false;
 		
 		//indicatore en passant corretto e valido
-		if ( !isenpassantValid()) flagValid = false;
+		if (enpassant && !isenpassantValid()) flagValid = false;
 		
 		//indicatore castle
 		if ( !iscastleValid()) flagValid = false;
@@ -108,14 +111,56 @@ public class compilerChecker extends Checker {
 		if ( !isnotationCorrect()) flagValid = false;
 		
 		//TODO mantenere sempre la stessa dicitura
-		 
-		//RESETTA TUTTO
+		if(flagValid)
+			updateChessboard();
+		//RESETTA TUTTE LE VARIABILI
 		reset();
 		turn = super.oppositeTurn(turn);
 		lastMove = piece+""+colFrom+""+rowFrom+"-"+colTo+""+rowTo;
 		return flagValid;
 	}
 	
+	private void updateChessboard() {
+		if(!castle.isEmpty())
+			handleCastling();
+		else {
+			cp.getBoard()[rowFrom][rowFrom] = "";
+		    	if (promotion != '_') cp.getBoard()[rowTo][colTo] = promotion + "" + turn;
+		        else cp.getBoard()[rowTo][colTo] = piece + "" + turn;
+		}
+	}
+	
+	
+	
+	 private void handleCastling() {
+	        if (castle.equals("O-O")) { //short castle
+	            if (turn == 'W') { // white side
+	                cp.getBoard()[7 - 0][4] = "";
+	                cp.getBoard()[7 - 0][6] = "KW";
+	                cp.getBoard()[7 - 0][7] = "";
+	                cp.getBoard()[7 - 0][5] = "RW";
+	            } else { // black side
+	            	cp.getBoard()[7 - 7][4] = "";
+	            	cp.getBoard()[7 - 7][6] = "KB";
+	            	cp.getBoard()[7 - 7][7] = "";
+	            	cp.getBoard()[7 - 7][5] = "RB";
+	            }
+	            return;
+	        } else if (castle.equals("O-O-O")) { //long castle
+	            if (turn == 'W') { // white side
+	            	cp.getBoard()[7 - 0][4] = "";
+	            	cp.getBoard()[7 - 0][2] = "KW";
+	            	cp.getBoard()[7 - 0][0] = "";
+	            	cp.getBoard()[7 - 0][3] = "RW";
+	            } else { // black side
+	            	cp.getBoard()[7 - 7][4] = "";
+	            	cp.getBoard()[7 - 7][2] = "KB";
+	            	cp.getBoard()[7 - 7][0] = "";
+	            	cp.getBoard()[7 - 7][3] = "RB";
+	            }
+	        }
+	    }
+	 
 	private boolean isnotationCorrect(){
 		boolean flagValidC = false;
 		boolean flagValidR = false;
@@ -300,4 +345,55 @@ public class compilerChecker extends Checker {
 		missingRow = false;
 	}
     
+	
+	
+	
+	
+	//SET-GET METHODS
+	public void setColTo(Token t) {
+		colTo = t.getText().charAt(0) - 'a';
+	}
+	
+	public void setRowTo(Token t) {
+		rowTo = Integer.parseInt(t.getText()) - 1;
+	}
+	
+	public void setColFrom(Token t) {
+		colFrom = t.getText().charAt(0) - 'a';
+	}
+	
+	public void setRowFrom(Token t) {
+		rowFrom = Integer.parseInt(t.getText()) - 1;
+	}
+	
+	public void setPiece(Token t) {
+		piece = t.getText().charAt(0);
+	}
+	
+	public void setPromotion(Token t) {
+		promotion = t.getText().charAt(0);
+	}
+	
+	public void setTake(Token t) {
+		take = t.getText().charAt(0);
+	}
+	
+	public void setEnpassant() {
+		enpassant = true;
+	}
+	
+	public void setCheckMate() {
+		checkMate = true;
+	}
+	
+	public void setChecks() {
+		checks =checks + 1;
+	}
+	
+	public void setCastle(int i) {
+		if(i==1)
+			castle="O-O";
+		else
+			castle="O-O-O";
+	}
 }

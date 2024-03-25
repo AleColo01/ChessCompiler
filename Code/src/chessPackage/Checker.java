@@ -144,7 +144,7 @@ public class Checker {
 	 */
     public void handleCastling(ChessboardPanel chessboardPanel, String move, char turn) {
         if (move.equals("O-O")) { //short castle
-            if (turn == 'B') { // white side
+            if (turn == 'W') { // white side
                 chessboardPanel.getBoard()[7 - 0][4] = "";
                 chessboardPanel.getBoard()[7 - 0][6] = "KW";
                 chessboardPanel.getBoard()[7 - 0][7] = "";
@@ -158,7 +158,7 @@ public class Checker {
             chessboardPanel.repaint();
             return;
         } else if (move.equals("O-O-O")) { //long castle
-            if (turn == 'B') { // white side
+            if (turn == 'W') { // white side
                 chessboardPanel.getBoard()[7 - 0][4] = "";
                 chessboardPanel.getBoard()[7 - 0][2] = "KW";
                 chessboardPanel.getBoard()[7 - 0][0] = "";
@@ -482,7 +482,6 @@ public class Checker {
      * This method scans for the whole chessboard until a piece returns true to canReach or canTake
      */
     protected int[] calculateMissingInfo(int fromColIndex, int fromRowIndex, int toColIndex, int toRowIndex, char pieceType, char turn, ChessboardPanel chessboardPanel) {
-
         if (fromColIndex == -1 && fromRowIndex == -1) {
             for (int r = 0; r < 8; r++) {
                 for (int c = 0; c < 8; c++) {
