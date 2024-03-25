@@ -1,4 +1,4 @@
-package myPackage;
+package testerCompilerPackage;
 
 import java.io.IOException;
 
@@ -17,6 +17,7 @@ public class MainTester {
 		System.out.println("-- PARSER --");
 		System.out.println("");
 		par.test(fileIn);
+		
 	}
 
 }

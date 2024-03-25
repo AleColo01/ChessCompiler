@@ -1,4 +1,5 @@
 package chessPackage;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;

@@ -31,6 +31,9 @@ HASH : '#';
 TAKE : ('x' | ':');
 CASTLE : 'O';
 EP : ' ep';
+INT : '0'..'9'+;
+SPACE : ' ';
+POINT : '.';
 NEWLINE	: '\r'? '\n';
 
 //FRAGMENTED RULES
@@ -62,7 +65,10 @@ castleRule:
 
 //COMPLETE RULE to check with Java class
 startRule 
-    : (move (NEWLINE | EOF))*;
+    : (turn (NEWLINE | EOF))*;
+    
+turn
+    :  (value+=INT+ POINT SPACE move SPACE move) {cc.setTurnNumber(value);};
     
 move
     : ((moveFrom? moveTo (enPassant | promotion)? (check | checkmate)?) | castleRule) {cc.processMove();};
