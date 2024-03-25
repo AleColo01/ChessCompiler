@@ -1,4 +1,4 @@
-package myPackage;
+package testerCompilerPackage;
 
 import java.io.FileReader;
 import java.io.IOException;

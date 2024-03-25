@@ -7,6 +7,7 @@ import chessPackage.ChessboardPanel;
 public class compilerChecker extends Checker {
 	public ChessboardPanel cp;
 	public char turn = 'W'; 
+	public int actualTurn = 0;
 	
 	//resetted each turn
 	private char piece; 
@@ -20,6 +21,7 @@ public class compilerChecker extends Checker {
 	private boolean enpassant;
 	private int checks;
 	private boolean checkMate;
+	private int turnNumber;
 	
 	//notation
 	private boolean missingCol;
@@ -74,6 +76,8 @@ public class compilerChecker extends Checker {
 		colFrom = res[1];
 		rowFrom = res[0];	
 		System.out.println(turn+":"+piece+colFrom+rowFrom+colTo+rowTo);
+		System.out.println("--");
+		
 		//CALCOLA TUTTE LE CORRETTE IMPOSTAZIONI
 		
 		//indicatore di mangiate corretto
@@ -108,6 +112,9 @@ public class compilerChecker extends Checker {
 		
 		//no notazione superflua (no indicare colonne o righe non necessarie)
 		if ( !isnotationCorrect()) flagValid = false;
+		
+		//numero di turno corretto
+		if ( !isTurnCorrect()) flagValid = false;
 		
 		if(flagValid)
 			updateChessboard();
@@ -338,6 +345,10 @@ public class compilerChecker extends Checker {
 		return false;
 	}
 
+	private boolean isTurnCorrect() {
+		if(actualTurn != turnNumber) return false;
+		return true;
+	}
 	
 	private void reset() {
 		piece = 0; 
@@ -353,6 +364,13 @@ public class compilerChecker extends Checker {
 		checkMate = false;
 		missingCol = false;
 		missingRow = false;
+		turnNumber=0;
+	}
+	
+	//Metodo per guardare se il turno è corretto
+	public void setTurnNumber(Token t) {
+		turnNumber = Integer.parseInt(t.getText());
+		System.out.println(turnNumber);
 	}
 	
 	//SET-GET METHODS

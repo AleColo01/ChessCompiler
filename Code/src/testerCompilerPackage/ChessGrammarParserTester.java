@@ -1,4 +1,4 @@
-package myPackage;
+package testerCompilerPackage;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,9 +25,8 @@ public class ChessGrammarParserTester {
 			
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			chessGrammarParser parser = new chessGrammarParser(tokens);
-			
 		    parser.startRule();
-			System.out.println ("\nParsing con ANTLR terminato con successo\n\n");
+			System.out.println ("\nParsing ANTLR terminato con successo\n\n");
 
 		} catch (Exception e) {
 			System.out.println ("Test ANTLR abortito");
