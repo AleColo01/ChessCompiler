@@ -73,23 +73,22 @@ public class compilerChecker extends Checker {
 		int[] res = super.calculateMissingInfo(colFrom, rowFrom, colTo, rowTo, piece, turn, cp);
 		colFrom = res[1];
 		rowFrom = res[0];	
-		
+		System.out.println(turn+":"+piece+colFrom+rowFrom+colTo+rowTo);
 		//CALCOLA TUTTE LE CORRETTE IMPOSTAZIONI
 		
 		//indicatore di mangiate corretto
 		if(take == 'x' || take == ':') {
 			if(!checkTake() || cp.getBoard()[rowTo][colTo].equals("")) flagValid = false;
 		}
-		
+			
 		//non devo avere dubbi su quale pezzo muovere
 		if(!isUnique()) flagValid = false;
 		
-		System.out.println(""+turn+piece+rowFrom+colFrom+rowTo+colTo);
 		//il proprio re non sia sotto scacco
 		if(super.giveupKing(cp, turn, piece, rowFrom, colFrom, rowTo, colTo)) flagValid = false;
 
 		//indicatore di promozione corretto e valido
-		if(!ispromotionValid()) flagValid = false;
+		if(promotion!=0 && !ispromotionValid()) flagValid = false;
 		
 		//indicatore numero di scacco corretto
     	int pos[] = new int[2];
@@ -102,15 +101,14 @@ public class compilerChecker extends Checker {
 		if(checkMate && countChecks(turn,kingRow,kingCol) > 0 && canKingMove() ) flagValid = false;
 		
 		//indicatore en passant corretto e valido
-		if (enpassant && !isenpassantValid()) flagValid = false;
+		if (!isenpassantValid()) flagValid = false;
 		
 		//indicatore castle
-		if ( !iscastleValid()) flagValid = false;
+		if (!castle.equals("") && !iscastleValid()) flagValid = false;
 		
 		//no notazione superflua (no indicare colonne o righe non necessarie)
 		if ( !isnotationCorrect()) flagValid = false;
 		
-		//TODO mantenere sempre la stessa dicitura
 		if(flagValid)
 			updateChessboard();
 		//RESETTA TUTTE LE VARIABILI
@@ -121,13 +119,22 @@ public class compilerChecker extends Checker {
 	}
 	
 	private void updateChessboard() {
-		if(!castle.isEmpty())
+		if(!castle.equals(""))
 			handleCastling();
 		else {
-			cp.getBoard()[rowFrom][rowFrom] = "";
-		    	if (promotion != '_') cp.getBoard()[rowTo][colTo] = promotion + "" + turn;
-		        else cp.getBoard()[rowTo][colTo] = piece + "" + turn;
+			cp.getBoard()[rowFrom][colFrom] = "";
+	    	if (promotion != 0) cp.getBoard()[rowTo][colTo] = promotion + "" + turn;
+	        else cp.getBoard()[rowTo][colTo] = piece + "" + turn;
 		}
+		
+		//STAMPA SCACCHIERA
+//		for (int r = 0; r < 8; r++) {
+//            for (int c = 0; c < 8; c++) {
+//            	System.out.print(cp.getBoard()[r][c]);
+//            	System.out.print(" | ");
+//            }
+//            System.out.println("");
+//        }	
 	}
 	
 	
@@ -236,6 +243,9 @@ public class compilerChecker extends Checker {
 	}
 
 	private boolean isenpassantValid() {
+		if(enpassant && piece!='P') return false;
+		if(!enpassant) return true;
+		
 		if(piece == 'P') {
             //accepted only if it's capturing a piece diagonally by one cell
             if (Math.abs(rowTo - rowFrom) == 1 && Math.abs(colTo - colFrom) == 1) {
@@ -344,10 +354,6 @@ public class compilerChecker extends Checker {
 		missingCol = false;
 		missingRow = false;
 	}
-    
-	
-	
-	
 	
 	//SET-GET METHODS
 	public void setColTo(Token t) {
@@ -355,7 +361,7 @@ public class compilerChecker extends Checker {
 	}
 	
 	public void setRowTo(Token t) {
-		rowTo = Integer.parseInt(t.getText()) - 1;
+		rowTo = 7 - (Integer.parseInt(t.getText()) - 1);
 	}
 	
 	public void setColFrom(Token t) {
@@ -363,7 +369,7 @@ public class compilerChecker extends Checker {
 	}
 	
 	public void setRowFrom(Token t) {
-		rowFrom = Integer.parseInt(t.getText()) - 1;
+		rowFrom = 7 - (Integer.parseInt(t.getText()) - 1);
 	}
 	
 	public void setPiece(Token t) {

@@ -482,10 +482,10 @@ public class Checker {
      * This method scans for the whole chessboard until a piece returns true to canReach or canTake
      */
     protected int[] calculateMissingInfo(int fromColIndex, int fromRowIndex, int toColIndex, int toRowIndex, char pieceType, char turn, ChessboardPanel chessboardPanel) {
-        if (fromColIndex == -1 && fromRowIndex == -1) {
+    	if (fromColIndex == -1 && fromRowIndex == -1) {
             for (int r = 0; r < 8; r++) {
                 for (int c = 0; c < 8; c++) {
-                    if (chessboardPanel.getBoard()[r][c].equals("" + pieceType + turn) 
+                	if (chessboardPanel.getBoard()[r][c].equals("" + pieceType + turn) 
                     		&& (canReach(chessboardPanel, turn, pieceType, r, c, toRowIndex, toColIndex, true) 
                     				|| canTake(chessboardPanel, turn, pieceType, r, c, toRowIndex, toColIndex, true)) ) {
                         fromColIndex = c;
@@ -494,6 +494,7 @@ public class Checker {
                     }
                 }
             }
+            System.out.println("--");
         } else if (fromColIndex == -1) {
             for (int c = 0; c < 8; c++) {
                 if (chessboardPanel.getBoard()[fromRowIndex][c].equals("" + pieceType + turn) 
