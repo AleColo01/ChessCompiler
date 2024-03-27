@@ -1,5 +1,5 @@
-white=[Ba1;Nf3]
-black=[Bc1;Ne3]
+white=[Ka1;Ba3;Nf3]
+black=[Kb5;Bc3;Ne3]
 1.	a3	a6
 2.	b3	b6
 3.	c3	c6

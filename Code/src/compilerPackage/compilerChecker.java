@@ -22,6 +22,8 @@ public class compilerChecker extends Checker {
 	private int checks;
 	private boolean checkMate;
 	private int turnNumber;
+	private int[] wKingPos = new int[2];
+	private int[] bKingPos = new int[2];
 	
 	//notation
 	private boolean missingCol;
@@ -348,6 +350,7 @@ public class compilerChecker extends Checker {
 		return true;
 	}
 	
+	
 	private void reset() {
 		piece = 0; 
 		rowFrom = -1; 
@@ -419,19 +422,95 @@ public class compilerChecker extends Checker {
 			castle="O-O-O";
 	}
 	
-	//TODO
-	public boolean checkPreamble() {
-		//chiamata ad ogni aggiunta:
-		//no pezzi in caselle già occupate
+	
+	//CHECKS OF PREAMBLE
+	//chiamata ad ogni pezzo nel preambolo
+	public boolean checkPreamblePlacement(Token r, Token c) {
+		int row = Integer.parseInt(r.getText());
+		int col = c.getText().charAt(0) - 'a';;
+		if(cp.getBoard()[row][col].equals(""))
+			return true;
 		return false;
 	}
 	
+	
+	//chiamata alla fine del preambolo 
 	public boolean checkChessboard() {
-		//chiamata alla fine:
-		//uno e uno solo re per parte
-		//no re in scacco matto
-		//solo re che parte in scacco
-		//no patta ( abbastanza pezzi e mosse disponibili)
-		return false;
+		
+        //Non c'è situazione di stallo (controlla anche che ci siano esattamente due re)
+        if(isDraw()) return false;
+		
+        
+       //TODO
+      //no re in scacco matto
+      //solo re che parte in scacco
+        
+		
+        return true;
 	}
+	
+	private boolean isWhiteSquare(int row, int col) {
+        return (row + col) % 2 == 0;
+    }
+	
+	private boolean isDraw() {
+		int wKing=0, bKing=0, wKnight=0, bKnight=0,wBishop=0, bBishop=0,wBishop_ws=0, wBishop_bs=0,bBishop_ws=0, bBishop_bs=0, noDrawPiece=0, totalPiece=0;
+		
+		for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+            	if(cp.getBoard()[r][c].equals("KW")) { wKing++;
+            	//Memorizing white kings position
+            		wKingPos[0]=r;
+            		wKingPos[1]=c;
+            	}
+            	else if(cp.getBoard()[r][c].equals("KB")) { bKing++;
+            	//Memorizing black kings position
+            		bKingPos[0]=r;
+        			bKingPos[1]=c;
+        	}
+            	else if(cp.getBoard()[r][c].equals("WN")) wKnight++;
+            	else if(cp.getBoard()[r][c].equals("BN")) bKnight++;
+            	else if(cp.getBoard()[r][c].equals("BW")) { 
+            		wBishop++;
+            		if(isWhiteSquare(r,c)) wBishop_ws++;
+            		else wBishop_bs++;}
+            	else if(cp.getBoard()[r][c].equals("BB")) { 
+            		bBishop++;
+            		if(isWhiteSquare(r,c)) bBishop_ws++;
+            		else bBishop_bs++;}
+            	else
+            		noDrawPiece++;
+            	totalPiece++;
+            }
+        }	
+		
+		//Only one king for player
+		if(wKing!=1 || bKing!=1) return true;
+		
+		//King vs King
+        if (totalPiece == 2) {
+            return true;
+        }
+
+        if(noDrawPiece == 0) {
+        	//King and knight vs king
+	        if (wBishop == 0 && bBishop == 0 && ((wKnight == 1 && bKnight == 0) || (wKnight == 0 && bKnight == 1))) 
+	            return true;
+	        
+        	if(wKnight == 0 && bKnight == 0) {
+		        //King and bishop vs king
+		        if ((wBishop == 1 && bBishop == 0) || (wBishop == 0 && bBishop == 1)) {
+		        	return true;
+		        }
+		
+		        //King and bishop vs king with bishop of the same color of the other player
+		        if (wBishop==1 && bBishop==1 && ((wBishop_ws == 1 && bBishop_ws == 1) || (wBishop_bs == 1 && bBishop_bs == 1))) 
+		            return true;
+        	}
+        }
+        
+        //There isn't draw situation
+        return false;
+	}
+	
 }
