@@ -1,5 +1,4 @@
 package chessPackage;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
@@ -13,16 +12,39 @@ public class Chessboard {
     private static JLabel nextMoveLabel; // Added label to display next move
     private static JFrame frame;
     private static char turn = 'W';
-    private static String nextMove = null;
-    private static int moveNumber = 1; // Contatore per il numero della mossa
+    private static String turnNumber = "1";
+    private static String nextMoveW = null;
+    private static String nextMoveB = null;
     private static Checker chk = new Checker();
+    
+    private static String [][] initialBoard = new String[8][8];
+    private static boolean preamble = false;
 
     /*
      * MAIN
      */
     public static void main(String[] args) {
+    	fillBoardWithEmptyStrings();
         try {
             moveReader = new BufferedReader(new FileReader("res/input.file"));
+            
+            //HERE ADD PREAMBLE CHESSBOARD
+            try {
+            	for(int i = 0; i<2; i++) {
+                    String Preamble = moveReader.readLine(); //skip two lines
+                    String PreambleTurn = Preamble.substring(0, 5);
+                    Preamble = Preamble.substring(7,Preamble.length()-1);
+                    String[] infos = Preamble.split(";");
+                    for (String info : infos) {
+                    	setUpChessboard(info,PreambleTurn);
+                    }
+            	}
+                preamble = true;
+            } catch (IOException ex) {
+                System.err.println("Error reading move: " + ex.getMessage());
+            }
+            
+            
         } catch (FileNotFoundException e) {
             System.err.println("File 'moves.txt' not found.");
             System.exit(1);
@@ -33,6 +55,23 @@ public class Chessboard {
             createNextMoveButton();
         });
     }
+    /*
+     * SET UP CHESSBOARD
+     */    
+    private static void setUpChessboard(String info,String t) {
+    	char turn = 'B';
+    	if(t.equals("white")) turn = 'W';
+    	
+    	char piece = info.charAt(0);
+    	char column = info.charAt(1);
+    	char row = info.charAt(2);
+    	
+    	int colIndex = column - 'a';
+    	int rowIndex = '8' - row;
+    	
+    	initialBoard[rowIndex][colIndex] = piece + "" + turn; 
+    }
+    
 
     /*
      * NEXT MOVE BUTTON
@@ -41,12 +80,16 @@ public class Chessboard {
         nextMoveButton = new JButton("Next Move:");
         nextMoveLabel = new JLabel(" ");
 
+        //INIZIALIZZAZIONE DEL PULSANTE, SCRIVI E SALVA LA MOSSA
         try {
-            nextMove = moveReader.readLine(); // Leggi e memorizza la prossima mossa durante l'inizializzazione del pulsante
-            if (nextMove == null) {
+            String[] parts = moveReader.readLine().split("\t");
+            turnNumber = parts[0];
+            nextMoveW = parts[1];
+            nextMoveB = parts[2];
+            if (nextMoveW == null) {
                 nextMoveLabel.setText("No more moves.");
             } else {
-                nextMoveLabel.setText("Next Move " + moveNumber + ": " + nextMove); // Mostra il numero della mossa
+                nextMoveLabel.setText("Next Move " +turnNumber+" "+ nextMoveW); 
             }
         } catch (IOException ex) {
             System.err.println("Error reading move: " + ex.getMessage());
@@ -54,19 +97,43 @@ public class Chessboard {
 
         nextMoveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (nextMove != null) { // Se c'è una mossa memorizzata, eseguila
+
+                if (nextMoveW != null || nextMoveB != null) { 
                     try {
-                        if (chk.movePiece(chessboardPanel, nextMove, turn)) {
-                            if (turn == 'W') turn = 'B';
-                            else turn = 'W';
-                        }
-                        moveNumber++; // Incrementa il numero della mossa
-                        nextMove = moveReader.readLine(); // Leggi la prossima mossa per la successiva pressione del pulsante
-                        if (nextMove == null) {
+                    	//PRIMA ESEGUE LA MOSSA
+                    	if (turn == 'W')
+                    		chk.movePiece(chessboardPanel, nextMoveW, turn);
+                    	else
+                    		chk.movePiece(chessboardPanel, nextMoveB, turn);
+                    	
+                        //PASSA AL TURNO SUCCESSIVO
+                        if (turn == 'W') {
+                        	turn = 'B';
+                        }else {
+                        	turn = 'W';
+                            //LEGGE LA SUCCESSIVA RIGA SE NECESSARIO
+                        	String line = moveReader.readLine();
+                        	if(line != null) {
+                                String[] parts = line.split("\t");
+                                turnNumber = parts[0];
+                                nextMoveW = parts[1];
+                                nextMoveB = parts[2];
+                        	}else{
+                                nextMoveW = null;
+                                nextMoveB = null;
+                        	}
+                        }                  
+                        
+                        //ED AGGIORNA IL PULSANTE
+                        if (nextMoveW == null && nextMoveB == null) {
                             nextMoveLabel.setText("No more moves.");
                         } else {
-                            nextMoveLabel.setText("Next Move " + moveNumber + ": " + nextMove); // Mostra il numero della mossa
+                        	if (turn == 'W')                     		                       	
+                        		nextMoveLabel.setText("Next Move " +turnNumber+" "+ nextMoveW); 
+                        	else
+                        		nextMoveLabel.setText("Next Move " +turnNumber+" "+ nextMoveB); 
                         }
+                        
                     } catch (IOException ex) {
                         System.err.println("Error reading move: " + ex.getMessage());
                     }
@@ -89,7 +156,8 @@ public class Chessboard {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Matrice rappresentante la disposizione iniziale degli scacchi
-        String[][] initialBoard = {
+        if(!preamble) {
+        String[][] TMPinitialBoard = {
             {"RB", "NB", "BB", "QB", "KB", "BB", "NB", "RB"},
             {"PB", "PB", "PB", "PB", "PB", "PB", "PB", "PB"},
             {"", "", "", "", "", "", "", ""},
@@ -99,6 +167,8 @@ public class Chessboard {
             {"PW", "PW", "PW", "PW", "PW", "PW", "PW", "PW"},
             {"RW", "NW", "BW", "QW", "KW", "BW", "NW", "RW"}
         };
+        initialBoard = TMPinitialBoard;
+        }
 
         ChessboardPanel chessboardPanel = new ChessboardPanel(initialBoard);
         // Imposta la dimensione del pannello a 400x400 pixel
@@ -109,5 +179,13 @@ public class Chessboard {
         frame.setVisible(true);
 
         return chessboardPanel;
+    }
+    
+    private static void fillBoardWithEmptyStrings() {
+        for (int i = 0; i < initialBoard.length; i++) {
+            for (int j = 0; j < initialBoard[i].length; j++) {
+                initialBoard[i][j] = "";
+            }
+        }
     }
 }

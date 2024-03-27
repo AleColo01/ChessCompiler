@@ -5,7 +5,7 @@ public class Checker {
 	
     public Checker() {}
 
-    public boolean movePiece(ChessboardPanel cp, String move, char turn) {
+    public boolean movePiece(ChessboardPanel cp, String move, char turn) {    	
     	/*
     	 * CASTLING: see handleCastling
     	 */
