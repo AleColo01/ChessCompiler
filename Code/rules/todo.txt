@@ -2,4 +2,5 @@ se inizia il nero come sono le mosse?
 se finisce il bianco come sono le mosse?
 sistema Chessboard.java -> manca da controllare nel caso in cui il preambolo non ci sia, ora
 							da per scontato che ci sia.
-compiler checkPreable and setChessboard
+							
+compiler checkChessboard -> manca, una volta finito di inserire i pezzi di controllare la parte dei re sotto scacco

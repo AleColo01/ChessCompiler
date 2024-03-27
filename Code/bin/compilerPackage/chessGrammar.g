@@ -45,8 +45,8 @@ preamble
 	TURN {/*turn and color*/}
 	EQUALS 
 	OPEN 
-	(PIECE COLUMN INT SC {/*check and set*/})* 
-	(PIECE COLUMN INT {/*check and set*/}) 
+	(PIECE c=COLUMN r=INT SC {cc.checkPreamblePlacement($r,$c);})* 
+	(PIECE COLUMN INT {cc.checkPreamblePlacement($r,$c);}) 
 	CLOSE
 	;	
 
@@ -85,7 +85,7 @@ castleRule:
 //COMPLETE RULE to check with Java class
 startRule 
     : (preamble NEWLINE
-    preamble NEWLINE)?
+    preamble NEWLINE)? {cc.checkChessboard();}
     (turn (NEWLINE | EOF))*;
     
 turn
