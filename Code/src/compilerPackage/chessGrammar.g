@@ -2,7 +2,7 @@ grammar chessGrammar;
 
 options {
   language = Java;
-  k = 4;		
+  k = 5;		
 }
 
 @lexer::header{
@@ -22,8 +22,8 @@ public compilerChecker cc = new compilerChecker();
 }
 
 PIECE : ('R' | 'B' | 'N' | 'Q' | 'K' | 'P');
-COLUMN  : 'a'..'h' ;
-ROW  : '1'..'8' ;
+COLUMN  : 'a'..'h';
+INT  : '0'..'9'+;
 MINUS : '-';
 PLUS : '+';
 EQUALS : '=';
@@ -31,24 +31,42 @@ HASH : '#';
 TAKE : ('x' | ':');
 CASTLE : 'O';
 EP : ' ep';
-INT : ('0'..'9')+;
-SPACE : ' ';
 TAB : '\t';
 POINT : '.';
 NEWLINE	: '\r'? '\n';
+OPEN	: '[';
+CLOSE	: ']';
+TURN : ('white' | 'black');
+SC : ';';
 
 //FRAGMENTED RULES
+preamble
+	:
+	TURN {/*turn and color*/}
+	EQUALS 
+	OPEN 
+	(PIECE COLUMN INT SC {/*check and set*/})* 
+	(PIECE COLUMN INT {/*check and set*/}) 
+	CLOSE
+	;	
+
+turnNum	:	
+	v=INT {
+		cc.setTurnNumber($v);
+    		cc.isTurnCorrect();
+    		}
+	;
 moveFrom :  
 	(p=PIECE {cc.setPiece($p);}
 	(c=COLUMN {cc.setColFrom($c);})?
-	(r=ROW {cc.setRowFrom($r);})?
+	(r=INT {cc.setRowFrom($r);})?
 	((t=TAKE | t=MINUS) {cc.setTake($t);})?)  |
 	((c=COLUMN t=TAKE)	{cc.setTake($t);
 	   			 cc.setColFrom($c);})
 ;
 moveTo	: 
 	c=COLUMN {cc.setColTo($c);}
-	r=ROW {cc.setRowTo($r);}
+	r=INT {cc.setRowTo($r);}
 ;
 enPassant: EP	{cc.setEnpassant();};
 check	: PLUS {cc.setChecks();}
@@ -66,12 +84,12 @@ castleRule:
 
 //COMPLETE RULE to check with Java class
 startRule 
-    : (turn (NEWLINE | EOF))*;
+    : (preamble NEWLINE
+    preamble NEWLINE)?
+    (turn (NEWLINE | EOF))*;
     
 turn
-    :  value=INT POINT SPACE move TAB move {cc.setTurnNumber($value);
-    					      cc.isTurnCorrect();
-    					      System.out.println("ciao");};
+    : turnNum POINT TAB move TAB move;
     
 move
     : ((moveFrom? moveTo (enPassant | promotion)? (check | checkmate)?) | castleRule) {cc.processMove();};

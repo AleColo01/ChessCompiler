@@ -75,8 +75,6 @@ public class compilerChecker extends Checker {
 		int[] res = super.calculateMissingInfo(colFrom, rowFrom, colTo, rowTo, piece, turn, cp);
 		colFrom = res[1];
 		rowFrom = res[0];	
-		System.out.println(turn+":"+piece+colFrom+rowFrom+colTo+rowTo);
-		System.out.println("--");
 		
 		//CALCOLA TUTTE LE CORRETTE IMPOSTAZIONI
 		
@@ -344,7 +342,9 @@ public class compilerChecker extends Checker {
 
 	public boolean isTurnCorrect() {
 		actualTurn = actualTurn + 1;
-		if(actualTurn != turnNumber) return false;
+		if(actualTurn != turnNumber) {
+			return false;
+		}
 		return true;
 	}
 	
@@ -368,7 +368,6 @@ public class compilerChecker extends Checker {
 	//Metodo per guardare se il turno è corretto
 	public void setTurnNumber(Token t) {
 		turnNumber = Integer.parseInt(t.getText());
-		System.out.println(turnNumber);
 	}
 	
 	//SET-GET METHODS
@@ -377,7 +376,8 @@ public class compilerChecker extends Checker {
 	}
 	
 	public void setRowTo(Token t) {
-		rowTo = 7 - (Integer.parseInt(t.getText()) - 1);
+		int rowToTemp = 7 - (Integer.parseInt(t.getText()) - 1);
+		if(rowToTemp >= 0 || rowToTemp <= 7 ) rowTo = rowToTemp;
 	}
 	
 	public void setColFrom(Token t) {
@@ -417,5 +417,21 @@ public class compilerChecker extends Checker {
 			castle="O-O";
 		else
 			castle="O-O-O";
+	}
+	
+	//TODO
+	public boolean checkPreamble() {
+		//chiamata ad ogni aggiunta:
+		//no pezzi in caselle già occupate
+		return false;
+	}
+	
+	public boolean checkChessboard() {
+		//chiamata alla fine:
+		//uno e uno solo re per parte
+		//no re in scacco matto
+		//solo re che parte in scacco
+		//no patta ( abbastanza pezzi e mosse disponibili)
+		return false;
 	}
 }

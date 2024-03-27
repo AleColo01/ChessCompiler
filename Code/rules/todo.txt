@@ -1,0 +1,4 @@
+se inizia il nero come sono le mosse?
+se finisce il bianco come sono le mosse?
+sistema Chessboard.java
+compiler checkPreable and setChessboard
