@@ -113,9 +113,6 @@ public class compilerChecker extends Checker {
 		//no notazione superflua (no indicare colonne o righe non necessarie)
 		if ( !isnotationCorrect()) flagValid = false;
 		
-		//numero di turno corretto
-		if ( !isTurnCorrect()) flagValid = false;
-		
 		if(flagValid)
 			updateChessboard();
 		//RESETTA TUTTE LE VARIABILI
@@ -345,7 +342,8 @@ public class compilerChecker extends Checker {
 		return false;
 	}
 
-	private boolean isTurnCorrect() {
+	public boolean isTurnCorrect() {
+		actualTurn = actualTurn + 1;
 		if(actualTurn != turnNumber) return false;
 		return true;
 	}

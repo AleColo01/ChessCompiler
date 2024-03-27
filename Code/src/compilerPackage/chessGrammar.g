@@ -31,8 +31,9 @@ HASH : '#';
 TAKE : ('x' | ':');
 CASTLE : 'O';
 EP : ' ep';
-INT : '0'..'9'+;
+INT : ('0'..'9')+;
 SPACE : ' ';
+TAB : '\t';
 POINT : '.';
 NEWLINE	: '\r'? '\n';
 
@@ -68,7 +69,9 @@ startRule
     : (turn (NEWLINE | EOF))*;
     
 turn
-    :  (value+=INT+ POINT SPACE move SPACE move) {cc.setTurnNumber(value);};
+    :  value=INT POINT SPACE move TAB move {cc.setTurnNumber($value);
+    					      cc.isTurnCorrect();
+    					      System.out.println("ciao");};
     
 move
     : ((moveFrom? moveTo (enPassant | promotion)? (check | checkmate)?) | castleRule) {cc.processMove();};
