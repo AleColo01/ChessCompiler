@@ -6,6 +6,8 @@ import chessPackage.ChessboardPanel;
 
 public class compilerChecker extends Checker {
 	public ChessboardPanel cp;
+	private char startTurn = 'W';
+	private int preambleCount = 0;
 	public char turn = 'W'; 
 	public int actualTurn = 0;
 	
@@ -422,29 +424,52 @@ public class compilerChecker extends Checker {
 			castle="O-O-O";
 	}
 	
+	public void setPrambleStartTurn(Token t) {
+		if(preambleCount==0) {
+			if(t.getText().equals("black")) {
+				startTurn='B';
+				preambleCount++;
+				setChessboardEmpty();
+			}
+		}
+	}
+	
+	private void setChessboardEmpty() {
+		for (int r = 0; r < 8; r++) {
+	        for (int c = 0; c < 8; c++) {
+	        	cp.getBoard()[r][c]="";
+	        }
+	    }
+	}
+	
+	
+	
 	
 	//CHECKS OF PREAMBLE
-	//chiamata ad ogni pezzo nel preambolo
-	public boolean checkPreamblePlacement(Token r, Token c) {
-		int row = Integer.parseInt(r.getText());
-		int col = c.getText().charAt(0) - 'a';;
-		if(cp.getBoard()[row][col].equals(""))
+	//chiamata ad ogni pezzo piazzato nel preambolo
+	public boolean checkPreamblePlacement(Token p,Token t,Token r, Token c) {
+		int row = 8 - Integer.parseInt(r.getText());
+		int col = c.getText().charAt(0) - 'a';
+		if(cp.getBoard()[row][col].equals("")) {
+			cp.getBoard()[row][col]=""+p.getText()+t.getText().toUpperCase().charAt(0);
 			return true;
+		}
 		return false;
 	}
 	
 	
-	//chiamata alla fine del preambolo 
+	//Chiamata alla fine di entrambi i preamboli
 	public boolean checkChessboard() {
-		
-        //Non c'è situazione di stallo (controlla anche che ci siano esattamente due re)
-        if(isDraw()) return false;
-		
+	//Non c'è situazione di stallo (controlla anche che ci siano esattamente due re)
+		if(isDraw()) return false;
         
-       //TODO
-      //no re in scacco matto
-      //solo re che parte in scacco
+ 	//solo re che parte in scacco
+        if(kingIsInCheck(startTurn)) return false;  
         
+	//no re in scacco matto
+        if(!canKingMove()) return false;
+        turn='B';
+        if(!canKingMove()) return false;
 		
         return true;
 	}
@@ -472,11 +497,11 @@ public class compilerChecker extends Checker {
             	else if(cp.getBoard()[r][c].equals("BN")) bKnight++;
             	else if(cp.getBoard()[r][c].equals("BW")) { 
             		wBishop++;
-            		if(isWhiteSquare(r,c)) wBishop_ws++;
+            		if(isWhiteSquare(r+1,c+1)) wBishop_ws++;
             		else wBishop_bs++;}
             	else if(cp.getBoard()[r][c].equals("BB")) { 
             		bBishop++;
-            		if(isWhiteSquare(r,c)) bBishop_ws++;
+            		if(isWhiteSquare(r+1,c+1)) bBishop_ws++;
             		else bBishop_bs++;}
             	else
             		noDrawPiece++;
@@ -513,4 +538,18 @@ public class compilerChecker extends Checker {
         return false;
 	}
 	
+	//Check if the king is on check
+	private boolean kingIsInCheck(char turn) {
+		for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+            	if(!(cp.getBoard()[r][c].equals("")) && cp.getBoard()[r][c].charAt(1)==turn) {
+            		if(turn=='W' && super.canTake(cp, turn, cp.getBoard()[r][c].charAt(0), r, c, bKingPos[0], bKingPos[1], true)) 
+            			return true;
+            		else if(turn=='B' && super.canTake(cp, turn, cp.getBoard()[r][c].charAt(0), r, c, wKingPos[0], wKingPos[1], true)) 
+            			return true;
+            	}
+            }
+		}
+		return false;
+	}
 }
