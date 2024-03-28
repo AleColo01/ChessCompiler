@@ -42,11 +42,11 @@ SC : ';';
 //FRAGMENTED RULES
 preamble
 	:
-	TURN {/*turn and color*/}
+	t=TURN {cc.setPrambleStartTurn($t);}
 	EQUALS 
 	OPEN 
-	(PIECE c=COLUMN r=INT SC {cc.checkPreamblePlacement($r,$c);})* 
-	(PIECE COLUMN INT {cc.checkPreamblePlacement($r,$c);}) 
+	(p=PIECE c=COLUMN r=INT SC {cc.checkPreamblePlacement($p,$t,$r,$c);})* 
+	(p1=PIECE c1=COLUMN r1=INT {cc.checkPreamblePlacement($p1,$t,$r1,$c1);}) 
 	CLOSE
 	;	
 

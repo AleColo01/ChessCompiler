@@ -2,6 +2,7 @@ package testerCompilerPackage;
 
 import java.io.IOException;
 
+
 public class MainTester {
 
 	public static void main(String[] args) throws IOException {
@@ -17,7 +18,6 @@ public class MainTester {
 		System.out.println("-- PARSER --");
 		System.out.println("");
 		par.test(fileIn);
-		
 	}
 
 }
