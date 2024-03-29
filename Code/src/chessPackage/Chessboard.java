@@ -24,22 +24,38 @@ public class Chessboard {
      * MAIN
      */
     public static void main(String[] args) {
-    	fillBoardWithEmptyStrings();
+    	setEmptyChessboard();
         try {
             moveReader = new BufferedReader(new FileReader("res/input.file"));
             
             //HERE ADD PREAMBLE CHESSBOARD
             try {
-            	for(int i = 0; i<2; i++) {
-                    String Preamble = moveReader.readLine(); //skip two lines
-                    String PreambleTurn = Preamble.substring(0, 5);
-                    Preamble = Preamble.substring(7,Preamble.length()-1);
-                    String[] infos = Preamble.split(";");
-                    for (String info : infos) {
-                    	setUpChessboard(info,PreambleTurn);
-                    }
+            	String firstLine = moveReader.readLine(); //skip two lines
+            	if(firstLine.charAt(0) == '1'){
+            			preamble = false;
             	}
-                preamble = true;
+            	else {
+            		preamble = true; 
+            		
+                	for(int i = 0; i<2; i++) {
+                        String PreambleTurn = firstLine.substring(0, 5);
+                        if(i==0) {
+                        	turn = PreambleTurn.toUpperCase().charAt(0);
+                        }
+                        firstLine = firstLine.substring(7,firstLine.length()-1);
+                        String[] infos = firstLine.split(";");
+                        for (String info : infos) {
+                        	setUpChessboard(info,PreambleTurn);
+                        }
+                        firstLine = moveReader.readLine();    
+                	}
+            	}
+            	
+                String[] parts = firstLine.split("\t");
+                turnNumber = parts[0];
+                nextMoveW = parts[1];
+                nextMoveB = parts[2];
+
             } catch (IOException ex) {
                 System.err.println("Error reading move: " + ex.getMessage());
             }
@@ -81,19 +97,12 @@ public class Chessboard {
         nextMoveLabel = new JLabel(" ");
 
         //INIZIALIZZAZIONE DEL PULSANTE, SCRIVI E SALVA LA MOSSA
-        try {
-            String[] parts = moveReader.readLine().split("\t");
-            turnNumber = parts[0];
-            nextMoveW = parts[1];
-            nextMoveB = parts[2];
-            if (nextMoveW == null) {
-                nextMoveLabel.setText("No more moves.");
-            } else {
-                nextMoveLabel.setText("Next Move " +turnNumber+" "+ nextMoveW); 
-            }
-        } catch (IOException ex) {
-            System.err.println("Error reading move: " + ex.getMessage());
+        if (nextMoveW == null) {
+            nextMoveLabel.setText("No more moves.");
+        } else {
+            nextMoveLabel.setText(turnNumber+" "+ nextMoveW); 
         }
+
 
         nextMoveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -129,9 +138,9 @@ public class Chessboard {
                             nextMoveLabel.setText("No more moves.");
                         } else {
                         	if (turn == 'W')                     		                       	
-                        		nextMoveLabel.setText("Next Move " +turnNumber+" "+ nextMoveW); 
+                        		nextMoveLabel.setText(turnNumber+" "+ nextMoveW); 
                         	else
-                        		nextMoveLabel.setText("Next Move " +turnNumber+" "+ nextMoveB); 
+                        		nextMoveLabel.setText(turnNumber+" "+ nextMoveB); 
                         }
                         
                     } catch (IOException ex) {
@@ -181,7 +190,7 @@ public class Chessboard {
         return chessboardPanel;
     }
     
-    private static void fillBoardWithEmptyStrings() {
+    private static void setEmptyChessboard() {
         for (int i = 0; i < initialBoard.length; i++) {
             for (int j = 0; j < initialBoard[i].length; j++) {
                 initialBoard[i][j] = "";

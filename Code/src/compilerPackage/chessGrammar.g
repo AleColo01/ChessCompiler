@@ -86,10 +86,14 @@ castleRule:
 startRule 
     : (preamble NEWLINE
     preamble NEWLINE)? {cc.checkChessboard();}
+    (blackStartingTurn(NEWLINE | EOF))? {cc.checkCorrectStartingTurn();}
     (turn (NEWLINE | EOF))*;
     
 turn
     : turnNum POINT TAB move TAB move;
+    
+blackStartingTurn
+    : turnNum POINT TAB TAB move;
     
 move
     : ((moveFrom? moveTo (enPassant | promotion)? (check | checkmate)?) | castleRule) {cc.processMove();};
