@@ -1,1 +1,0 @@
-sistemare isDraw -> se niente può mouversi.
