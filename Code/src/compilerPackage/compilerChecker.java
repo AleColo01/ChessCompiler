@@ -457,59 +457,61 @@ public class compilerChecker extends Checker {
 	
 	//Chiamata alla fine di entrambi i preamboli
 	public boolean checkChessboard() {
+		
     //Non c'è situazione di stallo (controlla anche che ci siano esattamente due re)
-		if(isInvalid()) return false;
+		if(isDraw()) return false;
 		
-	//se re che parte in scacco deve muoversi
-		if(oppositekingIsInCheck(super.oppositeTurn(turn)) && !canKingMove()) return false;  
-		
-		System.out.println("ciao gionny culo");
-		
- 	//solo re che parte in scacco
+	 //Il re che non parte non deve essere in scacco
         if(oppositekingIsInCheck(turn)) return false;
         
-		System.out.println("ciao gionny culo3");
-
+	//se il re che parte è in scacco deve potersi muovere
+		if(oppositekingIsInCheck(super.oppositeTurn(turn)) && !canKingMove()) return false;  
+		System.out.println("ciao gionny culo");
 		
+
         return true;
 	}
 	
-	private boolean isWhiteSquare(int row, int col) {
-        return (row + col) % 2 == 0;
-    }
+
 	
-	private boolean isInvalid() {
-		int wKing=0, bKing=0, wKnight=0, bKnight=0,wBishop=0, bBishop=0,wBishop_ws=0, wBishop_bs=0,bBishop_ws=0, bBishop_bs=0, noDrawPiece=0, totalPiece=0;
+	private boolean isDraw() {
+		int wKing=0, bKing=0, wKnight=0, bKnight=0,wBishop=0, bBishop=0,wBishop_ws=0, wBishop_bs=0,bBishop_ws=0, bBishop_bs=0, noDrawPiece=0, totalPiece=0, canMovePiece=0;
 		
 		for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
-            	if(cp.getBoard()[r][c].equals("KW")) { 
-            		wKing++;
-            	//Memorizing white kings position
-            		wKingPos[0]=r;
-            		wKingPos[1]=c;
+            	if(!(cp.getBoard()[r][c].equals(""))) {
+	            	if(cp.getBoard()[r][c].equals("KW")) { 
+	            		wKing++;
+	            	//Memorizing white kings position
+	            		wKingPos[0]=r;
+	            		wKingPos[1]=c;
+	            	}
+	            	else if(cp.getBoard()[r][c].equals("KB")) { 
+	            		bKing++;
+	            	//Memorizing black kings position
+	            		bKingPos[0]=r;
+	        			bKingPos[1]=c;
+	            	}
+	            	else if(cp.getBoard()[r][c].equals("WN")) wKnight++;
+	            	else if(cp.getBoard()[r][c].equals("BN")) bKnight++;
+	            	else if(cp.getBoard()[r][c].equals("BW")) { 
+	            		wBishop++;
+	            		if(isWhiteSquare(r+1,c+1)) wBishop_ws++;
+	            		else wBishop_bs++;}
+	            	else if(cp.getBoard()[r][c].equals("BB")) { 
+	            		bBishop++;
+	            		if(isWhiteSquare(r+1,c+1)) bBishop_ws++;
+	            		else bBishop_bs++;}
+	            	else
+	            		noDrawPiece++;
+	            	totalPiece++;
+	            	if(canMovePiece==0 && canMove(cp.getBoard()[r][c].charAt(0),cp.getBoard()[r][c].charAt(1),r,c))
+	            		canMovePiece++;
             	}
-            	else if(cp.getBoard()[r][c].equals("KB")) { 
-            		bKing++;
-            	//Memorizing black kings position
-            		bKingPos[0]=r;
-        			bKingPos[1]=c;
-            	}
-            	else if(cp.getBoard()[r][c].equals("WN")) wKnight++;
-            	else if(cp.getBoard()[r][c].equals("BN")) bKnight++;
-            	else if(cp.getBoard()[r][c].equals("BW")) { 
-            		wBishop++;
-            		if(isWhiteSquare(r+1,c+1)) wBishop_ws++;
-            		else wBishop_bs++;}
-            	else if(cp.getBoard()[r][c].equals("BB")) { 
-            		bBishop++;
-            		if(isWhiteSquare(r+1,c+1)) bBishop_ws++;
-            		else bBishop_bs++;}
-            	else
-            		noDrawPiece++;
-            	totalPiece++; 
             }
         }	
+		
+		if(canMovePiece==0)	return true;
 		
 		//Only one king for player
 		if(wKing!=1 || bKing!=1) return true;
@@ -555,8 +557,24 @@ public class compilerChecker extends Checker {
 		return false;
 	}
 	
-	//check correct starting turn
-	public boolean checkCorrectStartingTurn(){
-		return (turn == 'B');
+	
+	private boolean isWhiteSquare(int row, int col) {
+        return (row + col) % 2 == 0;
+    }
+	
+	public boolean canMove(char piece, char turn, int rowFrom, int colFrom) {
+		for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+            	if(super.canReach(cp, turn, piece, rowFrom, colFrom, r, c, true))
+            		return true;
+            }
+		}
+		return false;
 	}
+
+	//check correct starting turn
+		public boolean checkCorrectStartingTurn(){
+			return (turn == 'B');
+		}
+		
 }
