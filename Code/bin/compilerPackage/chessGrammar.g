@@ -19,6 +19,27 @@ import compilerPackage.*;
  
 @members {
 public compilerChecker cc = new compilerChecker();
+
+/*
+SemanticHandler h = new SemanticHandler ();
+
+	public SemanticHandler getHandler () {
+		return h;
+	}
+
+
+public void displayRecognitionError(String[] tokenNames,RecognitionException e) {
+	// in tokenNames c'è la lista dei token che si sarebbe voluto trovare
+	// token che genera l'errore
+	Token tk = input.LT(1);
+    // header e corpo dell'errore gestito automaticamente da ANTLR
+	String hdr = getErrorHeader(e);
+	String msg = getErrorMessage(e, tokenNames);
+		
+	// passo tutto all'handler che lo 
+	h.handleError(tokenNames, tk, e, hdr, msg);
+  }
+*/
 }
 
 PIECE : ('R' | 'B' | 'N' | 'Q' | 'K' | 'P');
@@ -38,6 +59,7 @@ OPEN	: '[';
 CLOSE	: ']';
 TURN : ('white' | 'black');
 SC : ';';
+ERROR_TOKEN : .; //  {	$channel = HIDDEN;	};
 
 //FRAGMENTED RULES
 preamble
@@ -86,14 +108,14 @@ castleRule:
 startRule 
     : (preamble NEWLINE
     preamble NEWLINE)? {cc.checkChessboard();}
-    (blackStartingTurn(NEWLINE | EOF))? {cc.checkCorrectStartingTurn();}
+    (blackStartingTurn(NEWLINE | EOF))? 
     (turn (NEWLINE | EOF))*;
     
 turn
     : turnNum POINT TAB move TAB move;
     
 blackStartingTurn
-    : turnNum POINT TAB TAB move;
+    : turnNum {cc.checkCorrectStartingTurn();} POINT TAB TAB move;
     
 move
     : ((moveFrom? moveTo (enPassant | promotion)? (check | checkmate)?) | castleRule) {cc.processMove();};
