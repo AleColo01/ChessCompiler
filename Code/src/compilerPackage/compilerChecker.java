@@ -9,6 +9,7 @@ public class compilerChecker extends Checker {
 	private int preambleCount = 0;
 	public char turn = 'W'; 
 	public int actualTurn = 0;
+	int wKing=0, bKing=0;
 	
 	//resetted each turn
 	private char piece; 
@@ -66,6 +67,7 @@ public class compilerChecker extends Checker {
 		//CALCOLA INFO MANCANTI
 		if (colFrom == -1) missingCol = true;
 		if (rowFrom == -1) missingRow = true;
+		
 		//eccezione con pedino che mangia (exf4) in cui la e è superflua ma mandatoria
 		if((take == 'x' || take == ':') && piece == 0) {
 			if(!missingCol && missingRow) missingCol = false;
@@ -116,6 +118,7 @@ public class compilerChecker extends Checker {
 		
 		if(flagValid)
 			updateChessboard();
+		
 		//RESETTA TUTTE LE VARIABILI
 		reset();
 		turn = super.oppositeTurn(turn);
@@ -461,21 +464,19 @@ public class compilerChecker extends Checker {
     //Non c'è situazione di stallo (controlla anche che ci siano esattamente due re)
 		if(isDraw()) return false;
 		
+	//Only one king for player
+		if(wKing!=1 || bKing!=1) return true;
+				
 	 //Il re che non parte non deve essere in scacco
         if(oppositekingIsInCheck(turn)) return false;
         
-	//se il re che parte è in scacco deve potersi muovere
-		if(oppositekingIsInCheck(super.oppositeTurn(turn)) && !canKingMove()) return false;  
-		System.out.println("ciao gionny culo");
-		
-
         return true;
 	}
 	
 
 	
 	private boolean isDraw() {
-		int wKing=0, bKing=0, wKnight=0, bKnight=0,wBishop=0, bBishop=0,wBishop_ws=0, wBishop_bs=0,bBishop_ws=0, bBishop_bs=0, noDrawPiece=0, totalPiece=0, canMovePiece=0;
+		int wKnight=0, bKnight=0, wBishop=0, bBishop=0,wBishop_ws=0, wBishop_bs=0,bBishop_ws=0, bBishop_bs=0, noDrawPiece=0, totalPiece=0, canMovePiece=0;
 		
 		for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
@@ -505,16 +506,13 @@ public class compilerChecker extends Checker {
 	            	else
 	            		noDrawPiece++;
 	            	totalPiece++;
-	            	if(canMovePiece==0 && canMove(cp.getBoard()[r][c].charAt(0),cp.getBoard()[r][c].charAt(1),r,c))
+	            	if(canMovePiece==0 && cp.getBoard()[r][c].charAt(1)==turn && canMove(cp.getBoard()[r][c].charAt(0),cp.getBoard()[r][c].charAt(1),r,c))
 	            		canMovePiece++;
             	}
             }
         }	
-		
+				
 		if(canMovePiece==0)	return true;
-		
-		//Only one king for player
-		if(wKing!=1 || bKing!=1) return true;
 		
 		//King vs King
         if (totalPiece == 2) {

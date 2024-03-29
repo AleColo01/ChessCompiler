@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g 2024-03-29 11:56:53
+// $ANTLR 3.5.1 C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g 2024-03-29 15:27:18
 
 package compilerPackage;
 
@@ -16,18 +16,19 @@ public class chessGrammarLexer extends Lexer {
 	public static final int COLUMN=6;
 	public static final int EP=7;
 	public static final int EQUALS=8;
-	public static final int HASH=9;
-	public static final int INT=10;
-	public static final int MINUS=11;
-	public static final int NEWLINE=12;
-	public static final int OPEN=13;
-	public static final int PIECE=14;
-	public static final int PLUS=15;
-	public static final int POINT=16;
-	public static final int SC=17;
-	public static final int TAB=18;
-	public static final int TAKE=19;
-	public static final int TURN=20;
+	public static final int ERROR_TOKEN=9;
+	public static final int HASH=10;
+	public static final int INT=11;
+	public static final int MINUS=12;
+	public static final int NEWLINE=13;
+	public static final int OPEN=14;
+	public static final int PIECE=15;
+	public static final int PLUS=16;
+	public static final int POINT=17;
+	public static final int SC=18;
+	public static final int TAB=19;
+	public static final int TAKE=20;
+	public static final int TURN=21;
 
 
 
@@ -44,15 +45,15 @@ public class chessGrammarLexer extends Lexer {
 	public chessGrammarLexer(CharStream input, RecognizerSharedState state) {
 		super(input,state);
 	}
-	@Override public String getGrammarFileName() { return "C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g"; }
+	@Override public String getGrammarFileName() { return "C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g"; }
 
 	// $ANTLR start "PIECE"
 	public final void mPIECE() throws RecognitionException {
 		try {
 			int _type = PIECE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:24:7: ( ( 'R' | 'B' | 'N' | 'Q' | 'K' | 'P' ) )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:45:7: ( ( 'R' | 'B' | 'N' | 'Q' | 'K' | 'P' ) )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:
 			{
 			if ( input.LA(1)=='B'||input.LA(1)=='K'||input.LA(1)=='N'||(input.LA(1) >= 'P' && input.LA(1) <= 'R') ) {
 				input.consume();
@@ -78,8 +79,8 @@ public class chessGrammarLexer extends Lexer {
 		try {
 			int _type = COLUMN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:25:9: ( 'a' .. 'h' )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:46:9: ( 'a' .. 'h' )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:
 			{
 			if ( (input.LA(1) >= 'a' && input.LA(1) <= 'h') ) {
 				input.consume();
@@ -105,10 +106,10 @@ public class chessGrammarLexer extends Lexer {
 		try {
 			int _type = INT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:26:6: ( ( '0' .. '9' )+ )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:26:8: ( '0' .. '9' )+
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:47:6: ( ( '0' .. '9' )+ )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:47:8: ( '0' .. '9' )+
 			{
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:26:8: ( '0' .. '9' )+
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:47:8: ( '0' .. '9' )+
 			int cnt1=0;
 			loop1:
 			while (true) {
@@ -120,7 +121,7 @@ public class chessGrammarLexer extends Lexer {
 
 				switch (alt1) {
 				case 1 :
-					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:
+					// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -157,8 +158,8 @@ public class chessGrammarLexer extends Lexer {
 		try {
 			int _type = MINUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:27:7: ( '-' )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:27:9: '-'
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:48:7: ( '-' )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:48:9: '-'
 			{
 			match('-'); 
 			}
@@ -177,8 +178,8 @@ public class chessGrammarLexer extends Lexer {
 		try {
 			int _type = PLUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:28:6: ( '+' )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:28:8: '+'
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:49:6: ( '+' )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:49:8: '+'
 			{
 			match('+'); 
 			}
@@ -197,8 +198,8 @@ public class chessGrammarLexer extends Lexer {
 		try {
 			int _type = EQUALS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:29:8: ( '=' )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:29:10: '='
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:50:8: ( '=' )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:50:10: '='
 			{
 			match('='); 
 			}
@@ -217,8 +218,8 @@ public class chessGrammarLexer extends Lexer {
 		try {
 			int _type = HASH;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:30:6: ( '#' )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:30:8: '#'
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:51:6: ( '#' )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:51:8: '#'
 			{
 			match('#'); 
 			}
@@ -237,8 +238,8 @@ public class chessGrammarLexer extends Lexer {
 		try {
 			int _type = TAKE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:31:6: ( ( 'x' | ':' ) )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:52:6: ( ( 'x' | ':' ) )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:
 			{
 			if ( input.LA(1)==':'||input.LA(1)=='x' ) {
 				input.consume();
@@ -264,8 +265,8 @@ public class chessGrammarLexer extends Lexer {
 		try {
 			int _type = CASTLE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:32:8: ( 'O' )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:32:10: 'O'
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:53:8: ( 'O' )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:53:10: 'O'
 			{
 			match('O'); 
 			}
@@ -284,8 +285,8 @@ public class chessGrammarLexer extends Lexer {
 		try {
 			int _type = EP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:33:4: ( ' ep' )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:33:6: ' ep'
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:54:4: ( ' ep' )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:54:6: ' ep'
 			{
 			match(" ep"); 
 
@@ -305,8 +306,8 @@ public class chessGrammarLexer extends Lexer {
 		try {
 			int _type = TAB;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:34:5: ( '\\t' )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:34:7: '\\t'
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:55:5: ( '\\t' )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:55:7: '\\t'
 			{
 			match('\t'); 
 			}
@@ -325,8 +326,8 @@ public class chessGrammarLexer extends Lexer {
 		try {
 			int _type = POINT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:35:7: ( '.' )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:35:9: '.'
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:56:7: ( '.' )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:56:9: '.'
 			{
 			match('.'); 
 			}
@@ -345,10 +346,10 @@ public class chessGrammarLexer extends Lexer {
 		try {
 			int _type = NEWLINE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:36:9: ( ( '\\r' )? '\\n' )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:36:11: ( '\\r' )? '\\n'
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:57:9: ( ( '\\r' )? '\\n' )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:57:11: ( '\\r' )? '\\n'
 			{
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:36:11: ( '\\r' )?
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:57:11: ( '\\r' )?
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( (LA2_0=='\r') ) {
@@ -356,7 +357,7 @@ public class chessGrammarLexer extends Lexer {
 			}
 			switch (alt2) {
 				case 1 :
-					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:36:11: '\\r'
+					// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:57:11: '\\r'
 					{
 					match('\r'); 
 					}
@@ -381,8 +382,8 @@ public class chessGrammarLexer extends Lexer {
 		try {
 			int _type = OPEN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:37:6: ( '[' )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:37:8: '['
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:58:6: ( '[' )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:58:8: '['
 			{
 			match('['); 
 			}
@@ -401,8 +402,8 @@ public class chessGrammarLexer extends Lexer {
 		try {
 			int _type = CLOSE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:38:7: ( ']' )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:38:9: ']'
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:59:7: ( ']' )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:59:9: ']'
 			{
 			match(']'); 
 			}
@@ -421,10 +422,10 @@ public class chessGrammarLexer extends Lexer {
 		try {
 			int _type = TURN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:39:6: ( ( 'white' | 'black' ) )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:39:8: ( 'white' | 'black' )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:60:6: ( ( 'white' | 'black' ) )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:60:8: ( 'white' | 'black' )
 			{
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:39:8: ( 'white' | 'black' )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:60:8: ( 'white' | 'black' )
 			int alt3=2;
 			int LA3_0 = input.LA(1);
 			if ( (LA3_0=='w') ) {
@@ -442,14 +443,14 @@ public class chessGrammarLexer extends Lexer {
 
 			switch (alt3) {
 				case 1 :
-					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:39:9: 'white'
+					// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:60:9: 'white'
 					{
 					match("white"); 
 
 					}
 					break;
 				case 2 :
-					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:39:19: 'black'
+					// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:60:19: 'black'
 					{
 					match("black"); 
 
@@ -474,8 +475,8 @@ public class chessGrammarLexer extends Lexer {
 		try {
 			int _type = SC;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:40:4: ( ';' )
-			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:40:6: ';'
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:61:4: ( ';' )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:61:6: ';'
 			{
 			match(';'); 
 			}
@@ -489,23 +490,35 @@ public class chessGrammarLexer extends Lexer {
 	}
 	// $ANTLR end "SC"
 
+	// $ANTLR start "ERROR_TOKEN"
+	public final void mERROR_TOKEN() throws RecognitionException {
+		try {
+			int _type = ERROR_TOKEN;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:62:13: ( . )
+			// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:62:15: .
+			{
+			matchAny(); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "ERROR_TOKEN"
+
 	@Override
 	public void mTokens() throws RecognitionException {
-		// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:8: ( PIECE | COLUMN | INT | MINUS | PLUS | EQUALS | HASH | TAKE | CASTLE | EP | TAB | POINT | NEWLINE | OPEN | CLOSE | TURN | SC )
-		int alt4=17;
-		switch ( input.LA(1) ) {
-		case 'B':
-		case 'K':
-		case 'N':
-		case 'P':
-		case 'Q':
-		case 'R':
-			{
+		// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:8: ( PIECE | COLUMN | INT | MINUS | PLUS | EQUALS | HASH | TAKE | CASTLE | EP | TAB | POINT | NEWLINE | OPEN | CLOSE | TURN | SC | ERROR_TOKEN )
+		int alt4=18;
+		int LA4_0 = input.LA(1);
+		if ( (LA4_0=='B'||LA4_0=='K'||LA4_0=='N'||(LA4_0 >= 'P' && LA4_0 <= 'R')) ) {
 			alt4=1;
-			}
-			break;
-		case 'b':
-			{
+		}
+		else if ( (LA4_0=='b') ) {
 			int LA4_2 = input.LA(2);
 			if ( (LA4_2=='l') ) {
 				alt4=16;
@@ -515,227 +528,216 @@ public class chessGrammarLexer extends Lexer {
 				alt4=2;
 			}
 
-			}
-			break;
-		case '0':
-		case '1':
-		case '2':
-		case '3':
-		case '4':
-		case '5':
-		case '6':
-		case '7':
-		case '8':
-		case '9':
-			{
+		}
+		else if ( ((LA4_0 >= '0' && LA4_0 <= '9')) ) {
 			alt4=3;
-			}
-			break;
-		case '-':
-			{
+		}
+		else if ( (LA4_0=='-') ) {
 			alt4=4;
-			}
-			break;
-		case '+':
-			{
+		}
+		else if ( (LA4_0=='+') ) {
 			alt4=5;
-			}
-			break;
-		case '=':
-			{
+		}
+		else if ( (LA4_0=='=') ) {
 			alt4=6;
-			}
-			break;
-		case '#':
-			{
+		}
+		else if ( (LA4_0=='#') ) {
 			alt4=7;
-			}
-			break;
-		case ':':
-		case 'x':
-			{
+		}
+		else if ( (LA4_0==':'||LA4_0=='x') ) {
 			alt4=8;
-			}
-			break;
-		case 'O':
-			{
+		}
+		else if ( (LA4_0=='O') ) {
 			alt4=9;
+		}
+		else if ( (LA4_0==' ') ) {
+			int LA4_10 = input.LA(2);
+			if ( (LA4_10=='e') ) {
+				alt4=10;
 			}
-			break;
-		case ' ':
-			{
-			alt4=10;
+
+			else {
+				alt4=18;
 			}
-			break;
-		case '\t':
-			{
+
+		}
+		else if ( (LA4_0=='\t') ) {
 			alt4=11;
-			}
-			break;
-		case '.':
-			{
+		}
+		else if ( (LA4_0=='.') ) {
 			alt4=12;
+		}
+		else if ( (LA4_0=='\r') ) {
+			int LA4_13 = input.LA(2);
+			if ( (LA4_13=='\n') ) {
+				alt4=13;
 			}
-			break;
-		case '\n':
-		case '\r':
-			{
+
+			else {
+				alt4=18;
+			}
+
+		}
+		else if ( (LA4_0=='\n') ) {
 			alt4=13;
-			}
-			break;
-		case '[':
-			{
+		}
+		else if ( (LA4_0=='[') ) {
 			alt4=14;
-			}
-			break;
-		case ']':
-			{
+		}
+		else if ( (LA4_0==']') ) {
 			alt4=15;
+		}
+		else if ( (LA4_0=='w') ) {
+			int LA4_17 = input.LA(2);
+			if ( (LA4_17=='h') ) {
+				alt4=16;
 			}
-			break;
-		case 'w':
-			{
-			alt4=16;
+
+			else {
+				alt4=18;
 			}
-			break;
-		case 'a':
-		case 'c':
-		case 'd':
-		case 'e':
-		case 'f':
-		case 'g':
-		case 'h':
-			{
+
+		}
+		else if ( (LA4_0=='a'||(LA4_0 >= 'c' && LA4_0 <= 'h')) ) {
 			alt4=2;
-			}
-			break;
-		case ';':
-			{
+		}
+		else if ( (LA4_0==';') ) {
 			alt4=17;
-			}
-			break;
-		default:
+		}
+		else if ( ((LA4_0 >= '\u0000' && LA4_0 <= '\b')||(LA4_0 >= '\u000B' && LA4_0 <= '\f')||(LA4_0 >= '\u000E' && LA4_0 <= '\u001F')||(LA4_0 >= '!' && LA4_0 <= '\"')||(LA4_0 >= '$' && LA4_0 <= '*')||LA4_0==','||LA4_0=='/'||LA4_0=='<'||(LA4_0 >= '>' && LA4_0 <= 'A')||(LA4_0 >= 'C' && LA4_0 <= 'J')||(LA4_0 >= 'L' && LA4_0 <= 'M')||(LA4_0 >= 'S' && LA4_0 <= 'Z')||LA4_0=='\\'||(LA4_0 >= '^' && LA4_0 <= '`')||(LA4_0 >= 'i' && LA4_0 <= 'v')||(LA4_0 >= 'y' && LA4_0 <= '\uFFFF')) ) {
+			alt4=18;
+		}
+
+		else {
 			NoViableAltException nvae =
 				new NoViableAltException("", 4, 0, input);
 			throw nvae;
 		}
+
 		switch (alt4) {
 			case 1 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:10: PIECE
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:10: PIECE
 				{
 				mPIECE(); 
 
 				}
 				break;
 			case 2 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:16: COLUMN
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:16: COLUMN
 				{
 				mCOLUMN(); 
 
 				}
 				break;
 			case 3 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:23: INT
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:23: INT
 				{
 				mINT(); 
 
 				}
 				break;
 			case 4 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:27: MINUS
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:27: MINUS
 				{
 				mMINUS(); 
 
 				}
 				break;
 			case 5 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:33: PLUS
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:33: PLUS
 				{
 				mPLUS(); 
 
 				}
 				break;
 			case 6 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:38: EQUALS
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:38: EQUALS
 				{
 				mEQUALS(); 
 
 				}
 				break;
 			case 7 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:45: HASH
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:45: HASH
 				{
 				mHASH(); 
 
 				}
 				break;
 			case 8 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:50: TAKE
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:50: TAKE
 				{
 				mTAKE(); 
 
 				}
 				break;
 			case 9 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:55: CASTLE
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:55: CASTLE
 				{
 				mCASTLE(); 
 
 				}
 				break;
 			case 10 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:62: EP
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:62: EP
 				{
 				mEP(); 
 
 				}
 				break;
 			case 11 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:65: TAB
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:65: TAB
 				{
 				mTAB(); 
 
 				}
 				break;
 			case 12 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:69: POINT
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:69: POINT
 				{
 				mPOINT(); 
 
 				}
 				break;
 			case 13 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:75: NEWLINE
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:75: NEWLINE
 				{
 				mNEWLINE(); 
 
 				}
 				break;
 			case 14 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:83: OPEN
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:83: OPEN
 				{
 				mOPEN(); 
 
 				}
 				break;
 			case 15 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:88: CLOSE
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:88: CLOSE
 				{
 				mCLOSE(); 
 
 				}
 				break;
 			case 16 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:94: TURN
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:94: TURN
 				{
 				mTURN(); 
 
 				}
 				break;
 			case 17 :
-				// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:1:99: SC
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:99: SC
 				{
 				mSC(); 
+
+				}
+				break;
+			case 18 :
+				// C:\\Documenti\\UniBG\\Materie\\Linguaggi Formali\\Progetto\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:1:102: ERROR_TOKEN
+				{
+				mERROR_TOKEN(); 
 
 				}
 				break;

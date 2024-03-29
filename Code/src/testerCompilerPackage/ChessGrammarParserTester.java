@@ -17,7 +17,7 @@ public class ChessGrammarParserTester {
 	  	int i;
 
 		try {
-			System.out.println ("Test ANTLR lexer");
+			System.out.println ("Test ANTLR parser");
 
 			chessGrammarLexer lexer = new chessGrammarLexer (
 									new ANTLRReaderStream(
