@@ -1,8 +1,8 @@
-black=[Pa7;Pb7;Pc7;Pd7;Pe7;Pf7;Pg7;Ph7;Ka8]
-white=[Pa2;Pb2;Pc2;Pd2;Pe2;Pf2;Pg2;Ph2;Ka1]
-black=[Pa7;Pb7;Pc7;Pd7;Pe7;Pf7;Pg7;Ph7;Ka8]
-white=[Pa2;Pb2;Pc2;Pd2;Pe2;Pf2;Pg2;Ph2;Ka1]
-1.		a6
+white=[Pa2;Pb2;Pc2;Pd2;Ka1]
+black=[Pa7;Pb7;Pc7;Pd7;Ka8]
+white=[Pe2;Pf2;Pg2;Ph2]
+black=[Pe7;Pf7;Pg7;Ph7]
+1.	a3	a6
 2.	b3	b6
 3.	c3	c6
 4.	d3	d6

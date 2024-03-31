@@ -374,6 +374,7 @@ public class compilerChecker extends Checker {
 	
 	//Metodo per guardare se il turno è corretto
 	public void setTurnNumber(Token t) {
+		System.out.println(t.getText());
 		turnNumber = Integer.parseInt(t.getText());
 	}
 	
@@ -430,10 +431,11 @@ public class compilerChecker extends Checker {
 		if(preambleCount==0) {
 			if(t.getText().equals("black")) {
 				turn='B';
-				preambleCount++;
-				setChessboardEmpty();
 			}
+			preambleCount++;
+			setChessboardEmpty();
 		}
+
 	}
 	
 	private void setChessboardEmpty() {
@@ -452,8 +454,10 @@ public class compilerChecker extends Checker {
 		int col = c.getText().charAt(0) - 'a';
 		if(cp.getBoard()[row][col].equals("")) {
 			cp.getBoard()[row][col]=""+p.getText()+t.getText().toUpperCase().charAt(0);
+			System.out.println(""+p.getText()+t.getText().toUpperCase().charAt(0));
 			return true;
 		}
+
 		return false;
 	}
 	

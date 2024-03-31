@@ -100,7 +100,11 @@ public class Chessboard {
         if (nextMoveW == null) {
             nextMoveLabel.setText("No more moves.");
         } else {
-            nextMoveLabel.setText(turnNumber+" "+ nextMoveW); 
+        	if (nextMoveW.equals("")) {
+                nextMoveLabel.setText(turnNumber+" "+ nextMoveB);   		
+        	}else {
+                nextMoveLabel.setText(turnNumber+" "+ nextMoveW);     		
+        	}
         }
 
 

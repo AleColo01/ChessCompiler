@@ -59,7 +59,6 @@ OPEN	: '[';
 CLOSE	: ']';
 TURN : ('white' | 'black');
 SC : ';';
-ERROR_TOKEN : .; //  {	$channel = HIDDEN;	};
 
 //FRAGMENTED RULES
 preamble
@@ -105,6 +104,7 @@ castleRule:
 	{cc.setCastle(i);};
 
 //COMPLETE RULE to check with Java class
+
 startRule 
     : (preamble NEWLINE
     preamble NEWLINE)? {cc.checkChessboard();}
