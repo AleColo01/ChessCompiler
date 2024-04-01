@@ -2,6 +2,8 @@ package testerCompilerPackage;
 
 import java.io.IOException;
 
+import chessPackage.Chessboard;
+
 
 public class MainTester {
 
@@ -18,6 +20,9 @@ public class MainTester {
 		System.out.println("-- PARSER --");
 		System.out.println("");
 		par.test(fileIn);
+		
+		System.out.println("Avvio Scacchiera...");
+		Chessboard.mainMethod();
 	}
 
 }

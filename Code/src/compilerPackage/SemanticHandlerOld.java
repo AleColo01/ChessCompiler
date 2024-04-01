@@ -1,4 +1,4 @@
-/*package compilerPackage;
+package compilerPackage;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -7,7 +7,7 @@ import org.antlr.runtime.Token;
 
 import compilerPackage.util.Variable;
 
-public class SemanticHandler {
+public class SemanticHandlerOld {
 	// ****** codici per i messaggi d'errore
 		public static int LEXICAL_ERROR 		= 0;
 		public static int SYNTAX_ERROR 			= 1;
@@ -27,7 +27,7 @@ public class SemanticHandler {
 		StringBuffer translation;
 		
 	// ****** costrutture
-		public SemanticHandler () {
+		public SemanticHandlerOld () {
 			symbolTable = new Hashtable<String, Variable> (103);
 			errors = new ArrayList<String>();
 			warnings = new ArrayList<String>();

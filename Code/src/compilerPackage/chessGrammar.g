@@ -20,7 +20,6 @@ import compilerPackage.*;
 @members {
 public compilerChecker cc = new compilerChecker();
 
-/*
 SemanticHandler h = new SemanticHandler ();
 
 	public SemanticHandler getHandler () {
@@ -39,7 +38,6 @@ public void displayRecognitionError(String[] tokenNames,RecognitionException e) 
 	// passo tutto all'handler che lo 
 	h.handleError(tokenNames, tk, e, hdr, msg);
   }
-*/
 }
 
 PIECE : ('R' | 'B' | 'N' | 'Q' | 'K' | 'P');
@@ -59,6 +57,7 @@ OPEN	: '[';
 CLOSE	: ']';
 TURN : ('white' | 'black');
 SC : ';';
+ERROR 	: . ;
 
 //FRAGMENTED RULES
 preamble
@@ -106,8 +105,7 @@ castleRule:
 //COMPLETE RULE to check with Java class
 
 startRule 
-    : (preamble NEWLINE
-    preamble NEWLINE)? {cc.checkChessboard();}
+    : (preamble NEWLINE preamble NEWLINE)? {cc.checkChessboard();}
     (blackStartingTurn(NEWLINE | EOF))? 
     (turn (NEWLINE | EOF))*;
     

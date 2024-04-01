@@ -23,7 +23,7 @@ public class Chessboard {
     /*
      * MAIN
      */
-    public static void main(String[] args) {
+    public static void mainMethod() {
     	setEmptyChessboard();
         try {
             moveReader = new BufferedReader(new FileReader("res/input.file"));
