@@ -78,18 +78,44 @@ public class SemanticHandler {
 	
 	// gestore gli errori semantici
 	void addError (int errCode, Token tk) {
-		String str = tk.getText();
-		String coors = "[" + tk.getLine() + ", " + (tk.getCharPositionInLine()+1) + "]";
+		String msg = "";
+		if(tk!=null) {
+			String str = tk.getText();
+			String coors = "[" + tk.getLine() + ", " + (tk.getCharPositionInLine()+1) + "]";
+			msg = "Errore Semantico in " + coors + ":\t";
+		}
 		
-		String msg = "Errore Semantico in " + coors + ":\t";
 		if (errCode == TAKE_NOT_CORRECT_ERROR)
 			msg += "Controlla la mangiata";
  		else if (errCode == MOVE_NOT_UNIQUE_ERROR)
  			msg += "Non è possibile definire il pezzo che deve compiere la mossa";
-		//TODO
+ 		else if(errCode == KING_IN_CHECK_ERROR)
+ 			msg += "La mossa lascia il re in scacco";
+ 		else if(errCode == PROMOTION_ERROR)
+ 			msg += "la promozione non è disponibile";
+ 		else if(errCode == CHECK_NOT_CORRECT_ERROR)
+ 			msg += "Indicatore scacco sbagliato";
+ 		else if(errCode == CHECKMATE_NOT_CORRECT_ERROR)
+ 			msg += "Indicatore scacco matto sbagliato";
+ 		else if(errCode == ENPASSANT_ERROR)
+ 			msg += "Indicatore enpassant errato";
+ 		else if(errCode == CASTLE_ERROR)
+ 			msg += "Arrocco non possibile";
+ 		else if(errCode == TURN_NUMBER_ERROR)
+ 			msg += "Il numero di turno indicato non è correto";
+ 		else if(errCode == PREAMBLE_NOT_POSSIBLE_ERROR)
+ 			msg += "Il prembolo è sbagliato";
+ 		else if(errCode == PREAMBLE_DRAW_ERROR)
+ 			msg += "Il preambolo parte da una situazione patta";
+ 		else if(errCode == STARTING_KING_CHECK_ERROR)
+ 			msg += "Il re di chi non inizia è in scacco";
+ 		else if(errCode == STARTING_TURN_ERROR)
+ 			msg += "Il colore di chi iniza non è corretto";
+		
  		errors.add(msg);
 	}
-
+	
+	
 	void addWarning (int warnCode, Token tk) {
 		String str = tk.getText();
 		String coors = "[" + tk.getLine() + ", " + (tk.getCharPositionInLine()+1) + "]";
@@ -99,8 +125,6 @@ public class SemanticHandler {
 			msg += "La notazione può essere abbreviata ulteriormente";
 
 		warnings.add (msg);
-		
 	}
-	
 
 }

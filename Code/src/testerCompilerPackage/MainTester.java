@@ -22,7 +22,7 @@ public class MainTester {
 		par.test(fileIn);
 		
 		System.out.println("Avvio Scacchiera...");
-		Chessboard.mainMethod();
+		//Chessboard.mainMethod();
 	}
 
 }
