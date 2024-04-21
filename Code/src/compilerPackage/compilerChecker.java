@@ -5,6 +5,8 @@ import chessPackage.Checker;
 import chessPackage.ChessboardPanel;
 
 public class compilerChecker extends Checker {
+	SemanticHandler sh = new SemanticHandler ();
+	
 	public ChessboardPanel cp;
 	private int preambleCount = 0;
 	public char turn = 'W'; 
@@ -91,9 +93,10 @@ public class compilerChecker extends Checker {
 		//non devo avere dubbi su quale pezzo muovere
 		if(!isUnique()) flagValid = false;
 		
+		
 		//il proprio re non sia sotto scacco
 		if(super.giveupKing(cp, turn, piece, rowFrom, colFrom, rowTo, colTo)) flagValid = false;
-
+		
 		//indicatore di promozione corretto e valido
 		if(promotion!=0 && !ispromotionValid()) flagValid = false;
 		
@@ -374,7 +377,6 @@ public class compilerChecker extends Checker {
 	
 	//Metodo per guardare se il turno è corretto
 	public void setTurnNumber(Token t) {
-		System.out.println(t.getText());
 		turnNumber = Integer.parseInt(t.getText());
 	}
 	
@@ -454,7 +456,6 @@ public class compilerChecker extends Checker {
 		int col = c.getText().charAt(0) - 'a';
 		if(cp.getBoard()[row][col].equals("")) {
 			cp.getBoard()[row][col]=""+p.getText()+t.getText().toUpperCase().charAt(0);
-			System.out.println(""+p.getText()+t.getText().toUpperCase().charAt(0));
 			return true;
 		}
 
@@ -576,7 +577,12 @@ public class compilerChecker extends Checker {
 
 	//check correct starting turn
 		public boolean checkCorrectStartingTurn(){
-			return (turn == 'B');
+			
+			if (turn != 'B') {
+				sh.addError(sh.STARTING_TURN_ERROR, null);
+				return false;
+			}
+			return true;
 		}
 		
 }

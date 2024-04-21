@@ -20,24 +20,6 @@ import compilerPackage.*;
 @members {
 public compilerChecker cc = new compilerChecker();
 
-SemanticHandler h = new SemanticHandler ();
-
-	public SemanticHandler getHandler () {
-		return h;
-	}
-
-
-public void displayRecognitionError(String[] tokenNames,RecognitionException e) {
-	// in tokenNames c'è la lista dei token che si sarebbe voluto trovare
-	// token che genera l'errore
-	Token tk = input.LT(1);
-    // header e corpo dell'errore gestito automaticamente da ANTLR
-	String hdr = getErrorHeader(e);
-	String msg = getErrorMessage(e, tokenNames);
-		
-	// passo tutto all'handler che lo 
-	h.handleError(tokenNames, tk, e, hdr, msg);
-  }
 }
 
 PIECE : ('R' | 'B' | 'N' | 'Q' | 'K' | 'P');
@@ -76,6 +58,7 @@ turnNum	:
     		cc.isTurnCorrect();
     		}
 	;
+	
 moveFrom :  
 	(p=PIECE {cc.setPiece($p);}
 	(c=COLUMN {cc.setColFrom($c);})?
@@ -88,12 +71,17 @@ moveTo	:
 	c=COLUMN {cc.setColTo($c);}
 	r=INT {cc.setRowTo($r);}
 ;
+
 enPassant: EP	{cc.setEnpassant();};
+
 check	: PLUS {cc.setChecks();}
 	 (PLUS {cc.setChecks();})?
 	  ;
+	  
 checkmate : HASH {cc.setCheckMate();};
-promotion : EQUALS p=PIECE {cc.setPromotion($p);};	 		
+
+promotion : EQUALS p=PIECE {cc.setPromotion($p);};	
+ 		
 castleRule: 
 	CASTLE 
 	MINUS {int i=1;}
