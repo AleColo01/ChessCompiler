@@ -73,7 +73,8 @@ moveFrom :
 ;
 moveTo	: 
 	c=COLUMN {cc.setColTo($c);}
-	r=INT {cc.setRowTo($r);}
+	r=INT {cc.setRowTo($r);
+		cc.setLastToken($r); }
 ;
 
 enPassant: EP	{cc.setEnpassant();};
@@ -87,7 +88,7 @@ checkmate : HASH {cc.setCheckMate();};
 promotion : EQUALS p=PIECE {cc.setPromotion($p);};	
  		
 castleRule: 
-	CASTLE 
+	t=CASTLE {cc.setLastToken($t);} 
 	MINUS {int i=1;}
 	CASTLE 
 	(MINUS CASTLE {i = 2;})?

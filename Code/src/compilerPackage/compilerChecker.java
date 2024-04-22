@@ -14,6 +14,8 @@ public class compilerChecker extends Checker {
 	public int actualTurn = 0;
 	int wKing=0, bKing=0;
 	
+	private Token lastToken;
+	
 	//resetted each turn
 	private char piece; 
 	private int rowTo; 
@@ -84,40 +86,70 @@ public class compilerChecker extends Checker {
 			colFrom = res[1];
 			rowFrom = res[0];	
 			
+			if(colFrom == -1 || rowFrom == -1) {
+				sh.addError(sh.IMPOSSIBLE_MOVE_ERROR, lastToken);
+				error = true;
+			}
+			
 			//CALCOLA TUTTE LE CORRETTE IMPOSTAZIONI
 			
 			//indicatore di mangiate corretto
 			if(take == 'x' || take == ':') {
-				if(!checkTake() || cp.getBoard()[rowTo][colTo].equals("")) error = true;
+				if(!checkTake() || cp.getBoard()[rowTo][colTo].equals("")) {
+					sh.addError(sh.TAKE_NOT_CORRECT_ERROR, lastToken);
+					error = true;
+				}
 			}
-				
+					
 			//non devo avere dubbi su quale pezzo muovere
-			if(!error && !isUnique()) error = true;
+			if(!error && !isUnique()) {
+				System.out.println("GILPY");
+				sh.addError(sh.MOVE_NOT_UNIQUE_ERROR, lastToken);
+				error = true;
+			}
 			
 			//il proprio re non sia sotto scacco
-			if(!error && super.giveupKing(cp, turn, piece, rowFrom, colFrom, rowTo, colTo)) error = true;
+			if(!error && super.giveupKing(cp, turn, piece, rowFrom, colFrom, rowTo, colTo)) {
+				sh.addError(sh.KING_IN_CHECK_ERROR, lastToken);
+				error = true;
+			}
 			
 			//indicatore di promozione corretto e valido
-			if(!error && promotion!=0 && !ispromotionValid()) error = true;
+			if(!error && promotion!=0 && !ispromotionValid()) {
+				sh.addError(sh.PROMOTION_ERROR, lastToken);
+				error = true;
+			}
 			
 			//indicatore numero di scacco corretto
 	    	int pos[] = new int[2];
 	    	pos = super.kingPosition(cp, oppositeTurn(turn));
 	    	int kingRow = pos[0];
 	    	int kingCol = pos[1];
-			if(!error && !checkMate && countChecks(turn,kingRow,kingCol) != checks ) error = true;
+			if(!error && !checkMate && countChecks(turn,kingRow,kingCol) != checks ) {
+				sh.addError(sh.CHECK_NOT_CORRECT_ERROR, lastToken);
+				error = true;
+			}
 			
 			//indicatore scacco matto corretto
-			if(!error && checkMate && countChecks(turn,kingRow,kingCol) > 0 && canKingMove() ) error = true;
+			if(!error && checkMate && countChecks(turn,kingRow,kingCol) > 0 && canKingMove() ) {
+				sh.addError(sh.CHECKMATE_NOT_CORRECT_ERROR, lastToken);
+				error = true;
+			}
 			
 			//indicatore en passant corretto e valido
-			if (!error && !isenpassantValid()) error = true;
+			if (!error && !isenpassantValid()) {
+				sh.addError(sh.ENPASSANT_ERROR, lastToken);
+				error = true;
+			}
 			
 			//indicatore castle
-			if (!error && !castle.equals("") && !iscastleValid()) error = true;
+			if (!error && !castle.equals("") && !iscastleValid()) {
+				sh.addError(sh.CASTLE_ERROR, lastToken);
+				error = true;
+			}
 			
 			//no notazione superflua (no indicare colonne o righe non necessarie)
-			if (!error && !isnotationCorrect()) error = true;
+			if (!error && !isnotationCorrect())  sh.addWarning(sh.NOTATION_WARNING, lastToken);
 			
 			if(!error)
 				updateChessboard();
@@ -353,6 +385,7 @@ public class compilerChecker extends Checker {
 		if(!error) {
 			actualTurn = actualTurn + 1;
 			if(actualTurn != turnNumber) {
+				sh.addError(sh.TURN_NUMBER_ERROR, lastToken);
 				error = true;
 			}
 		}
@@ -374,6 +407,11 @@ public class compilerChecker extends Checker {
 		missingCol = false;
 		missingRow = false;
 		turnNumber=0;
+		lastToken = null;
+	}
+	
+	public void setLastToken(Token t) {
+		lastToken = t;
 	}
 	
 	//Metodo per guardare se il turno è corretto
@@ -459,7 +497,10 @@ public class compilerChecker extends Checker {
 			if(cp.getBoard()[row][col].equals("")) {
 				cp.getBoard()[row][col]=""+p.getText()+t.getText().toUpperCase().charAt(0);
 			}
-			else error = true;
+			else {
+				sh.addError(sh.PREAMBLE_NOT_POSSIBLE_ERROR, lastToken);
+				error = true;
+			}
 		}
 	}
 	
@@ -468,13 +509,22 @@ public class compilerChecker extends Checker {
 	public void checkChessboard() {
 		
     //Non c'è situazione di stallo (controlla anche che ci siano esattamente due re)
-		if(!error && isDraw()) error = true;
+		if(!error && isDraw()) {
+			sh.addError(sh.PREAMBLE_DRAW_ERROR, lastToken);
+			error = true;
+		}
 		
 	//Only one king for player
-		if(!error && (wKing!=1 || bKing!=1)) error = true;
+		if(!error && (wKing!=1 || bKing!=1)) {
+			sh.addError(sh.PREAMBLE_NOT_POSSIBLE_ERROR, lastToken);
+			error = true;
+		}
 				
 	 //Il re che non parte non deve essere in scacco
-        if(!error && oppositekingIsInCheck(turn)) error = true;
+        if(!error && oppositekingIsInCheck(turn)) {
+			sh.addError(sh.STARTING_KING_CHECK_ERROR, lastToken);        	
+        	error = true;
+        }
         
 	}
 	
@@ -578,7 +628,7 @@ public class compilerChecker extends Checker {
 	//check correct starting turn
 		public void checkCorrectStartingTurn(){
 			if (!error && turn != 'B') {
-				sh.addError(sh.STARTING_TURN_ERROR, null);
+				sh.addError(sh.STARTING_TURN_ERROR, lastToken);
 				error = true;
 			}
 		}
