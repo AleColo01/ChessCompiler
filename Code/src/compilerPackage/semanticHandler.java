@@ -7,7 +7,7 @@ import org.antlr.runtime.Token;
 
 import compilerPackage.util.Variable;
 
-public class SemanticHandler {
+public class semanticHandler {
 	// ****** codici per i messaggi d'errore
 	public static int LEXICAL_ERROR 		= 0;
 	public static int SYNTAX_ERROR 			= 1;
@@ -35,7 +35,7 @@ public class SemanticHandler {
 	StringBuffer translation;
 	
 	// ****** costrutture
-	public SemanticHandler () {
+	public semanticHandler () {
 		symbolTable = new Hashtable<String, Variable> (103);
 		errors = new ArrayList<String>();
 		warnings = new ArrayList<String>();
@@ -52,9 +52,6 @@ public class SemanticHandler {
 	}
 	public ArrayList<String> getErrors () {
 		return errors;
-	}
-	public int getNErrors () {
-		return errors.size();
 	}
 
 	public boolean hasWarnings () {

@@ -20,6 +20,10 @@ import compilerPackage.*;
 @members {
 public compilerChecker cc = new compilerChecker();
 
+	public semanticHandler getHandler () {
+		return cc.sh;
+	}
+	
 }
 
 PIECE : ('R' | 'B' | 'N' | 'Q' | 'K' | 'P');
