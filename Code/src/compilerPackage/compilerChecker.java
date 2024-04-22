@@ -5,7 +5,8 @@ import chessPackage.Checker;
 import chessPackage.ChessboardPanel;
 
 public class compilerChecker extends Checker {
-	SemanticHandler sh = new SemanticHandler ();
+	semanticHandler sh = new semanticHandler ();
+	private boolean error = false;
 	
 	public ChessboardPanel cp;
 	private int preambleCount = 0;
@@ -63,70 +64,69 @@ public class compilerChecker extends Checker {
        reset();
 	}
 	
-	public boolean processMove(){
-		boolean flagValid = true;
-		
-		//CALCOLA INFO MANCANTI
-		if (colFrom == -1) missingCol = true;
-		if (rowFrom == -1) missingRow = true;
-		
-		//eccezione con pedino che mangia (exf4) in cui la e è superflua ma mandatoria
-		if((take == 'x' || take == ':') && piece == 0) {
-			if(!missingCol && missingRow) missingCol = false;
-		}
-		
-		if(piece == 0 && castle.equals("")) {
-			piece = 'P';
-		}
-		
-		int[] res = super.calculateMissingInfo(colFrom, rowFrom, colTo, rowTo, piece, turn, cp);
-		colFrom = res[1];
-		rowFrom = res[0];	
-		
-		//CALCOLA TUTTE LE CORRETTE IMPOSTAZIONI
-		
-		//indicatore di mangiate corretto
-		if(take == 'x' || take == ':') {
-			if(!checkTake() || cp.getBoard()[rowTo][colTo].equals("")) flagValid = false;
-		}
+	public void processMove(){
+		if(!error) {
 			
-		//non devo avere dubbi su quale pezzo muovere
-		if(!isUnique()) flagValid = false;
-		
-		
-		//il proprio re non sia sotto scacco
-		if(super.giveupKing(cp, turn, piece, rowFrom, colFrom, rowTo, colTo)) flagValid = false;
-		
-		//indicatore di promozione corretto e valido
-		if(promotion!=0 && !ispromotionValid()) flagValid = false;
-		
-		//indicatore numero di scacco corretto
-    	int pos[] = new int[2];
-    	pos = super.kingPosition(cp, oppositeTurn(turn));
-    	int kingRow = pos[0];
-    	int kingCol = pos[1];
-		if(!checkMate && countChecks(turn,kingRow,kingCol) != checks ) flagValid = false;
-		
-		//indicatore scacco matto corretto
-		if(checkMate && countChecks(turn,kingRow,kingCol) > 0 && canKingMove() ) flagValid = false;
-		
-		//indicatore en passant corretto e valido
-		if (!isenpassantValid()) flagValid = false;
-		
-		//indicatore castle
-		if (!castle.equals("") && !iscastleValid()) flagValid = false;
-		
-		//no notazione superflua (no indicare colonne o righe non necessarie)
-		if ( !isnotationCorrect()) flagValid = false;
-		
-		if(flagValid)
-			updateChessboard();
-		
-		//RESETTA TUTTE LE VARIABILI
-		reset();
-		turn = super.oppositeTurn(turn);
-		lastMove = piece+""+colFrom+""+rowFrom+"-"+colTo+""+rowTo;
-		return flagValid;
+			//CALCOLA INFO MANCANTI
+			if (colFrom == -1) missingCol = true;
+			if (rowFrom == -1) missingRow = true;
+			
+			//eccezione con pedino che mangia (exf4) in cui la e è superflua ma mandatoria
+			if((take == 'x' || take == ':') && piece == 0) {
+				if(!missingCol && missingRow) missingCol = false;
+			}
+			
+			if(piece == 0 && castle.equals("")) {
+				piece = 'P';
+			}
+			
+			int[] res = super.calculateMissingInfo(colFrom, rowFrom, colTo, rowTo, piece, turn, cp);
+			colFrom = res[1];
+			rowFrom = res[0];	
+			
+			//CALCOLA TUTTE LE CORRETTE IMPOSTAZIONI
+			
+			//indicatore di mangiate corretto
+			if(take == 'x' || take == ':') {
+				if(!checkTake() || cp.getBoard()[rowTo][colTo].equals("")) error = true;
+			}
+				
+			//non devo avere dubbi su quale pezzo muovere
+			if(!error && !isUnique()) error = true;
+			
+			//il proprio re non sia sotto scacco
+			if(!error && super.giveupKing(cp, turn, piece, rowFrom, colFrom, rowTo, colTo)) error = true;
+			
+			//indicatore di promozione corretto e valido
+			if(!error && promotion!=0 && !ispromotionValid()) error = true;
+			
+			//indicatore numero di scacco corretto
+	    	int pos[] = new int[2];
+	    	pos = super.kingPosition(cp, oppositeTurn(turn));
+	    	int kingRow = pos[0];
+	    	int kingCol = pos[1];
+			if(!error && !checkMate && countChecks(turn,kingRow,kingCol) != checks ) error = true;
+			
+			//indicatore scacco matto corretto
+			if(!error && checkMate && countChecks(turn,kingRow,kingCol) > 0 && canKingMove() ) error = true;
+			
+			//indicatore en passant corretto e valido
+			if (!error && !isenpassantValid()) error = true;
+			
+			//indicatore castle
+			if (!error && !castle.equals("") && !iscastleValid()) error = true;
+			
+			//no notazione superflua (no indicare colonne o righe non necessarie)
+			if (!error && !isnotationCorrect()) error = true;
+			
+			if(!error)
+				updateChessboard();
+			
+			//RESETTA TUTTE LE VARIABILI
+			reset();
+			turn = super.oppositeTurn(turn);
+			lastMove = piece+""+colFrom+""+rowFrom+"-"+colTo+""+rowTo;
+		}
 	}
 	
 	private void updateChessboard() {
@@ -349,12 +349,13 @@ public class compilerChecker extends Checker {
 		return false;
 	}
 
-	public boolean isTurnCorrect() {
-		actualTurn = actualTurn + 1;
-		if(actualTurn != turnNumber) {
-			return false;
+	public void isTurnCorrect() {
+		if(!error) {
+			actualTurn = actualTurn + 1;
+			if(actualTurn != turnNumber) {
+				error = true;
+			}
 		}
-		return true;
 	}
 	
 	
@@ -451,31 +452,30 @@ public class compilerChecker extends Checker {
 	
 	//CHECKS OF PREAMBLE
 	//chiamata ad ogni pezzo piazzato nel preambolo
-	public boolean checkPreamblePlacement(Token p,Token t,Token r, Token c) {
-		int row = 8 - Integer.parseInt(r.getText());
-		int col = c.getText().charAt(0) - 'a';
-		if(cp.getBoard()[row][col].equals("")) {
-			cp.getBoard()[row][col]=""+p.getText()+t.getText().toUpperCase().charAt(0);
-			return true;
+	public void checkPreamblePlacement(Token p,Token t,Token r, Token c) {
+			if(!error) {
+			int row = 8 - Integer.parseInt(r.getText());
+			int col = c.getText().charAt(0) - 'a';
+			if(cp.getBoard()[row][col].equals("")) {
+				cp.getBoard()[row][col]=""+p.getText()+t.getText().toUpperCase().charAt(0);
+			}
+			else error = true;
 		}
-
-		return false;
 	}
 	
 	
 	//Chiamata alla fine di entrambi i preamboli
-	public boolean checkChessboard() {
+	public void checkChessboard() {
 		
     //Non c'è situazione di stallo (controlla anche che ci siano esattamente due re)
-		if(isDraw()) return false;
+		if(!error && isDraw()) error = true;
 		
 	//Only one king for player
-		if(wKing!=1 || bKing!=1) return true;
+		if(!error && (wKing!=1 || bKing!=1)) error = true;
 				
 	 //Il re che non parte non deve essere in scacco
-        if(oppositekingIsInCheck(turn)) return false;
+        if(!error && oppositekingIsInCheck(turn)) error = true;
         
-        return true;
 	}
 	
 
@@ -576,13 +576,11 @@ public class compilerChecker extends Checker {
 	}
 
 	//check correct starting turn
-		public boolean checkCorrectStartingTurn(){
-			
-			if (turn != 'B') {
+		public void checkCorrectStartingTurn(){
+			if (!error && turn != 'B') {
 				sh.addError(sh.STARTING_TURN_ERROR, null);
-				return false;
+				error = true;
 			}
-			return true;
 		}
 		
 }

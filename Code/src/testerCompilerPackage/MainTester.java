@@ -21,8 +21,10 @@ public class MainTester {
 		System.out.println("");
 		par.test(fileIn);
 		
-		System.out.println("Avvio Scacchiera...");
-		//Chessboard.mainMethod();
+		if(par.startChessboard) {
+			System.out.println("Avvio Scacchiera...");
+			Chessboard.mainMethod();
+		}
 	}
 
 }
