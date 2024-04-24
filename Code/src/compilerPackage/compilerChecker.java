@@ -14,6 +14,7 @@ public class compilerChecker extends Checker {
 	public int actualTurn = 0;
 	int wKing=0, bKing=0;
 	
+	private boolean blackStarting = false;
 	private Token lastToken;
 	
 	//resetted each turn
@@ -82,6 +83,10 @@ public class compilerChecker extends Checker {
 				piece = 'P';
 			}
 			
+			System.out.println(turnNumber);
+			System.out.println(colTo);
+			System.out.println(rowTo);
+			System.out.println("--");
 			int[] res = super.calculateMissingInfo(colFrom, rowFrom, colTo, rowTo, piece, turn, cp);
 			colFrom = res[1];
 			rowFrom = res[0];	
@@ -103,7 +108,6 @@ public class compilerChecker extends Checker {
 					
 			//non devo avere dubbi su quale pezzo muovere
 			if(!error && !isUnique()) {
-				System.out.println("GILPY");
 				sh.addError(sh.MOVE_NOT_UNIQUE_ERROR, lastToken);
 				error = true;
 			}
@@ -156,9 +160,13 @@ public class compilerChecker extends Checker {
 			
 			//RESETTA TUTTE LE VARIABILI
 			reset();
-			turn = super.oppositeTurn(turn);
+			
 			lastMove = piece+""+colFrom+""+rowFrom+"-"+colTo+""+rowTo;
 		}
+	}
+	
+	public void nextTurn() {
+		turn = super.oppositeTurn(turn);
 	}
 	
 	private void updateChessboard() {
@@ -476,8 +484,12 @@ public class compilerChecker extends Checker {
 			preambleCount++;
 			setChessboardEmpty();
 		}
-
 	}
+	
+	public void setBlackStarting() {
+		blackStarting = true;
+	}
+	
 	
 	private void setChessboardEmpty() {
 		for (int r = 0; r < 8; r++) {
@@ -507,13 +519,13 @@ public class compilerChecker extends Checker {
 	
 	//Chiamata alla fine di entrambi i preamboli
 	public void checkChessboard() {
-		
+
     //Non c'è situazione di stallo (controlla anche che ci siano esattamente due re)
 		if(!error && isDraw()) {
 			sh.addError(sh.PREAMBLE_DRAW_ERROR, lastToken);
 			error = true;
 		}
-		
+
 	//Only one king for player
 		if(!error && (wKing!=1 || bKing!=1)) {
 			sh.addError(sh.PREAMBLE_NOT_POSSIBLE_ERROR, lastToken);
@@ -627,9 +639,15 @@ public class compilerChecker extends Checker {
 
 	//check correct starting turn
 		public void checkCorrectStartingTurn(){
-			if (!error && turn != 'B') {
-				sh.addError(sh.STARTING_TURN_ERROR, lastToken);
-				error = true;
+			if(!error) {
+				if (turn == 'B' && !blackStarting) {
+					sh.addError(sh.STARTING_TURN_ERROR, lastToken);
+					error = true;
+				}				
+				else if (turn == 'W' && blackStarting) {
+					sh.addError(sh.STARTING_TURN_ERROR, lastToken);
+					error = true;
+				}	
 			}
 		}
 		

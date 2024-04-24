@@ -99,14 +99,34 @@ castleRule:
 
 startRule 
     : (preamble NEWLINE preamble NEWLINE)? {cc.checkChessboard();}
-    (blackStartingTurn(NEWLINE | EOF))? 
-    (turn (NEWLINE | EOF))*;
+    (blackStartingTurn flag=(NEWLINE | EOF))? {cc.checkCorrectStartingTurn();
+	    					if($flag != null){
+	    					    	cc.processMove();
+	    					 	cc.nextTurn();
+	    					}		
+						}
+    (turn (NEWLINE | EOF) )*;
     
 turn
-    : turnNum POINT TAB move TAB move;
+    : turnNum 
+    	POINT 
+    	TAB 
+    	move {cc.processMove();
+    		cc.nextTurn();} 
+    	TAB 
+    	move {cc.processMove();
+    		cc.nextTurn();};
     
 blackStartingTurn
-    : turnNum {cc.checkCorrectStartingTurn();} POINT TAB TAB move;
+    : turnNum 
+    	POINT 
+    	TAB 
+    	TAB 
+    	move {cc.setBlackStarting();};
     
 move
-    : ((moveFrom? moveTo (enPassant | promotion)? (check | checkmate)?) | castleRule) {cc.processMove();};
+    : ((moveFrom? 
+    		moveTo 
+    		(enPassant | promotion)? 
+    		(check | checkmate)?) 
+    	| castleRule) ;

@@ -438,8 +438,7 @@ public class Checker {
     	String oldPosition = cp.getBoard()[rowTo][colTo];
     	char oldTurn = cp.getBoard()[rowFrom][colFrom].charAt(1);
     	cp.getBoard()[rowFrom][colFrom] = "";
-    	cp.getBoard()[rowTo][colTo] = ""+piece+turn;
-    	
+    	cp.getBoard()[rowTo][colTo] = ""+piece+turn;  	
         for (int r = 0; r < 8; r++) {
         	for (int c = 0; c < 8; c++) {
         		//check if any enemy piece can reach the ally king
@@ -451,6 +450,7 @@ public class Checker {
                 }
              }
         }
+
         //restore chessboard to old state
         cp.getBoard()[rowFrom][colFrom] = ""+piece+oldTurn;
         cp.getBoard()[rowTo][colTo] = oldPosition;
@@ -489,6 +489,7 @@ public class Checker {
     	if (colFrom == -1 && rowFrom == -1) {
             for (int r = 0; r < 8; r++) {
                 for (int c = 0; c < 8; c++) {
+
                 	if (cp.getBoard()[r][c].equals("" + piece + turn) 
                     		&& (canReach(cp, turn, piece, r, c, rowTo, colTo, true) 
                     				|| canTake(cp, turn, piece, r, c, rowTo, colTo, true)) ) {
