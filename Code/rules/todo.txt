@@ -1,7 +1,5 @@
-QUI ho provato a cercare i problemi, ho descritto cosa succede. alcuni errori possono sorgere in piu modi e non tutti sono scovati
+Qui ho provato a cercare i problemi, ho descritto cosa succede. alcuni errori possono sorgere in piu modi e non tutti sono scovati
 o sono risolvibili in maniere non banali che il compilatore non capisce.
-
-TAKE_NOT_CORRECT_ERROR = 11; // funziona se lo metto quando non serve ma non viceversa
 
 MOVE_NOT_UNIQUE_ERROR = 12; //l'errore è identificato, ma quando viene aggiunta una info ( riga o colonna ) non viene risolto
 KING_IN_CHECK_ERROR = 13; //se il re si muove in scacco, viene tornato errore IMPOSSIBLE MOVE
@@ -12,12 +10,13 @@ CHECK_NOT_CORRECT_ERROR = 15; //dice sempre che non serve e non lo richiede se m
 CHECKMATE_NOT_CORRECT_ERROR = 16; //dice sempre che non serve e non lo richiede se manca
 ENPASSANT_ERROR = 17; //se in eccesso viene individuato
 						// mossa en passant non è mai vista come valida! e quindi nemmeno permessa dal compilatore 
-CASTLE_ERROR = 18; //arrocco non è mai permesso
-PREAMBLE_DRAW_ERROR = 21; //non sempre individata
+
 STARTING_KING_CHECK_ERROR = 22; //non individuata 
-PREAMBLE_NOT_POSSIBLE_ERROR // pezzi fuori dalla scacchiera
 	
 PARSER TERMINATO CON SUCCESSO MA è UNA MEZOGNA es. 1.	a3	a6	a7
+
+AGGIUNGERE CHE PEDINI NON DEVONO STARE NELLA PRIMA RIGA
+
 
 sembrano OK:
 
@@ -25,10 +24,7 @@ IMPOSSIBLE_MOVE_ERROR
 TURN_NUMBER_ERROR
 STARTING_TURN_ERROR = 23; (appaiono due errori diversi, uno viene visto come errore nel preambolo e uno come errore nella mossa)
 NOTATION_WARNING
-
-
-
-
-
-
-
+TAKE_NOT_CORRECT_ERROR = 11; // funziona se lo metto quando non serve ma non viceversa -->RISOLTO MA SI POSSONO FARE ALTRI TEST
+PREAMBLE_NOT_POSSIBLE_ERROR // pezzi fuori dalla scacchiera -->RISOLTO 
+PREAMBLE_DRAW_ERROR = 21; //non sempre individata --> RISOLTO, DA TESTARE ALTRI CASI OLTRE RE-RE RE-RE-CAVALLO
+CASTLE_ERROR = 18; //arrocco non è mai permesso --> RISOLTO, SI POSSONO FARE ALTRI TEST

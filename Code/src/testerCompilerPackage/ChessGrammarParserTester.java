@@ -34,7 +34,7 @@ public class ChessGrammarParserTester {
 		    if (!sh.hasErrors())
 		    	System.out.println ("Parsing con ANTLR terminato con successo\n\n");
 		    else {    	
-		    	System.out.println ("Error: " + sh.getErrors().get(0));		    	
+		    	System.out.println ("Error: " + sh.getErrors().get(0));		   
 		    	startChessboard = false;
 		    	System.out.println ("\nParsing ANTLR abortito\n\n");
 		    }

@@ -23,10 +23,10 @@ public class Chessboard {
     /*
      * MAIN
      */
-    public static void mainMethod() {
+    public static void mainMethod(String inputFile) {
     	setEmptyChessboard();
         try {
-            moveReader = new BufferedReader(new FileReader("res/input.file"));
+            moveReader = new BufferedReader(new FileReader(inputFile));
             
             //HERE ADD PREAMBLE CHESSBOARD
             try {
@@ -34,7 +34,7 @@ public class Chessboard {
             	if(firstLine.charAt(0) == '1'){
             			preamble = false;
             	}
-            	else {
+            	else if(firstLine!=null) {
             		preamble = true; 
             		
                 	for(int i = 0; i<2; i++) {
@@ -51,11 +51,12 @@ public class Chessboard {
                 	}
             	}
             	
+            	if(firstLine!=null) {
                 String[] parts = firstLine.split("\t");
                 turnNumber = parts[0];
                 nextMoveW = parts[1];
                 nextMoveB = parts[2];
-
+            	}
             } catch (IOException ex) {
                 System.err.println("Error reading move: " + ex.getMessage());
             }

@@ -83,29 +83,32 @@ public class compilerChecker extends Checker {
 				piece = 'P';
 			}
 			
-			System.out.println(turnNumber);
-			System.out.println(colTo);
-			System.out.println(rowTo);
-			System.out.println("--");
 			int[] res = super.calculateMissingInfo(colFrom, rowFrom, colTo, rowTo, piece, turn, cp);
 			colFrom = res[1];
 			rowFrom = res[0];	
 			
-			if(colFrom == -1 || rowFrom == -1) {
+			if(castle.equals("") && (colFrom == -1 || rowFrom == -1)) {
 				sh.addError(sh.IMPOSSIBLE_MOVE_ERROR, lastToken);
+				error = true;
+			}
+			
+			//indicatore castle
+			if (!error && !castle.equals("") && !iscastleValid()) {
+				sh.addError(sh.CASTLE_ERROR, lastToken);
 				error = true;
 			}
 			
 			//CALCOLA TUTTE LE CORRETTE IMPOSTAZIONI
 			
 			//indicatore di mangiate corretto
-			if(take == 'x' || take == ':') {
+			if(!error && castle.equals("") && (take == 0 && !cp.getBoard()[rowTo][colTo].equals("") || (take == 'x' || take == ':'))) {
 				if(!checkTake() || cp.getBoard()[rowTo][colTo].equals("")) {
 					sh.addError(sh.TAKE_NOT_CORRECT_ERROR, lastToken);
 					error = true;
 				}
 			}
-					
+				
+
 			//non devo avere dubbi su quale pezzo muovere
 			if(!error && !isUnique()) {
 				sh.addError(sh.MOVE_NOT_UNIQUE_ERROR, lastToken);
@@ -113,7 +116,7 @@ public class compilerChecker extends Checker {
 			}
 			
 			//il proprio re non sia sotto scacco
-			if(!error && super.giveupKing(cp, turn, piece, rowFrom, colFrom, rowTo, colTo)) {
+			if(!error && castle.equals("") && super.giveupKing(cp, turn, piece, rowFrom, colFrom, rowTo, colTo)) {
 				sh.addError(sh.KING_IN_CHECK_ERROR, lastToken);
 				error = true;
 			}
@@ -146,11 +149,6 @@ public class compilerChecker extends Checker {
 				error = true;
 			}
 			
-			//indicatore castle
-			if (!error && !castle.equals("") && !iscastleValid()) {
-				sh.addError(sh.CASTLE_ERROR, lastToken);
-				error = true;
-			}
 			
 			//no notazione superflua (no indicare colonne o righe non necessarie)
 			if (!error && !isnotationCorrect())  sh.addWarning(sh.NOTATION_WARNING, lastToken);
@@ -251,7 +249,7 @@ public class compilerChecker extends Checker {
         if (turn == 'B' && countChecks(oppositeTurn(turn),0,4)==0) { //Black
     		cp.getBoard()[0][4] = "";
     		//long castle
-    		if(castle.equals("long")) {
+    		if(castle.equals("O-O-O")) {
     			if(!movedKB && !movedRBlong 
     					&& cp.getBoard()[0][1].equals("") 
     					&& cp.getBoard()[0][2].equals("")
@@ -260,7 +258,7 @@ public class compilerChecker extends Checker {
     			}
     		}
     		//short castle
-    		else if(castle.equals("short")) {
+    		else if(castle.equals("O-O")) {
     			if(!movedKB && !movedRBshort 
     					&& cp.getBoard()[0][5].equals("") && countChecks(oppositeTurn(turn),0,5)==0 
     					&& cp.getBoard()[0][6].equals("") && countChecks(oppositeTurn(turn),0,6)==0) {
@@ -272,7 +270,7 @@ public class compilerChecker extends Checker {
         if (turn == 'W' && countChecks(oppositeTurn(turn),7,4)==0) { //White
     		cp.getBoard()[7][4] = "";
     		//long castle
-    		if(castle.equals("long")) {
+    		if(castle.equals("O-O-O")) {
     			if(!movedKW && !movedRWlong     					
     					&& cp.getBoard()[7][1].equals("") && countChecks(oppositeTurn(turn),7,1)==0
     					&& cp.getBoard()[7][2].equals("") && countChecks(oppositeTurn(turn),7,2)==0
@@ -281,7 +279,7 @@ public class compilerChecker extends Checker {
     			}
     		}
     		//short castle
-    		else if(castle.equals("short")) {
+    		else if(castle.equals("O-O")) {
     			if(!movedKW && !movedRWshort 					
     					&& cp.getBoard()[7][5].equals("") && countChecks(oppositeTurn(turn),7,5)==0 
     					&& cp.getBoard()[7][6].equals("") && countChecks(oppositeTurn(turn),7,6)==0) {
@@ -504,14 +502,14 @@ public class compilerChecker extends Checker {
 	//chiamata ad ogni pezzo piazzato nel preambolo
 	public void checkPreamblePlacement(Token p,Token t,Token r, Token c) {
 			if(!error) {
-			int row = 8 - Integer.parseInt(r.getText());
-			int col = c.getText().charAt(0) - 'a';
-			if(cp.getBoard()[row][col].equals("")) {
-				cp.getBoard()[row][col]=""+p.getText()+t.getText().toUpperCase().charAt(0);
-			}
-			else {
-				sh.addError(sh.PREAMBLE_NOT_POSSIBLE_ERROR, lastToken);
-				error = true;
+				int row = 8 - Integer.parseInt(r.getText());
+				int col = c.getText().charAt(0) - 'a';
+				if((col>=0 && col<=7) && (row>=0 && row<=7) && cp.getBoard()[row][col].equals("")) {
+					cp.getBoard()[row][col]=""+p.getText()+t.getText().toUpperCase().charAt(0);
+				}
+				else {
+					sh.addError(sh.PREAMBLE_NOT_POSSIBLE_ERROR, lastToken);
+					error = true;
 			}
 		}
 	}
@@ -560,8 +558,8 @@ public class compilerChecker extends Checker {
 	            		bKingPos[0]=r;
 	        			bKingPos[1]=c;
 	            	}
-	            	else if(cp.getBoard()[r][c].equals("WN")) wKnight++;
-	            	else if(cp.getBoard()[r][c].equals("BN")) bKnight++;
+	            	else if(cp.getBoard()[r][c].equals("NW")) wKnight++;
+	            	else if(cp.getBoard()[r][c].equals("NB")) bKnight++;
 	            	else if(cp.getBoard()[r][c].equals("BW")) { 
 	            		wBishop++;
 	            		if(isWhiteSquare(r+1,c+1)) wBishop_ws++;
@@ -602,7 +600,7 @@ public class compilerChecker extends Checker {
 		            return true;
         	}
         }
-        
+
         //There isn't draw situation
         return false;
 	}
