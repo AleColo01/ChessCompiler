@@ -5,8 +5,6 @@ import java.util.Hashtable;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 
-import compilerPackage.util.Variable;
-
 public class semanticHandler {
 	// ****** codici per i messaggi d'errore
 	public static int LEXICAL_ERROR 		= 0;
@@ -30,14 +28,12 @@ public class semanticHandler {
 	public static int NOTATION_WARNING = 101; //presente notazione superflua OK
 	
 	// ****** attributi semantici globali
-	Hashtable<String, Variable> symbolTable;
 	ArrayList<String> errors;
 	ArrayList<String> warnings;
 	StringBuffer translation;
 	
 	// ****** costrutture
 	public semanticHandler () {
-		symbolTable = new Hashtable<String, Variable> (103);
 		errors = new ArrayList<String>();
 		warnings = new ArrayList<String>();
 		translation = new StringBuffer ();
