@@ -370,9 +370,9 @@ public class Checker {
     	if(piece != 'K' && checkGiveupKing && giveupKing(cp, turn, piece, rowFrom, colFrom, rowTo, colTo)) return false;
     	//If it's not moving, it's invalid
         if (rowFrom == rowTo && colFrom == colTo) return false;
-        
         switch (piece) {
             case 'P': //PAWN
+
                 if (turn == 'B' && rowTo <= rowFrom) { //cannot move up
                     return false;
                 }
@@ -384,7 +384,7 @@ public class Checker {
                     char colonna = (char) ('a' + colTo);
                     if (turn == 'B') { //Black
                     	//normal capture
-                        if (cp.getBoard()[rowTo][colTo].endsWith("B"))  {
+                        if (cp.getBoard()[rowTo][colTo].endsWith("W"))  {
                         	return true;
                         }
                         //EN PASSANT: check if last move was a pawn moving through that cell
@@ -395,7 +395,7 @@ public class Checker {
                     }
                     if (turn == 'W') { //White
                     	//normal capture
-                        if (cp.getBoard()[rowTo][colTo].endsWith("N"))              
+                        if (cp.getBoard()[rowTo][colTo].endsWith("B"))              
                         	return true;
                       //EN PASSANT: check if last move was a pawn moving through that cell
                         if(lastMove.equals("P"+colonna+"7-"+colonna+"5")) {
@@ -426,22 +426,28 @@ public class Checker {
     
     //Check if this move will put the ally King is check by some enemy piece
     protected boolean giveupKing(ChessboardPanel cp, char turn, char piece, int rowFrom, int colFrom, int rowTo, int colTo) { 
-    	
     	//get ally king position
     	int pos[] = new int[2];
     	pos = kingPosition(cp,turn);
     	int kingRow = pos[0];
     	int kingCol = pos[1];
-    	
+    	//If is the king that wants to move
+    	if(cp.getBoard()[rowFrom][colFrom].startsWith("K")) {
+    		kingRow = rowTo;
+    	 	kingCol = colTo;
+    	}
+    	 	
     	//pretend to do the wanted move, to see what would happen.
     	//save old chessboard state.
     	String oldPosition = cp.getBoard()[rowTo][colTo];
     	char oldTurn = cp.getBoard()[rowFrom][colFrom].charAt(1);
     	cp.getBoard()[rowFrom][colFrom] = "";
     	cp.getBoard()[rowTo][colTo] = ""+piece+turn;  	
+
         for (int r = 0; r < 8; r++) {
         	for (int c = 0; c < 8; c++) {
         		//check if any enemy piece can reach the ally king
+        		if(!cp.getBoard()[r][c].equals("") && cp.getBoard()[r][c].charAt(1)!=turn)
         		if(!cp.getBoard()[r][c].equals("") && cp.getBoard()[r][c].charAt(1)!=turn && canTake(cp, oppositeTurn(turn), cp.getBoard()[r][c].charAt(0), r, c, kingRow, kingCol, false)) {
         	        //restore chessboard to old state
         			cp.getBoard()[rowFrom][colFrom] = ""+piece+oldTurn;
@@ -491,8 +497,8 @@ public class Checker {
                 for (int c = 0; c < 8; c++) {
 
                 	if (cp.getBoard()[r][c].equals("" + piece + turn) 
-                    		&& (canReach(cp, turn, piece, r, c, rowTo, colTo, true) 
-                    				|| canTake(cp, turn, piece, r, c, rowTo, colTo, true)) ) {
+                    		&& ((canReach(cp, turn, piece, r, c, rowTo, colTo, true) 
+                    				|| canTake(cp, turn, piece, r, c, rowTo, colTo, true))) ) {
                         colFrom = c;
                         rowFrom = r;
                         break;
