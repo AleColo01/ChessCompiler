@@ -87,6 +87,7 @@ public class compilerChecker extends Checker {
 			colFrom = res[1];
 			rowFrom = res[0];	
 			
+			
 			if(castle.equals("") && (colFrom == -1 || rowFrom == -1)) {
 				sh.addError(sh.IMPOSSIBLE_MOVE_ERROR, lastToken);
 				error = true;
@@ -115,6 +116,7 @@ public class compilerChecker extends Checker {
 				error = true;
 			}
 			
+			
 			//il proprio re non sia sotto scacco
 			if(!error && castle.equals("") && super.giveupKing(cp, turn, piece, rowFrom, colFrom, rowTo, colTo)) {
 				sh.addError(sh.KING_IN_CHECK_ERROR, lastToken);
@@ -132,6 +134,7 @@ public class compilerChecker extends Checker {
 	    	pos = super.kingPosition(cp, oppositeTurn(turn));
 	    	int kingRow = pos[0];
 	    	int kingCol = pos[1];
+	    	
 			if(!error && !checkMate && countChecks(turn,kingRow,kingCol) != checks ) {
 				sh.addError(sh.CHECK_NOT_CORRECT_ERROR, lastToken);
 				error = true;

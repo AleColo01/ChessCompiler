@@ -12,7 +12,9 @@ public class MainTester {
 		//String fileIn = ".\\res\\input_TAKE_NOT_CORRECT_ERROR.file";
 		//String fileIn = ".\\res\\input_PREAMBLE_NOT_POSSIBLE_ERROR.file";
 		//String fileIn = ".\\res\\input_PREAMBLE_DRAW_ERROR.file";
-		String fileIn = ".\\res\\input_CASTLE_ERROR.file";
+		//String fileIn = ".\\res\\input_CASTLE_ERROR.file";
+		//String fileIn = ".\\res\\input_STARTING_KING_CHECK_ERROR.file";
+		String fileIn = ".\\res\\input_KING_IN_CHECK_ERROR.file";
 		
 		
 		ChessGrammarLexerTester lex = new ChessGrammarLexerTester();
