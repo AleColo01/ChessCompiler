@@ -83,13 +83,26 @@ public class compilerChecker extends Checker {
 				piece = 'P';
 			}
 			
+			super.kingGivedUp=false;
+			
 			int[] res = super.calculateMissingInfo(colFrom, rowFrom, colTo, rowTo, piece, turn, cp);
 			colFrom = res[1];
 			rowFrom = res[0];	
 			
-			
+			//Da controllare anche qua se il re è lasciato sotto scacco essendo che calculateMissingInfo potrebbe lasciare row e col a -1 perchè giveupking ritorna vero
+			if(castle.equals("") && super.kingGivedUp) {
+				sh.addError(sh.KING_IN_CHECK_ERROR, lastToken);
+				error = true;
+			}
+				
 			if(castle.equals("") && (colFrom == -1 || rowFrom == -1)) {
 				sh.addError(sh.IMPOSSIBLE_MOVE_ERROR, lastToken);
+				error = true;
+			}
+			
+			//il proprio re non sia sotto scacco
+			if(!error && castle.equals("") && super.giveupKing(cp, turn, piece, rowFrom, colFrom, rowTo, colTo)) {
+				sh.addError(sh.KING_IN_CHECK_ERROR, lastToken);
 				error = true;
 			}
 			
@@ -116,12 +129,7 @@ public class compilerChecker extends Checker {
 				error = true;
 			}
 			
-			
-			//il proprio re non sia sotto scacco
-			if(!error && castle.equals("") && super.giveupKing(cp, turn, piece, rowFrom, colFrom, rowTo, colTo)) {
-				sh.addError(sh.KING_IN_CHECK_ERROR, lastToken);
-				error = true;
-			}
+		
 			
 			//indicatore di promozione corretto e valido
 			if(!error && promotion!=0 && !ispromotionValid()) {

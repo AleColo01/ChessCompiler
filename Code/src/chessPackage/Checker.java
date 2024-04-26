@@ -2,6 +2,7 @@ package chessPackage;
 
 public class Checker {
 	private String lastMove = "";
+	protected boolean kingGivedUp = false;
 	
     public Checker() {}
 
@@ -179,7 +180,7 @@ public class Checker {
 	 */
     public boolean canReach(ChessboardPanel cp, char turn, char piece, int rowFrom, int colFrom, int rowTo, int colTo, boolean checkGiveupKing) {
     	//if the ally king is checked after this move, it is invalid
-    	if(piece != 'K' && checkGiveupKing && giveupKing(cp, turn, piece, rowFrom, colFrom, rowTo, colTo)) return false;
+    	if(checkGiveupKing && giveupKing(cp, turn, piece, rowFrom, colFrom, rowTo, colTo)) return false;
         
     	boolean accepted = false;
         switch (piece) {
@@ -427,14 +428,17 @@ public class Checker {
     //Check if this move will put the ally King is check by some enemy piece
     protected boolean giveupKing(ChessboardPanel cp, char turn, char piece, int rowFrom, int colFrom, int rowTo, int colTo) { 
     	//get ally king position
-    	int pos[] = new int[2];
-    	pos = kingPosition(cp,turn);
-    	int kingRow = pos[0];
-    	int kingCol = pos[1];
+    	int kingRow;
+    	int kingCol;
     	//If is the king that wants to move
     	if(cp.getBoard()[rowFrom][colFrom].startsWith("K")) {
     		kingRow = rowTo;
     	 	kingCol = colTo;
+    	} else {
+    		int pos[] = new int[2];
+        	pos = kingPosition(cp,turn);
+        	kingRow = pos[0];
+        	kingCol = pos[1];
     	}
     	 	
     	//pretend to do the wanted move, to see what would happen.
@@ -452,6 +456,7 @@ public class Checker {
         	        //restore chessboard to old state
         			cp.getBoard()[rowFrom][colFrom] = ""+piece+oldTurn;
                     cp.getBoard()[rowTo][colTo] = oldPosition;
+                    kingGivedUp = true;
                 	return true;	
                 }
              }

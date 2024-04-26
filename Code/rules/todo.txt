@@ -1,14 +1,11 @@
+ERRORI LESSCIALI PARSING???
+
 Qui ho provato a cercare i problemi, ho descritto cosa succede. alcuni errori possono sorgere in piu modi e non tutti sono scovati
 o sono risolvibili in maniere non banali che il compilatore non capisce.
 
 MOVE_NOT_UNIQUE_ERROR = 12; //l'errore è identificato, ma quando viene aggiunta una info ( riga o colonna ) non viene risolto
 
-KING_IN_CHECK_ERROR = 13; //se il re si muove in scacco, viene tornato errore IMPOSSIBLE MOVE -->RISOLTO
-							se un pezzo si muove lasciando il re sotto scacco, viene tornato errore IMPOSSIBLE MOVE -->RISOLTO MA SOLO SE VIENE MESSA LA MOSSA COMPLETA
-																														ALTRIMENTI ASCOLTA AUDIO GIONNY DEL 26/04 ore 13:20
-							se un altro pezzo si muove mentre il re e sotto scacco, l'errore non è visto --> A ME QUI RITORNA IMPOSSIBLE MOVE, 
-																												PENSO SIA PER STESOS PROBLEMA DI SOPRA
-							
+
 							
 CHECK_NOT_CORRECT_ERROR = 15; //dice sempre che non serve e non lo richiede se manca
 							 // controllare anche se ne individua il numero giusto
@@ -37,3 +34,7 @@ PREAMBLE_NOT_POSSIBLE_ERROR // pezzi fuori dalla scacchiera -->RISOLTO
 PREAMBLE_DRAW_ERROR = 21; //non sempre individata --> RISOLTO, DA TESTARE ALTRI CASI OLTRE RE-RE RE-RE-CAVALLO
 CASTLE_ERROR = 18; //arrocco non è mai permesso --> RISOLTO, SI POSSONO FARE ALTRI TEST
 STARTING_KING_CHECK_ERROR = 22; //non individuata --> PER ME è TUTTO OK ORA, C'ERA SOLO UN BUG OCN I PEDINI
+KING_IN_CHECK_ERROR = 13; //se il re si muove in scacco, viene tornato errore IMPOSSIBLE MOVE 
+							se un pezzo si muove lasciando il re sotto scacco, viene tornato errore IMPOSSIBLE MOVE 
+							se un altro pezzo si muove mentre il re e sotto scacco, l'errore non è visto 				-->RISOLTO MA DA TESTARE MEGLIO, ASCOLTA AUDIO GIONNY DEL 26/04 ore 13:20 PER AIUTO
+							
