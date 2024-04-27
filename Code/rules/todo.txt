@@ -2,9 +2,7 @@
 
 *Manca gestione del termine della partita (se vince il bianco il nero non ha piu mosse da fare)
 
-*La cosa che l'enpassant ha uno spazio davanti crea problemi ma non saprei come modificare il fatto dei tab 
 
-*In generale si potrebbe pennsare di modificare la scrittura delle mosse perchè star li a mettere tab ecc è scomodo
 
 
 
@@ -18,7 +16,6 @@ NOTATION_WARNING
 TAKE_NOT_CORRECT_ERROR = 11; // funziona se lo metto quando non serve ma non viceversa -->RISOLTO MA SI POSSONO FARE ALTRI TEST
 PREAMBLE_NOT_POSSIBLE_ERROR // pezzi fuori dalla scacchiera -->RISOLTO 
 PREAMBLE_DRAW_ERROR = 21; //non sempre individata --> RISOLTO, DA TESTARE ALTRI CASI OLTRE RE-RE RE-RE-CAVALLO
-CASTLE_ERROR = 18; //arrocco non è mai permesso --> RISOLTO, SI POSSONO FARE ALTRI TEST
 STARTING_KING_CHECK_ERROR = 22; //non individuata --> PER ME è TUTTO OK ORA, C'ERA SOLO UN BUG CON I PEDINI
 KING_IN_CHECK_ERROR = 13; //se il re si muove in scacco, viene tornato errore IMPOSSIBLE MOVE 
 							se un pezzo si muove lasciando il re sotto scacco, viene tornato errore IMPOSSIBLE MOVE 
@@ -29,7 +26,9 @@ MOVE_NOT_UNIQUE_ERROR = 12; //l'errore è identificato, ma quando viene aggiunta
 CHECK_NOT_CORRECT_ERROR = 15; //dice sempre che non serve e non lo richiede se manca
 							 // controllare anche se ne individua il numero giusto		-->RISOLTO SEMBRA TUTTO OK
 CHECKMATE_NOT_CORRECT_ERROR = 16; //dice sempre che non serve e non lo richiede se manca -->RISOLTO MA TESTATO SOLO CASO DI TEST DEL FILE							 						
-						
+CASTLE_ERROR = 18; //arrocco non è mai permesso 
+					//Se metto O-O-O anche senza avere torri non da errore, guarda file di input --RISOLTO, FARE ALTRI TEST
+										
 PEDINI NON DEVONO STARE NELLA PRIMA RIGA --> FATTO, PER ORA RTORNA SEMPLICEMENTE CHE C'è UN ERRORE NEL PREAMBOLO	
 			
 PARSER TERMINATO CON SUCCESSO MA è UNA MEZOGNA es. 1.	a3	a6	a7 -->CONTROLLARE METODO handleerror NEL SEMANTIC HANDLER, 
