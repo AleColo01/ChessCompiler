@@ -26,7 +26,7 @@ public class ChessGrammarLexerTester {
 				i = 1;
 				
 				while ((tk = lexer.nextToken()).getType() != chessGrammarLexer.EOF) {
-					// recuper le informazioni relative ai token rilevati
+					// recupero le informazioni relative ai token rilevati
 					int line = tk.getLine();
 					int col = tk.getCharPositionInLine()+1;
 					int type = tk.getType();
@@ -41,7 +41,6 @@ public class ChessGrammarLexerTester {
 				} 
 
 			} catch (Exception e) {
-				System.out.println ("Test ANTLR abortito");
 				e.printStackTrace();
 			}			
 		}

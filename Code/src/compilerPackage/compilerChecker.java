@@ -87,6 +87,7 @@ public class compilerChecker extends Checker {
 			super.notUnique=false;
 			super.enpassant=false;
 			
+			
 			int[] res = super.calculateMissingInfo(colFrom, rowFrom, colTo, rowTo, piece, turn, cp);
 			colFrom = res[1];
 			rowFrom = res[0];	

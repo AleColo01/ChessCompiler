@@ -1,6 +1,10 @@
 #####ERRORI DA SISTEMARE######
 
+*Manca gestione del termine della partita (se vince il bianco il nero non ha piu mosse da fare)
 
+*La cosa che l'enpassant ha uno spazio davanti crea problemi ma non saprei come modificare il fatto dei tab 
+
+*In generale si potrebbe pennsare di modificare la scrittura delle mosse perchè star li a mettere tab ecc è scomodo
 
 
 
