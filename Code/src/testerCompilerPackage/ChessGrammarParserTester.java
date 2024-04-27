@@ -27,7 +27,8 @@ public class ChessGrammarParserTester {
 			
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			chessGrammarParser parser = new chessGrammarParser(tokens);
-		    parser.startRule();
+			
+			parser.startRule();
 		    
 		    semanticHandler sh = parser.getHandler();
 		    

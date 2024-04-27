@@ -3,6 +3,8 @@ package chessPackage;
 public class Checker {
 	private String lastMove = "";
 	protected boolean kingGivedUp = false;
+	protected boolean enpassant = false;
+	protected boolean notUnique = false;
 	
     public Checker() {}
 
@@ -136,10 +138,14 @@ public class Checker {
         if (fromRowIndex != -1) rowFrom = (char) ('8' - fromRowIndex);
         if (toRowIndex != -1) rowTo = (char) ('8' - toRowIndex);
         lastMove = piece+""+colFrom+""+rowFrom+"-"+colTo+""+rowTo;
-        
         return true;
     }
 
+    
+    protected void setLastMove(String move) {
+    	lastMove = move;
+    }
+    
 	/*
 	 * HANDLE CASTLING 
 	 */
@@ -219,7 +225,7 @@ public class Checker {
                 }
                 break;
             case 'R': //ROOK
-            	//If the tower is moving vertically, check noone is in between
+            	//If the tower is moving vertically, check none is in between
                 if (Math.abs(rowTo - rowFrom) == 0 && colTo != colFrom) {
                 	int startCol, endCol;
                 	if (colTo > colFrom) {
@@ -390,6 +396,7 @@ public class Checker {
                         }
                         //EN PASSANT: check if last move was a pawn moving through that cell
                         if(lastMove.equals("P"+colonna+"2-"+colonna+"4")) {
+                        	enpassant = true;
                         	cp.getBoard()[4][colTo] = "";
                         	return true;
                         }
@@ -401,6 +408,7 @@ public class Checker {
                       //EN PASSANT: check if last move was a pawn moving through that cell
                         if(lastMove.equals("P"+colonna+"7-"+colonna+"5")) {
                         	cp.getBoard()[3][colTo] = "";
+                        	enpassant = true;
                         	return true;
                         }
                     }
@@ -500,10 +508,10 @@ public class Checker {
     	if (colFrom == -1 && rowFrom == -1) {
             for (int r = 0; r < 8; r++) {
                 for (int c = 0; c < 8; c++) {
-
                 	if (cp.getBoard()[r][c].equals("" + piece + turn) 
                     		&& ((canReach(cp, turn, piece, r, c, rowTo, colTo, true) 
                     				|| canTake(cp, turn, piece, r, c, rowTo, colTo, true))) ) {
+                		notUnique = true;
                         colFrom = c;
                         rowFrom = r;
                         break;

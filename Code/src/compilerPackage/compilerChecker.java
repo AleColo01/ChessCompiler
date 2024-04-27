@@ -84,6 +84,8 @@ public class compilerChecker extends Checker {
 			}
 			
 			super.kingGivedUp=false;
+			super.notUnique=false;
+			super.enpassant=false;
 			
 			int[] res = super.calculateMissingInfo(colFrom, rowFrom, colTo, rowTo, piece, turn, cp);
 			colFrom = res[1];
@@ -116,12 +118,11 @@ public class compilerChecker extends Checker {
 			
 			//indicatore di mangiate corretto
 			if(!error && castle.equals("") && (take == 0 && !cp.getBoard()[rowTo][colTo].equals("") || (take == 'x' || take == ':'))) {
-				if(!checkTake() || cp.getBoard()[rowTo][colTo].equals("")) {
+				if(!checkTake() || (cp.getBoard()[rowTo][colTo].equals("") && !super.enpassant)) {
 					sh.addError(sh.TAKE_NOT_CORRECT_ERROR, lastToken);
 					error = true;
 				}
 			}
-				
 
 			//non devo avere dubbi su quale pezzo muovere
 			if(!error && !isUnique()) {
@@ -143,23 +144,12 @@ public class compilerChecker extends Checker {
 	    	int kingRow = pos[0];
 	    	int kingCol = pos[1];
 	    	
-			if(!error && !checkMate && countChecks(turn,kingRow,kingCol) != checks ) {
-				sh.addError(sh.CHECK_NOT_CORRECT_ERROR, lastToken);
-				error = true;
-			}
-			
-			//indicatore scacco matto corretto
-			if(!error && checkMate && countChecks(turn,kingRow,kingCol) > 0 && canKingMove() ) {
-				sh.addError(sh.CHECKMATE_NOT_CORRECT_ERROR, lastToken);
-				error = true;
-			}
-			
+
 			//indicatore en passant corretto e valido
 			if (!error && !isenpassantValid()) {
 				sh.addError(sh.ENPASSANT_ERROR, lastToken);
 				error = true;
 			}
-			
 			
 			//no notazione superflua (no indicare colonne o righe non necessarie)
 			if (!error && !isnotationCorrect())  sh.addWarning(sh.NOTATION_WARNING, lastToken);
@@ -167,10 +157,27 @@ public class compilerChecker extends Checker {
 			if(!error)
 				updateChessboard();
 			
+			//indicatore scacco matto corretto
+			if(!error && !checkMate && isCheckMate(turn, kingRow, kingCol)) {
+				sh.addError(sh.CHECKMATE_NOT_CORRECT_ERROR, lastToken);
+				error = true;
+			}
+			
+			if(!error && !checkMate && countChecks(turn,kingRow,kingCol) != checks ) {
+				sh.addError(sh.CHECK_NOT_CORRECT_ERROR, lastToken);
+				error = true;
+			}
+			
+			char charColFrom = (char) ('a'+colFrom);
+			char charColTo = (char) ('a'+colTo);
+			char charRowFrom = (char) ('8' - rowFrom);
+			char charRowTo = (char) ('8' - rowTo);
+			
+			lastMove = piece+""+charColFrom+""+charRowFrom+"-"+charColTo+""+charRowTo;
+			super.setLastMove(lastMove);
+			
 			//RESETTA TUTTE LE VARIABILI
 			reset();
-			
-			lastMove = piece+""+colFrom+""+rowFrom+"-"+colTo+""+rowTo;
 		}
 	}
 	
@@ -342,7 +349,7 @@ public class compilerChecker extends Checker {
             for (int c = 0; c < 8; c++) {
             	if(cp.getBoard()[r][c].equals("" + piece + turn) 
             			&& (super.canTake(cp, turn, piece, r, c, rowTo, colTo, true) || super.canReach(cp, turn, piece, r, c, rowTo, colTo, true)) 
-            			&& (r!=rowFrom || c!=colFrom)) { 
+            			&& (r!=rowFrom || c!=colFrom) && super.notUnique) { 
             		return false;
             	}
             }
@@ -359,15 +366,15 @@ public class compilerChecker extends Checker {
 	}
 	
 	private int countChecks(char turn, int kingRow, int kingCol) {
-		int checks = 0;
+		int check = 0;
 		for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
         		if(!cp.getBoard()[r][c].equals("") && cp.getBoard()[r][c].charAt(1)==turn && canTake(cp, turn, cp.getBoard()[r][c].charAt(0), r, c, kingRow, kingCol, false)) {
-        			checks++;
+        			check = check + 1;
         		}
             }
         }		
-		return checks;
+		return check;
 	}
 	
 	private boolean canKingMove(){
@@ -425,6 +432,9 @@ public class compilerChecker extends Checker {
 		missingRow = false;
 		turnNumber=0;
 		lastToken = null;
+		//super.notUnique=false;
+		//super.enpassant=false;
+		//super.kingGivedUp=false;
 	}
 	
 	public void setLastToken(Token t) {
@@ -647,17 +657,45 @@ public class compilerChecker extends Checker {
 	}
 
 	//check correct starting turn
-		public void checkCorrectStartingTurn(){
-			if(!error) {
-				if (turn == 'B' && !blackStarting) {
-					sh.addError(sh.STARTING_TURN_ERROR, lastToken);
-					error = true;
-				}				
-				else if (turn == 'W' && blackStarting) {
-					sh.addError(sh.STARTING_TURN_ERROR, lastToken);
-					error = true;
-				}	
-			}
+	public void checkCorrectStartingTurn(){
+		if(!error) {
+			if (turn == 'B' && !blackStarting) {
+				sh.addError(sh.STARTING_TURN_ERROR, lastToken);
+				error = true;
+			}				
+			else if (turn == 'W' && blackStarting) {
+				sh.addError(sh.STARTING_TURN_ERROR, lastToken);
+				error = true;
+			}	
 		}
+	}
 		
+	private boolean isCheckMate(char turn, int kingRow, int kingCol) {
+		if(countChecks(turn,kingRow,kingCol) == 0)
+			return false;
+		for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+            	for (int r1 = 0; r1 < 8; r1++) {
+                    for (int c1 = 0; c1 < 8; c1++) {
+		            	if(!(cp.getBoard()[r][c].equals("")) && cp.getBoard()[r][c].charAt(1)!=turn && canTake(cp, oppositeTurn(turn), cp.getBoard()[r][c].charAt(0), r, c, r1, c1, false)) {
+		            		if(cp.getBoard()[r][c].startsWith("K")) {
+		                		kingRow = r1;
+		                	 	kingCol = c1;
+		                	} 
+		            		String oldPosition = cp.getBoard()[r1][c1];
+		                	cp.getBoard()[r1][c1] = ""+cp.getBoard()[r][c].charAt(0)+oppositeTurn(turn); 
+		                	cp.getBoard()[r][c] = "";
+		                	int check = countChecks(turn,kingRow,kingCol);
+		                	cp.getBoard()[r][c] = cp.getBoard()[r1][c1];
+		                	cp.getBoard()[r1][c1] = oldPosition; 
+		                	if(check == 0) {
+		                		return false;
+		                	}
+		            	}
+                    }	
+            	}
+            }
+		}
+		return true;
+	}
 }
