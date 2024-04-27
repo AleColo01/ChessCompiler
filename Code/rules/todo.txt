@@ -1,21 +1,6 @@
+#####ERRORI DA SISTEMARE######
+
 ERRORI LESSCIALI PARSING???
-
-Qui ho provato a cercare i problemi, ho descritto cosa succede. alcuni errori possono sorgere in piu modi e non tutti sono scovati
-o sono risolvibili in maniere non banali che il compilatore non capisce.
-
-MOVE_NOT_UNIQUE_ERROR = 12; //l'errore è identificato, ma quando viene aggiunta una info ( riga o colonna ) non viene risolto
-
-
-							
-CHECK_NOT_CORRECT_ERROR = 15; //dice sempre che non serve e non lo richiede se manca
-							 // controllare anche se ne individua il numero giusto
-							 
-CHECKMATE_NOT_CORRECT_ERROR = 16; //dice sempre che non serve e non lo richiede se manca
-
-ENPASSANT_ERROR = 17; //se in eccesso viene individuato
-						// mossa en passant non è mai vista come valida! e quindi nemmeno permessa dal compilatore 
-
-
 	
 PARSER TERMINATO CON SUCCESSO MA è UNA MEZOGNA es. 1.	a3	a6	a7
 
@@ -23,7 +8,9 @@ AGGIUNGERE CHE PEDINI NON DEVONO STARE NELLA PRIMA RIGA
 
 
 
-Sembrano OK:
+
+
+#####ERRORI CHE SEMBRANO OK MA VANNO TESTATI ANCORA######
 
 IMPOSSIBLE_MOVE_ERROR
 TURN_NUMBER_ERROR
@@ -33,8 +20,16 @@ TAKE_NOT_CORRECT_ERROR = 11; // funziona se lo metto quando non serve ma non vic
 PREAMBLE_NOT_POSSIBLE_ERROR // pezzi fuori dalla scacchiera -->RISOLTO 
 PREAMBLE_DRAW_ERROR = 21; //non sempre individata --> RISOLTO, DA TESTARE ALTRI CASI OLTRE RE-RE RE-RE-CAVALLO
 CASTLE_ERROR = 18; //arrocco non è mai permesso --> RISOLTO, SI POSSONO FARE ALTRI TEST
-STARTING_KING_CHECK_ERROR = 22; //non individuata --> PER ME è TUTTO OK ORA, C'ERA SOLO UN BUG OCN I PEDINI
+STARTING_KING_CHECK_ERROR = 22; //non individuata --> PER ME è TUTTO OK ORA, C'ERA SOLO UN BUG CON I PEDINI
 KING_IN_CHECK_ERROR = 13; //se il re si muove in scacco, viene tornato errore IMPOSSIBLE MOVE 
 							se un pezzo si muove lasciando il re sotto scacco, viene tornato errore IMPOSSIBLE MOVE 
 							se un altro pezzo si muove mentre il re e sotto scacco, l'errore non è visto 				-->RISOLTO MA DA TESTARE MEGLIO, ASCOLTA AUDIO GIONNY DEL 26/04 ore 13:20 PER AIUTO
-							
+ENPASSANT_ERROR = 17; //se in eccesso viene individuato
+						// mossa en passant non è mai vista come valida! e quindi nemmeno permessa dal compilatore -->RISOLTO FARE QUALCHE TEST, ATTENTO AL WARNING DATO!
+MOVE_NOT_UNIQUE_ERROR = 12; //l'errore è identificato, ma quando viene aggiunta una info ( riga o colonna ) non viene risolto -->RISOLTO MA TESTATO SOLO COME NEL FILE						
+CHECK_NOT_CORRECT_ERROR = 15; //dice sempre che non serve e non lo richiede se manca
+							 // controllare anche se ne individua il numero giusto		-->RISOLTO SEMBRA TUTTO OK
+CHECKMATE_NOT_CORRECT_ERROR = 16; //dice sempre che non serve e non lo richiede se manca -->RISOLTO MA TESTATO SOLO CASO DI TEST DEL FILE							 						
+						
+						
+						
