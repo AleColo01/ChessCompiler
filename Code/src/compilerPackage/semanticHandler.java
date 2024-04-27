@@ -119,7 +119,7 @@ public class semanticHandler {
 	void addWarning (int warnCode, Token tk) {
 		String str = tk.getText();
 		String coors = "[" + tk.getLine() + ", " + (tk.getCharPositionInLine()+1) + "]";
-		String msg = "Warning in " + coors + ":\t";
+		String msg = "Warning in " + coors + ":  ";
 		
 		if (warnCode == NOTATION_WARNING)
 			msg += "La notazione può essere abbreviata ulteriormente";

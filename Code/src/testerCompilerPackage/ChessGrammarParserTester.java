@@ -15,6 +15,14 @@ public class ChessGrammarParserTester {
 	public void test(String file) throws IOException {
 
 	  	String fileIn = file;
+	  	
+	  	//For the color on console
+	  	 final String RESET = "\033[0m"; 
+	     final String RED = "\033[0;31m";
+	     final String YELLOW = "\033[0;33m"; 
+	     final String GREENBACK = "\033[42m";
+	     final String REDBACK = "\033[41m";
+	     
 	  	Token tk;
 	  	int i;
 
@@ -32,24 +40,25 @@ public class ChessGrammarParserTester {
 		    
 		    semanticHandler sh = parser.getHandler();
 		    
-		    if (!sh.hasErrors())
-		    	System.out.println ("Parsing con ANTLR terminato con successo\n\n");
-		    else {    	
-		    	System.out.println ("Error: " + sh.getErrors().get(0));		   
-		    	startChessboard = false;
-		    	System.out.println ("\nParsing ANTLR abortito\n\n");
-		    }
-
 		    if (sh.hasWarnings()) {
-			    System.out.println ("Warning: \n" );
+		    	System.out.println(YELLOW);
 		    	for (int n = 0; n<sh.getNWarnings(); n++)	    	
-		    		System.out.println ((n+1) + " - " + sh.getWarnings().get(n));		    		    	
+		    		System.out.println ((n+1) + " - " + sh.getWarnings().get(n));
+		    	System.out.println(RESET);
 		    }
 		    
-			
+		    if (!sh.hasErrors())
+		    	System.out.println ("Parsing con ANTLR terminato con successo\n\n");
+		    else {  
+		    	startChessboard = false;
+		    	System.out.println (RED+ sh.getErrors().get(0) + RESET);	
+		    	System.out.println (REDBACK+"\n\nParsing ANTLR abortito\n\n"+RESET);
+		    }
+
 
 		} catch (Exception e) {
-			System.out.println ("Test ANTLR abortito");
+			startChessboard = false;
+			System.out.println (REDBACK+"\n\nTest ANTLR abortito"+RESET);
 			e.printStackTrace();
 		}
 	}
