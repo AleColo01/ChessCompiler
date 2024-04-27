@@ -264,11 +264,12 @@ public class compilerChecker extends Checker {
 	}
 	
 	private boolean iscastleValid() {
+		System.out.println(cp.getBoard()[0][0]);
 		boolean flagValid = false;
         if (turn == 'B' && countChecks(oppositeTurn(turn),0,4)==0) { //Black
     		cp.getBoard()[0][4] = "";
     		//long castle
-    		if(castle.equals("O-O-O")) {
+    		if(castle.equals("O-O-O") && cp.getBoard()[0][7].equals("RB")) {
     			if(!movedKB && !movedRBlong 
     					&& cp.getBoard()[0][1].equals("") 
     					&& cp.getBoard()[0][2].equals("")
@@ -277,7 +278,7 @@ public class compilerChecker extends Checker {
     			}
     		}
     		//short castle
-    		else if(castle.equals("O-O")) {
+    		else if(castle.equals("O-O") && cp.getBoard()[0][0].equals("RB")) {
     			if(!movedKB && !movedRBshort 
     					&& cp.getBoard()[0][5].equals("") && countChecks(oppositeTurn(turn),0,5)==0 
     					&& cp.getBoard()[0][6].equals("") && countChecks(oppositeTurn(turn),0,6)==0) {
@@ -289,7 +290,7 @@ public class compilerChecker extends Checker {
         if (turn == 'W' && countChecks(oppositeTurn(turn),7,4)==0) { //White
     		cp.getBoard()[7][4] = "";
     		//long castle
-    		if(castle.equals("O-O-O")) {
+    		if(castle.equals("O-O-O") && cp.getBoard()[7][0].equals("RW")) {
     			if(!movedKW && !movedRWlong     					
     					&& cp.getBoard()[7][1].equals("") && countChecks(oppositeTurn(turn),7,1)==0
     					&& cp.getBoard()[7][2].equals("") && countChecks(oppositeTurn(turn),7,2)==0
@@ -298,7 +299,7 @@ public class compilerChecker extends Checker {
     			}
     		}
     		//short castle
-    		else if(castle.equals("O-O")) {
+    		else if(castle.equals("O-O") && cp.getBoard()[7][7].equals("RW")) {
     			if(!movedKW && !movedRWshort 					
     					&& cp.getBoard()[7][5].equals("") && countChecks(oppositeTurn(turn),7,5)==0 
     					&& cp.getBoard()[7][6].equals("") && countChecks(oppositeTurn(turn),7,6)==0) {
