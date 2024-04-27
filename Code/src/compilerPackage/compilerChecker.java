@@ -525,13 +525,15 @@ public class compilerChecker extends Checker {
 			if(!error) {
 				int row = 8 - Integer.parseInt(r.getText());
 				int col = c.getText().charAt(0) - 'a';
-				if((col>=0 && col<=7) && (row>=0 && row<=7) && cp.getBoard()[row][col].equals("")) {
-					cp.getBoard()[row][col]=""+p.getText()+t.getText().toUpperCase().charAt(0);
+				if((col>=0 && col<=7) && (row>=0 && row<=7) && cp.getBoard()[row][col].equals("") && 
+					!(p.getText().equals("P") && t.getText().equals("white") && row == 7) &&
+					!(p.getText().equals("P") && t.getText().equals("black") && row == 0)) {
+						cp.getBoard()[row][col]=""+p.getText()+t.getText().toUpperCase().charAt(0);
 				}
-				else {
+				else{
 					sh.addError(sh.PREAMBLE_NOT_POSSIBLE_ERROR, lastToken);
 					error = true;
-			}
+				}
 		}
 	}
 	
