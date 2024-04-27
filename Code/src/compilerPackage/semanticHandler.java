@@ -62,12 +62,13 @@ public class semanticHandler {
 	}
 
 // *********************** gestione degli errori
+	
 	public void handleError(String[] tokenNames, Token tk, RecognitionException e, String hdr, String msg) {
 		String coors = "[" + tk.getLine() + ", " + (tk.getCharPositionInLine()+1) + "]";
-		if (tk.getType() == chessGrammarLexer.ERROR) 
+		//if (tk.getType() == chessGrammarLexer.ERROR) 
 			errors.add("Errore Lessicale in " + coors + ":\t" +msg+"\t"+tk.getText());
-		else
-			errors.add("Errore Sintattico in " + coors + ":\t" +msg+"\t"+tk.getText());
+		//else
+		//	errors.add("Errore Sintattico in " + coors + ":\t" +msg+"\t"+tk.getText());
 	}
 	
 	// gestore gli errori semantici
@@ -77,6 +78,9 @@ public class semanticHandler {
 			String str = tk.getText();
 			String coors = "[" + tk.getLine() + ", " + (tk.getCharPositionInLine()+1) + "]";
 			msg = "Errore Semantico in " + coors + ":\t";
+		}
+		else {
+			msg = "Errore Semantico:\\t";
 		}
 		
 		if (errCode == TAKE_NOT_CORRECT_ERROR)

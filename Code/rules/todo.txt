@@ -1,10 +1,5 @@
 #####ERRORI DA SISTEMARE######
 
-ERRORI LESSCIALI PARSING???
-	
-PARSER TERMINATO CON SUCCESSO MA è UNA MEZOGNA es. 1.	a3	a6	a7
-
-AGGIUNGERE CHE PEDINI NON DEVONO STARE NELLA PRIMA RIGA
 
 
 
@@ -31,5 +26,7 @@ CHECK_NOT_CORRECT_ERROR = 15; //dice sempre che non serve e non lo richiede se m
 							 // controllare anche se ne individua il numero giusto		-->RISOLTO SEMBRA TUTTO OK
 CHECKMATE_NOT_CORRECT_ERROR = 16; //dice sempre che non serve e non lo richiede se manca -->RISOLTO MA TESTATO SOLO CASO DI TEST DEL FILE							 						
 						
-						
-						
+PEDINI NON DEVONO STARE NELLA PRIMA RIGA --> FATTO, PER ORA RTORNA SEMPLICEMENTE CHE C'è UN ERRORE NEL PREAMBOLO	
+			
+PARSER TERMINATO CON SUCCESSO MA è UNA MEZOGNA es. 1.	a3	a6	a7 -->CONTROLLARE METODO handleerror NEL SEMANTIC HANDLER, 
+																		PER ME COSI è APPOSTO PERò						
