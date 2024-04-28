@@ -118,8 +118,17 @@ public class compilerChecker extends Checker {
 			//CALCOLA TUTTE LE CORRETTE IMPOSTAZIONI
 			
 			//indicatore di mangiate corretto
-			if(!error && castle.equals("") && (take == 0 && !cp.getBoard()[rowTo][colTo].equals("") || (take == 'x' || take == ':'))) {
-				if(!checkTake() || (cp.getBoard()[rowTo][colTo].equals("") && !super.enpassant)) {
+			if(actualTurn == 3 & turn == 'W') {
+				System.out.println(checkTake());
+			}
+			if(!error && castle.equals("")) {
+				if(take == 'x' || take == ':') {
+					if(!checkTake() || (cp.getBoard()[rowTo][colTo].equals("") && !super.enpassant)) {
+						sh.addError(sh.TAKE_NOT_CORRECT_ERROR, lastToken);
+						error = true;
+					}
+				}
+				if((take == 0 && !cp.getBoard()[rowTo][colTo].equals(""))){
 					sh.addError(sh.TAKE_NOT_CORRECT_ERROR, lastToken);
 					error = true;
 				}
@@ -163,7 +172,7 @@ public class compilerChecker extends Checker {
 				sh.addError(sh.CHECKMATE_NOT_CORRECT_ERROR, lastToken);
 				error = true;
 			}
-			
+
 			if(!error && !checkMate && countChecks(turn,kingRow,kingCol) != checks ) {
 				sh.addError(sh.CHECK_NOT_CORRECT_ERROR, lastToken);
 				error = true;
@@ -343,6 +352,7 @@ public class compilerChecker extends Checker {
 	}
 
 	private boolean checkTake(){
+		
 		return super.canTake(cp, turn, piece, rowFrom, colFrom, rowTo, colTo, true);
 	}
 	

@@ -379,7 +379,7 @@ public class Checker {
         if (rowFrom == rowTo && colFrom == colTo) return false;
         switch (piece) {
             case 'P': //PAWN
-
+            	
                 if (turn == 'B' && rowTo <= rowFrom) { //cannot move up
                     return false;
                 }
@@ -403,6 +403,7 @@ public class Checker {
                     }
                     if (turn == 'W') { //White
                     	//normal capture
+                    	System.out.println("--");
                         if (cp.getBoard()[rowTo][colTo].endsWith("B"))              
                         	return true;
                       //EN PASSANT: check if last move was a pawn moving through that cell
