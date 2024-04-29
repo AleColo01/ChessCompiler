@@ -97,7 +97,7 @@ public class compilerChecker extends Checker {
 				sh.addError(sh.KING_IN_CHECK_ERROR, lastToken);
 				error = true;
 			}
-				
+			
 			if(castle.equals("") && (colFrom == -1 || rowFrom == -1)) {
 				sh.addError(sh.IMPOSSIBLE_MOVE_ERROR, lastToken);
 				error = true;

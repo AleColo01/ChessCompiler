@@ -386,6 +386,7 @@ public class Checker {
                 if (turn == 'W' && rowTo >= rowFrom) { //cannot move down
                     return false;
                 }
+                System.out.println(""+rowFrom+colFrom+rowTo+colTo);
                 //accepted only if it's capturing a piece diagonally by one cell
                 if (Math.abs(rowTo - rowFrom) == 1 && Math.abs(colTo - colFrom) == 1) {
                     char colonna = (char) ('a' + colTo);
