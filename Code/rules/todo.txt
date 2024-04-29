@@ -1,16 +1,14 @@
 #####ERRORI DA SISTEMARE######
 
-TAKE_NOT_CORRECT_ERROR
-
-
-
-
-
-
-
-
 
 *Manca gestione del termine della partita (se vince il bianco il nero non ha piu mosse da fare)
+
+
+
+
+
+
+
 
 #####ERRORI CHE SEMBRANO OK MA VANNO TESTATI ANCORA######
 

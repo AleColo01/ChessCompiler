@@ -403,7 +403,6 @@ public class Checker {
                     }
                     if (turn == 'W') { //White
                     	//normal capture
-                    	System.out.println("--");
                         if (cp.getBoard()[rowTo][colTo].endsWith("B"))              
                         	return true;
                       //EN PASSANT: check if last move was a pawn moving through that cell

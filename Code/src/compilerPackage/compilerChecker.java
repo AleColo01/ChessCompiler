@@ -118,9 +118,6 @@ public class compilerChecker extends Checker {
 			//CALCOLA TUTTE LE CORRETTE IMPOSTAZIONI
 			
 			//indicatore di mangiate corretto
-			if(actualTurn == 3 & turn == 'W') {
-				System.out.println(checkTake());
-			}
 			if(!error && castle.equals("")) {
 				if(take == 'x' || take == ':') {
 					if(!checkTake() || (cp.getBoard()[rowTo][colTo].equals("") && !super.enpassant)) {
@@ -273,7 +270,6 @@ public class compilerChecker extends Checker {
 	}
 	
 	private boolean iscastleValid() {
-		System.out.println(cp.getBoard()[0][0]);
 		boolean flagValid = false;
         if (turn == 'B' && countChecks(oppositeTurn(turn),0,4)==0) { //Black
     		cp.getBoard()[0][4] = "";
