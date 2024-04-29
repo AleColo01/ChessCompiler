@@ -64,7 +64,9 @@ public class Checker {
         char rowFrom = '_';
         char colTo = '_';
         char rowTo = '_';
+        
         if (move.length() == 6) { //long notation (all info)
+        	piece = move.charAt(0);
             colFrom = move.charAt(1);
             rowFrom = move.charAt(2);
             colTo = move.charAt(4);
@@ -109,8 +111,8 @@ public class Checker {
         if (colTo != '_') toColIndex = colTo - 'a';
         if (rowTo != '_') toRowIndex = 7 - (Character.getNumericValue(rowTo) - 1);
 
-        int[] res = calculateMissingInfo(fromColIndex,fromRowIndex,toColIndex,toRowIndex,piece,turn,cp);
         
+        int[] res = calculateMissingInfo(fromColIndex,fromRowIndex,toColIndex,toRowIndex,piece,turn,cp);
         fromColIndex = res[1];
         fromRowIndex = res[0];
         
@@ -123,11 +125,16 @@ public class Checker {
             System.out.println("Invalid move by " + name + ": " + move);
             return false;
         }
-
+        
+        //Add this control because en passant is controled by canTake
+        //if we have all the information calculatemissing info doesn't call canTake -> En passant not controlled
+        if(piece=='P') canTake(cp, turn, piece, fromRowIndex, fromColIndex, toRowIndex, toColIndex, false);
+        
+        
         cp.getBoard()[fromRowIndex][fromColIndex] = "";
         if (promotion != '_') cp.getBoard()[toRowIndex][toColIndex] = promotion + "" + turn;
         else cp.getBoard()[toRowIndex][toColIndex] = piece + "" + turn;
-
+        
         cp.repaint();
         
     	/*
@@ -386,7 +393,6 @@ public class Checker {
                 if (turn == 'W' && rowTo >= rowFrom) { //cannot move down
                     return false;
                 }
-                System.out.println(""+rowFrom+colFrom+rowTo+colTo);
                 //accepted only if it's capturing a piece diagonally by one cell
                 if (Math.abs(rowTo - rowFrom) == 1 && Math.abs(colTo - colFrom) == 1) {
                     char colonna = (char) ('a' + colTo);

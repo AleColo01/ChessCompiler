@@ -89,9 +89,9 @@ public class compilerChecker extends Checker {
 			
 			
 			int[] res = super.calculateMissingInfo(colFrom, rowFrom, colTo, rowTo, piece, turn, cp);
+			System.out.println(""+piece+turn+rowFrom+colFrom+rowTo+colTo);
 			colFrom = res[1];
 			rowFrom = res[0];	
-			
 			//Da controllare anche qua se il re è lasciato sotto scacco essendo che calculateMissingInfo potrebbe lasciare row e col a -1 perchè giveupking ritorna vero
 			if(castle.equals("") && super.kingGivedUp) {
 				sh.addError(sh.KING_IN_CHECK_ERROR, lastToken);
