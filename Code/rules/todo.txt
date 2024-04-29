@@ -1,16 +1,18 @@
 #####ERRORI DA SISTEMARE######
 
-TAKE_NOT_CORRECT_ERROR
-
-
-
-
-
-
-
-
 
 *Manca gestione del termine della partita (se vince il bianco il nero non ha piu mosse da fare)
+
+
+Mangiate dei pedini sbagliate (file ENPASSANT_ERROR)	-->PENSO CAUSATI TUTTI DA PROBLEMI NEL CANTAKE DEL PEDINO
+	1.	a4	bxa3	--Questo va bene e anche bxa3 ep
+	1.	a4	Pb4xa3	-->Cazzo succede qua -->RISOLTO (guardare modifiche in movepiece)
+	1.	a4	b4xa3	--> Errore sbagliato secondo me problema nel compilatore, rowFrom o colFrom non vengono settati con i metodi setRowFrom/setColFrom :(
+	1.	a4	b4a3	--Anche qua errore sbagliato
+
+
+
+
 
 #####ERRORI CHE SEMBRANO OK MA VANNO TESTATI ANCORA######
 

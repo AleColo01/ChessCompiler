@@ -89,15 +89,15 @@ public class compilerChecker extends Checker {
 			
 			
 			int[] res = super.calculateMissingInfo(colFrom, rowFrom, colTo, rowTo, piece, turn, cp);
+			System.out.println(""+piece+turn+rowFrom+colFrom+rowTo+colTo);
 			colFrom = res[1];
 			rowFrom = res[0];	
-			
 			//Da controllare anche qua se il re è lasciato sotto scacco essendo che calculateMissingInfo potrebbe lasciare row e col a -1 perchè giveupking ritorna vero
 			if(castle.equals("") && super.kingGivedUp) {
 				sh.addError(sh.KING_IN_CHECK_ERROR, lastToken);
 				error = true;
 			}
-				
+			
 			if(castle.equals("") && (colFrom == -1 || rowFrom == -1)) {
 				sh.addError(sh.IMPOSSIBLE_MOVE_ERROR, lastToken);
 				error = true;
@@ -118,9 +118,6 @@ public class compilerChecker extends Checker {
 			//CALCOLA TUTTE LE CORRETTE IMPOSTAZIONI
 			
 			//indicatore di mangiate corretto
-			if(actualTurn == 3 & turn == 'W') {
-				System.out.println(checkTake());
-			}
 			if(!error && castle.equals("")) {
 				if(take == 'x' || take == ':') {
 					if(!checkTake() || (cp.getBoard()[rowTo][colTo].equals("") && !super.enpassant)) {
@@ -273,7 +270,6 @@ public class compilerChecker extends Checker {
 	}
 	
 	private boolean iscastleValid() {
-		System.out.println(cp.getBoard()[0][0]);
 		boolean flagValid = false;
         if (turn == 'B' && countChecks(oppositeTurn(turn),0,4)==0) { //Black
     		cp.getBoard()[0][4] = "";
