@@ -246,11 +246,19 @@ public class compilerChecker extends Checker {
 		boolean flagValidC = false;
 		boolean flagValidR = false;
 		
+		if((piece == 'B' || piece == 'Q' || piece == 'N') && ((missingCol && !missingRow) || (!missingCol && missingRow))) {
+			 for (int c = 0; c < 8; c++) {
+				for (int r = 0; r < 8; r++) {
+					if(!cp.getBoard()[r][c].equals("")  && cp.getBoard()[r][c].charAt(0)==piece && cp.getBoard()[r][c].charAt(1)==turn && (canReach(cp, turn, piece, r, c, rowTo, colTo, true)))
+						return true;
+				}
+			 }
+		}
+		
 		if(!missingCol) {
             for (int c = 0; c < 8; c++) {
-        		if(c!=colFrom && !cp.getBoard()[rowFrom][c].equals("") && cp.getBoard()[rowFrom][c].charAt(0)==piece && cp.getBoard()[rowFrom][c].charAt(1)==turn && (canTake(cp, turn, piece, rowFrom, c, rowTo, colTo, true) || canReach(cp, turn, piece, rowFrom, c, rowTo, colTo, true))) {
+        		if(c!=colFrom && !cp.getBoard()[rowFrom][c].equals("") && cp.getBoard()[rowFrom][c].charAt(0)==piece && cp.getBoard()[rowFrom][c].charAt(1)==turn && (canTake(cp, turn, piece, rowFrom, c, rowTo, colTo, true) || canReach(cp, turn, piece, rowFrom, c, rowTo, colTo, true))) 
         			flagValidC = true;
-        		}
             }
 		}else {
 			flagValidC = true;
@@ -265,6 +273,8 @@ public class compilerChecker extends Checker {
 		}else{
 			flagValidR = true;
 		}
+		
+		if((!flagValidC && flagValidR) || (flagValidC && !flagValidR) && (take == 'x' || take == ':')) return true;
 		
 		return (flagValidC && flagValidR);
 	}

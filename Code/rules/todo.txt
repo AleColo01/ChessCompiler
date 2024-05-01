@@ -1,36 +1,3 @@
 #####ERRORI DA SISTEMARE######
 sistemare warning per cavallo, alfiere, regina... move not unique
 anche quando pedino mangia es. bxa4 la b è obbligatoria eh
-
-#####ERRORI CHE SEMBRANO OK MA VANNO TESTATI ANCORA######
-
-IMPOSSIBLE_MOVE_ERROR
-TURN_NUMBER_ERROR
-STARTING_TURN_ERROR = 23; (appaiono due errori diversi, uno viene visto come errore nel preambolo e uno come errore nella mossa)
-NOTATION_WARNING
-TAKE_NOT_CORRECT_ERROR = 11; // funziona se lo metto quando non serve ma non viceversa -->RISOLTO MA SI POSSONO FARE ALTRI TEST
-PREAMBLE_NOT_POSSIBLE_ERROR // pezzi fuori dalla scacchiera -->RISOLTO 
-PREAMBLE_DRAW_ERROR = 21; //non sempre individata --> RISOLTO, DA TESTARE ALTRI CASI OLTRE RE-RE RE-RE-CAVALLO
-STARTING_KING_CHECK_ERROR = 22; //non individuata --> PER ME è TUTTO OK ORA, C'ERA SOLO UN BUG CON I PEDINI
-KING_IN_CHECK_ERROR = 13; //se il re si muove in scacco, viene tornato errore IMPOSSIBLE MOVE 
-							se un pezzo si muove lasciando il re sotto scacco, viene tornato errore IMPOSSIBLE MOVE 
-							se un altro pezzo si muove mentre il re e sotto scacco, l'errore non è visto 				-->RISOLTO MA DA TESTARE MEGLIO, ASCOLTA AUDIO GIONNY DEL 26/04 ore 13:20 PER AIUTO
-ENPASSANT_ERROR = 17; //se in eccesso viene individuato
-						// mossa en passant non è mai vista come valida! e quindi nemmeno permessa dal compilatore -->RISOLTO FARE QUALCHE TEST, ATTENTO AL WARNING DATO!
-MOVE_NOT_UNIQUE_ERROR = 12; //l'errore è identificato, ma quando viene aggiunta una info ( riga o colonna ) non viene risolto -->RISOLTO MA TESTATO SOLO COME NEL FILE						
-CHECK_NOT_CORRECT_ERROR = 15; //dice sempre che non serve e non lo richiede se manca
-							 // controllare anche se ne individua il numero giusto		-->RISOLTO SEMBRA TUTTO OK
-CHECKMATE_NOT_CORRECT_ERROR = 16; //dice sempre che non serve e non lo richiede se manca -->RISOLTO MA TESTATO SOLO CASO DI TEST DEL FILE							 						
-CASTLE_ERROR = 18; //arrocco non è mai permesso 
-					//Se metto O-O-O anche senza avere torri non da errore, guarda file di input --RISOLTO, FARE ALTRI TEST
-										
-PEDINI NON DEVONO STARE NELLA PRIMA RIGA --> FATTO, PER ORA RTORNA SEMPLICEMENTE CHE C'è UN ERRORE NEL PREAMBOLO	
-			
-PARSER TERMINATO CON SUCCESSO MA è UNA MEZOGNA es. 1.	a3	a6	a7 -->CONTROLLARE METODO handleerror NEL SEMANTIC HANDLER, 
-																		PER ME COSI è APPOSTO PERò			
-Mangiate dei pedini sbagliate (file ENPASSANT_ERROR)	-->PENSO CAUSATI TUTTI DA PROBLEMI NEL CANTAKE DEL PEDINO
-	1.	a4	bxa3	--Questo va bene e anche bxa3 ep
-	1.	a4	Pb4xa3	-->Cazzo succede qua -->RISOLTO (guardare modifiche in movepiece)
-	1.	a4	b4xa3	--> Errore sbagliato (LASCIAMO COSI) -> secondo me problema nel compilatore, rowFrom o colFrom non vengono settati con i metodi setRowFrom/setColFrom :(
-	1.	a4	b4a3	--Anche qua errore sbagliato (LASCIAMO COSI) -> secondo me problema nel compilatore, rowFrom o colFrom non vengono settati con i metodi setRowFrom/setColFrom :(
-			
