@@ -80,7 +80,7 @@ public class semanticHandler {
 			msg = "Errore Semantico in " + coors + ":\t";
 		}
 		else {
-			msg = "Errore Semantico:\\t";
+			msg = "Errore Semantico:\t";
 		}
 		
 		if (errCode == TAKE_NOT_CORRECT_ERROR)
@@ -90,7 +90,7 @@ public class semanticHandler {
  		else if(errCode == KING_IN_CHECK_ERROR)
  			msg += "La mossa lascia il re in scacco (KING_IN_CHECK_ERROR)";
  		else if(errCode == PROMOTION_ERROR)
- 			msg += "la promozione non è disponibile (PROMOTION_ERROR)";
+ 			msg += "Errore nella promoziona (PROMOTION_ERROR)";
  		else if(errCode == CHECK_NOT_CORRECT_ERROR)
  			msg += "Indicatore scacco sbagliato (CHECK_NOT_CORRECT_ERROR)";
  		else if(errCode == CHECKMATE_NOT_CORRECT_ERROR)
@@ -100,7 +100,7 @@ public class semanticHandler {
  		else if(errCode == CASTLE_ERROR)
  			msg += "Arrocco non possibile (CASTLE_ERROR)";
  		else if(errCode == TURN_NUMBER_ERROR)
- 			msg += "Il numero di turno indicato non è correto (TURN_NUMBER_ERROR)";
+ 			msg += "Il numero di turno indicato non è corretto (TURN_NUMBER_ERROR)";
  		else if(errCode == PREAMBLE_NOT_POSSIBLE_ERROR)
  			msg += "Il prembolo è sbagliato (PREAMBLE_NOT_POSSIBLE_ERROR)";
  		else if(errCode == PREAMBLE_DRAW_ERROR)

@@ -55,7 +55,8 @@ public class Chessboard {
                 String[] parts = firstLine.split("\t");
                 turnNumber = parts[0];
                 nextMoveW = parts[1];
-                nextMoveB = parts[2];
+                if(parts.length==3)
+                	nextMoveB = parts[2];
             	}
             } catch (IOException ex) {
                 System.err.println("Error reading move: " + ex.getMessage());
@@ -69,6 +70,8 @@ public class Chessboard {
 
         SwingUtilities.invokeLater(() -> {
             chessboardPanel = createAndShowGUI();
+            if(nextMoveB == null)
+            	chessboardPanel.gameEnded = true;
             createNextMoveButton();
         });
     }
@@ -98,7 +101,7 @@ public class Chessboard {
         nextMoveLabel = new JLabel(" ");
 
         //INIZIALIZZAZIONE DEL PULSANTE, SCRIVI E SALVA LA MOSSA
-        if (nextMoveW == null || nextMoveB == null) {
+        if (nextMoveW == null) {
             nextMoveLabel.setText("No more moves.");
         } else {
         	if (nextMoveW.equals("")) {
@@ -118,7 +121,8 @@ public class Chessboard {
                     	if (turn == 'W')
                     		chk.movePiece(chessboardPanel, nextMoveW, turn);
                     	else
-                    		chk.movePiece(chessboardPanel, nextMoveB, turn);
+                    		if(nextMoveB != null)
+                    			chk.movePiece(chessboardPanel, nextMoveB, turn);
                     	
                         //PASSA AL TURNO SUCCESSIVO
                         if (turn == 'W') {
@@ -128,6 +132,8 @@ public class Chessboard {
                             //LEGGE LA SUCCESSIVA RIGA SE NECESSARIO
                         	String line = moveReader.readLine();
                         	String[] parts = null;
+                        	nextMoveW = null;
+                        	nextMoveB = null;
                         	if(line != null) {
                                 parts = line.split("\t");
                                 turnNumber = parts[0];
@@ -149,7 +155,11 @@ public class Chessboard {
                         	if (turn == 'W')                     		                       	
                         		nextMoveLabel.setText(turnNumber+" "+ nextMoveW); 
                         	else
-                        		nextMoveLabel.setText(turnNumber+" "+ nextMoveB); 
+                        		if(nextMoveB == null) {
+                        			nextMoveLabel.setText("No more moves.");
+                        		}else {
+                            		nextMoveLabel.setText(turnNumber+" "+ nextMoveB);
+                        		}
                         }
                         
                     } catch (IOException ex) {

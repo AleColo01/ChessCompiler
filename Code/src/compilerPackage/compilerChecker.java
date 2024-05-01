@@ -91,6 +91,7 @@ public class compilerChecker extends Checker {
 			int[] res = super.calculateMissingInfo(colFrom, rowFrom, colTo, rowTo, piece, turn, cp);
 			colFrom = res[1];
 			rowFrom = res[0];	
+			
 			//Da controllare anche qua se il re è lasciato sotto scacco essendo che calculateMissingInfo potrebbe lasciare row e col a -1 perchè giveupking ritorna vero
 			if(castle.equals("") && super.kingGivedUp) {
 				sh.addError(sh.KING_IN_CHECK_ERROR, lastToken);
@@ -136,10 +137,10 @@ public class compilerChecker extends Checker {
 				error = true;
 			}
 			
-		
-			
 			//indicatore di promozione corretto e valido
-			if(!error && promotion!=0 && !ispromotionValid()) {
+			if(!error && (promotion!=0 && !ispromotionValid()) || 
+					(piece == 'P' && promotion==0 && 
+						((turn=='W' && rowTo==0)||(turn=='B' && rowTo==7)))){
 				sh.addError(sh.PROMOTION_ERROR, lastToken);
 				error = true;
 			}
@@ -164,7 +165,7 @@ public class compilerChecker extends Checker {
 				updateChessboard();
 			
 			//indicatore scacco matto corretto
-			if(!error && !checkMate && isCheckMate(turn, kingRow, kingCol)) {
+			if(!error && ((!checkMate && isCheckMate(turn, kingRow, kingCol)) || (checkMate && !isCheckMate(turn, kingRow, kingCol)))) {
 				sh.addError(sh.CHECKMATE_NOT_CORRECT_ERROR, lastToken);
 				error = true;
 			}
@@ -247,7 +248,7 @@ public class compilerChecker extends Checker {
 		
 		if(!missingCol) {
             for (int c = 0; c < 8; c++) {
-        		if(c!=colFrom && !cp.getBoard()[rowFrom][c].equals("") && cp.getBoard()[rowFrom][c].charAt(1)==piece && cp.getBoard()[rowFrom][c].charAt(1)==turn && (canTake(cp, turn, piece, rowFrom, c, rowTo, colTo, true) || canReach(cp, turn, piece, rowFrom, c, rowTo, colTo, true))) {
+        		if(c!=colFrom && !cp.getBoard()[rowFrom][c].equals("") && cp.getBoard()[rowFrom][c].charAt(0)==piece && cp.getBoard()[rowFrom][c].charAt(1)==turn && (canTake(cp, turn, piece, rowFrom, c, rowTo, colTo, true) || canReach(cp, turn, piece, rowFrom, c, rowTo, colTo, true))) {
         			flagValidC = true;
         		}
             }
@@ -255,16 +256,16 @@ public class compilerChecker extends Checker {
 			flagValidC = true;
 		}
 		
-		
 		if(!missingRow) {
             for (int r = 0; r < 8; r++) {
-        		if(r!=rowFrom && !cp.getBoard()[r][colFrom].equals("") && cp.getBoard()[r][colFrom].charAt(1)==piece && cp.getBoard()[r][colFrom].charAt(1)==turn && (canTake(cp, turn, piece, r, colFrom, rowTo, colTo, true) || canReach(cp, turn, piece, r, colFrom, rowTo, colTo, true))) {
+        		if(r!=rowFrom && !cp.getBoard()[r][colFrom].equals("") && cp.getBoard()[r][colFrom].charAt(0)==piece && cp.getBoard()[r][colFrom].charAt(1)==turn && (canTake(cp, turn, piece, r, colFrom, rowTo, colTo, true) || canReach(cp, turn, piece, r, colFrom, rowTo, colTo, true))) {
         			flagValidR = true;
         		}
             }
 		}else{
 			flagValidR = true;
 		}
+		
 		return (flagValidC && flagValidR);
 	}
 	
@@ -533,8 +534,7 @@ public class compilerChecker extends Checker {
 				int row = 8 - Integer.parseInt(r.getText());
 				int col = c.getText().charAt(0) - 'a';
 				if((col>=0 && col<=7) && (row>=0 && row<=7) && cp.getBoard()[row][col].equals("") && 
-					!(p.getText().equals("P") && t.getText().equals("white") && row == 7) &&
-					!(p.getText().equals("P") && t.getText().equals("black") && row == 0)) {
+					!(p.getText().equals("P") && (row == 7 || row ==0))) {
 						cp.getBoard()[row][col]=""+p.getText()+t.getText().toUpperCase().charAt(0);
 				}
 				else{
