@@ -98,7 +98,7 @@ public class Chessboard {
         nextMoveLabel = new JLabel(" ");
 
         //INIZIALIZZAZIONE DEL PULSANTE, SCRIVI E SALVA LA MOSSA
-        if (nextMoveW == null) {
+        if (nextMoveW == null || nextMoveB == null) {
             nextMoveLabel.setText("No more moves.");
         } else {
         	if (nextMoveW.equals("")) {
@@ -127,11 +127,15 @@ public class Chessboard {
                         	turn = 'W';
                             //LEGGE LA SUCCESSIVA RIGA SE NECESSARIO
                         	String line = moveReader.readLine();
+                        	String[] parts = null;
                         	if(line != null) {
-                                String[] parts = line.split("\t");
+                                parts = line.split("\t");
                                 turnNumber = parts[0];
                                 nextMoveW = parts[1];
-                                nextMoveB = parts[2];
+                                if(parts.length==3)
+                                	nextMoveB = parts[2];
+                                else
+                                	chessboardPanel.gameEnded = true;
                         	}else{
                                 nextMoveW = null;
                                 nextMoveB = null;

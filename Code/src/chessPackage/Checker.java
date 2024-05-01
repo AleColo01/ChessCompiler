@@ -122,7 +122,7 @@ public class Checker {
         if (fromColIndex == -1 || fromRowIndex == -1) {
         	String name = "black";
         	if(turn == 'W') name = "white";
-            System.out.println("Invalid move by " + name + ": " + move);
+            if(!cp.gameEnded) System.out.println("Invalid move by " + name + ": " + move);
             return false;
         }
         
