@@ -19,6 +19,7 @@ public class ChessboardPanel extends JPanel {
     private String[][] board;
 
     private Map<String, BufferedImage> pieceImageMap;
+    public boolean gameEnded = false;
 
     public ChessboardPanel(String[][] board) {
         this.board = board;
@@ -76,9 +77,9 @@ public class ChessboardPanel extends JPanel {
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 if ((row + col) % 2 == 0) {
-                    g.setColor(Color.GRAY);
-                } else {
                     g.setColor(Color.WHITE);
+                } else {
+                    g.setColor(Color.GRAY);
                 }
                 int x = col * squareSize;
                 int y = row * squareSize;

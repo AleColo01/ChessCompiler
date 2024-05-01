@@ -2,7 +2,7 @@ grammar chessGrammar;
 
 options {
   language = Java;
-  k = 5;		
+  k = 15;		
 }
 
 @lexer::header{
@@ -118,7 +118,8 @@ startRule
 	    					 	cc.nextTurn();
 	    					}		
 						}
-    (turn (NEWLINE | EOF) )*;
+    (turn (NEWLINE | EOF) )*
+    (lastTurn EOF)?;
     
 turn
     : turnNum 
@@ -130,6 +131,14 @@ turn
     	move {cc.processMove();
     		cc.nextTurn();};
     
+lastTurn
+	: turnNum 
+    		POINT 
+    		TAB 
+    		move {cc.processMove();
+    			cc.nextTurn();}
+    			;
+
 blackStartingTurn
     : turnNum 
     	POINT 
