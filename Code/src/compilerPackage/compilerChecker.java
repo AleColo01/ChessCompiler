@@ -15,7 +15,10 @@ public class compilerChecker extends Checker {
 	int wKing=0, bKing=0;
 	
 	private boolean blackStarting = false;
+	private boolean whiteStarting = false;
+	private char initialTurn = 'W';
 	private Token lastToken;
+	private boolean lastTurn = false;
 	
 	//resetted each turn
 	private char piece; 
@@ -69,6 +72,19 @@ public class compilerChecker extends Checker {
 	
 	public void processMove(){
 		if(!error) {
+			if(lastTurn && turn == 'W'){
+				sh.addError(sh.CASTLE_ERROR, lastToken);
+				error = true;
+			}
+			
+			if(actualTurn == 1 && turn == 'W') {
+				blackStarting = false;
+				whiteStarting = true;
+			}
+			
+			if(actualTurn == 1 && turn == 'B' && !whiteStarting) {
+				blackStarting = true;
+			}
 			
 			//CALCOLA INFO MANCANTI
 			if (colFrom == -1) missingCol = true;
@@ -184,6 +200,17 @@ public class compilerChecker extends Checker {
 			super.setLastMove(lastMove);
 			
 			//RESETTA TUTTE LE VARIABILI
+			if(turn == 'W') {
+				lastTurn = true;
+			}
+			if(turn == 'B') {
+				lastTurn = false;
+			}
+			
+			if(actualTurn == 1 && turn == 'B' && !whiteStarting) {
+				blackStarting = true;
+			}
+			
 			reset();
 		}
 	}
@@ -516,17 +543,12 @@ public class compilerChecker extends Checker {
 	public void setPrambleStartTurn(Token t) {
 		if(preambleCount==0) {
 			if(t.getText().equals("black")) {
-				turn='B';
+				initialTurn='B';
 			}
 			preambleCount++;
 			setChessboardEmpty();
 		}
 	}
-	
-	public void setBlackStarting() {
-		blackStarting = true;
-	}
-	
 	
 	private void setChessboardEmpty() {
 		for (int r = 0; r < 8; r++) {
@@ -677,12 +699,12 @@ public class compilerChecker extends Checker {
 
 	//check correct starting turn
 	public void checkCorrectStartingTurn(){
-		if(!error) {
-			if (turn == 'B' && !blackStarting) {
+		if(!error && actualTurn==1) {
+			if (initialTurn == 'B' && !blackStarting) {
 				sh.addError(sh.STARTING_TURN_ERROR, lastToken);
 				error = true;
 			}				
-			else if (turn == 'W' && blackStarting) {
+			else if (initialTurn == 'W' && blackStarting) {
 				sh.addError(sh.STARTING_TURN_ERROR, lastToken);
 				error = true;
 			}	

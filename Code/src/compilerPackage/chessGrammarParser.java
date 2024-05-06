@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g 2024-05-01 11:48:04
+// $ANTLR 3.5.1 C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g 2024-05-06 17:36:34
 
 package compilerPackage;
 import compilerPackage.*;
@@ -51,7 +51,7 @@ public class chessGrammarParser extends Parser {
 	}
 
 	@Override public String[] getTokenNames() { return chessGrammarParser.tokenNames; }
-	@Override public String getGrammarFileName() { return "D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g"; }
+	@Override public String getGrammarFileName() { return "C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g"; }
 
 
 	public compilerChecker cc = new compilerChecker();
@@ -76,8 +76,90 @@ public class chessGrammarParser extends Parser {
 
 
 
+	// $ANTLR start "startRule"
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:60:1: startRule : ( preamble NEWLINE preamble NEWLINE )? ( turn ( NEWLINE | EOF ) )* ;
+	public final void startRule() throws RecognitionException {
+		try {
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:61:5: ( ( preamble NEWLINE preamble NEWLINE )? ( turn ( NEWLINE | EOF ) )* )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:61:7: ( preamble NEWLINE preamble NEWLINE )? ( turn ( NEWLINE | EOF ) )*
+			{
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:61:7: ( preamble NEWLINE preamble NEWLINE )?
+			int alt1=2;
+			int LA1_0 = input.LA(1);
+			if ( (LA1_0==TURN) ) {
+				alt1=1;
+			}
+			switch (alt1) {
+				case 1 :
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:61:8: preamble NEWLINE preamble NEWLINE
+					{
+					pushFollow(FOLLOW_preamble_in_startRule233);
+					preamble();
+					state._fsp--;
+
+					match(input,NEWLINE,FOLLOW_NEWLINE_in_startRule235); 
+					pushFollow(FOLLOW_preamble_in_startRule237);
+					preamble();
+					state._fsp--;
+
+					match(input,NEWLINE,FOLLOW_NEWLINE_in_startRule239); 
+					}
+					break;
+
+			}
+
+			cc.checkChessboard();
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:62:5: ( turn ( NEWLINE | EOF ) )*
+			loop2:
+			while (true) {
+				int alt2=2;
+				int LA2_0 = input.LA(1);
+				if ( (LA2_0==INT) ) {
+					alt2=1;
+				}
+
+				switch (alt2) {
+				case 1 :
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:62:6: turn ( NEWLINE | EOF )
+					{
+					pushFollow(FOLLOW_turn_in_startRule250);
+					turn();
+					state._fsp--;
+
+					if ( input.LA(1)==EOF||input.LA(1)==NEWLINE ) {
+						input.consume();
+						state.errorRecovery=false;
+					}
+					else {
+						MismatchedSetException mse = new MismatchedSetException(null,input);
+						throw mse;
+					}
+					cc.checkCorrectStartingTurn();
+					}
+					break;
+
+				default :
+					break loop2;
+				}
+			}
+
+			}
+
+		}
+		catch (RecognitionException re) {
+			reportError(re);
+			recover(input,re);
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "startRule"
+
+
+
 	// $ANTLR start "preamble"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:62:1: preamble : t= TURN EQUALS OPEN (p= PIECE c= COLUMN r= INT SC )* (p1= PIECE c1= COLUMN r1= INT ) CLOSE ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:65:1: preamble : t= TURN EQUALS OPEN (p= PIECE c= COLUMN r= INT SC )* (p1= PIECE c1= COLUMN r1= INT ) CLOSE ;
 	public final void preamble() throws RecognitionException {
 		Token t=null;
 		Token p=null;
@@ -88,26 +170,26 @@ public class chessGrammarParser extends Parser {
 		Token r1=null;
 
 		try {
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:63:2: (t= TURN EQUALS OPEN (p= PIECE c= COLUMN r= INT SC )* (p1= PIECE c1= COLUMN r1= INT ) CLOSE )
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:64:2: t= TURN EQUALS OPEN (p= PIECE c= COLUMN r= INT SC )* (p1= PIECE c1= COLUMN r1= INT ) CLOSE
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:66:2: (t= TURN EQUALS OPEN (p= PIECE c= COLUMN r= INT SC )* (p1= PIECE c1= COLUMN r1= INT ) CLOSE )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:67:2: t= TURN EQUALS OPEN (p= PIECE c= COLUMN r= INT SC )* (p1= PIECE c1= COLUMN r1= INT ) CLOSE
 			{
-			t=(Token)match(input,TURN,FOLLOW_TURN_in_preamble233); 
+			t=(Token)match(input,TURN,FOLLOW_TURN_in_preamble283); 
 			cc.setPrambleStartTurn(t);
-			match(input,EQUALS,FOLLOW_EQUALS_in_preamble238); 
-			match(input,OPEN,FOLLOW_OPEN_in_preamble242); 
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:67:2: (p= PIECE c= COLUMN r= INT SC )*
-			loop1:
+			match(input,EQUALS,FOLLOW_EQUALS_in_preamble288); 
+			match(input,OPEN,FOLLOW_OPEN_in_preamble292); 
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:70:2: (p= PIECE c= COLUMN r= INT SC )*
+			loop3:
 			while (true) {
-				int alt1=2;
-				int LA1_0 = input.LA(1);
-				if ( (LA1_0==PIECE) ) {
-					int LA1_1 = input.LA(2);
-					if ( (LA1_1==COLUMN) ) {
-						int LA1_2 = input.LA(3);
-						if ( (LA1_2==INT) ) {
-							int LA1_3 = input.LA(4);
-							if ( (LA1_3==SC) ) {
-								alt1=1;
+				int alt3=2;
+				int LA3_0 = input.LA(1);
+				if ( (LA3_0==PIECE) ) {
+					int LA3_1 = input.LA(2);
+					if ( (LA3_1==COLUMN) ) {
+						int LA3_2 = input.LA(3);
+						if ( (LA3_2==INT) ) {
+							int LA3_3 = input.LA(4);
+							if ( (LA3_3==SC) ) {
+								alt3=1;
 							}
 
 						}
@@ -116,33 +198,33 @@ public class chessGrammarParser extends Parser {
 
 				}
 
-				switch (alt1) {
+				switch (alt3) {
 				case 1 :
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:67:3: p= PIECE c= COLUMN r= INT SC
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:70:3: p= PIECE c= COLUMN r= INT SC
 					{
-					p=(Token)match(input,PIECE,FOLLOW_PIECE_in_preamble249); 
-					c=(Token)match(input,COLUMN,FOLLOW_COLUMN_in_preamble253); 
-					r=(Token)match(input,INT,FOLLOW_INT_in_preamble257); 
-					match(input,SC,FOLLOW_SC_in_preamble259); 
+					p=(Token)match(input,PIECE,FOLLOW_PIECE_in_preamble299); 
+					c=(Token)match(input,COLUMN,FOLLOW_COLUMN_in_preamble303); 
+					r=(Token)match(input,INT,FOLLOW_INT_in_preamble307); 
+					match(input,SC,FOLLOW_SC_in_preamble309); 
 					cc.checkPreamblePlacement(p,t,r,c);
 					}
 					break;
 
 				default :
-					break loop1;
+					break loop3;
 				}
 			}
 
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:68:2: (p1= PIECE c1= COLUMN r1= INT )
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:68:3: p1= PIECE c1= COLUMN r1= INT
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:71:2: (p1= PIECE c1= COLUMN r1= INT )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:71:3: p1= PIECE c1= COLUMN r1= INT
 			{
-			p1=(Token)match(input,PIECE,FOLLOW_PIECE_in_preamble270); 
-			c1=(Token)match(input,COLUMN,FOLLOW_COLUMN_in_preamble274); 
-			r1=(Token)match(input,INT,FOLLOW_INT_in_preamble278); 
+			p1=(Token)match(input,PIECE,FOLLOW_PIECE_in_preamble320); 
+			c1=(Token)match(input,COLUMN,FOLLOW_COLUMN_in_preamble324); 
+			r1=(Token)match(input,INT,FOLLOW_INT_in_preamble328); 
 			cc.checkPreamblePlacement(p1,t,r1,c1);
 			}
 
-			match(input,CLOSE,FOLLOW_CLOSE_in_preamble285); 
+			match(input,CLOSE,FOLLOW_CLOSE_in_preamble335); 
 			}
 
 		}
@@ -159,15 +241,15 @@ public class chessGrammarParser extends Parser {
 
 
 	// $ANTLR start "turnNum"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:72:1: turnNum : v= INT ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:75:1: turnNum : v= INT ;
 	public final void turnNum() throws RecognitionException {
 		Token v=null;
 
 		try {
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:72:9: (v= INT )
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:73:2: v= INT
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:75:9: (v= INT )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:76:2: v= INT
 			{
-			v=(Token)match(input,INT,FOLLOW_INT_in_turnNum300); 
+			v=(Token)match(input,INT,FOLLOW_INT_in_turnNum350); 
 
 					cc.setTurnNumber(v);
 			    		cc.isTurnCorrect();
@@ -188,7 +270,7 @@ public class chessGrammarParser extends Parser {
 
 
 	// $ANTLR start "moveFrom"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:79:1: moveFrom : ( (p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )? ) | ( (c= COLUMN t= TAKE ) ) );
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:82:1: moveFrom : ( (p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )? ) | ( (c= COLUMN t= TAKE ) ) );
 	public final void moveFrom() throws RecognitionException {
 		Token p=null;
 		Token c=null;
@@ -196,111 +278,111 @@ public class chessGrammarParser extends Parser {
 		Token t=null;
 
 		try {
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:79:10: ( (p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )? ) | ( (c= COLUMN t= TAKE ) ) )
-			int alt6=2;
-			int LA6_0 = input.LA(1);
-			if ( (LA6_0==PIECE) ) {
-				alt6=1;
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:82:10: ( (p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )? ) | ( (c= COLUMN t= TAKE ) ) )
+			int alt8=2;
+			int LA8_0 = input.LA(1);
+			if ( (LA8_0==PIECE) ) {
+				alt8=1;
 			}
-			else if ( (LA6_0==COLUMN) ) {
-				alt6=2;
+			else if ( (LA8_0==COLUMN) ) {
+				alt8=2;
 			}
 
 			else {
 				NoViableAltException nvae =
-					new NoViableAltException("", 6, 0, input);
+					new NoViableAltException("", 8, 0, input);
 				throw nvae;
 			}
 
-			switch (alt6) {
+			switch (alt8) {
 				case 1 :
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:80:2: (p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )? )
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:83:2: (p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )? )
 					{
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:80:2: (p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )? )
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:80:3: p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )?
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:83:2: (p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )? )
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:83:3: p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )?
 					{
-					p=(Token)match(input,PIECE,FOLLOW_PIECE_in_moveFrom319); 
+					p=(Token)match(input,PIECE,FOLLOW_PIECE_in_moveFrom369); 
 					cc.setPiece(p);
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:81:2: (c= COLUMN )?
-					int alt2=2;
-					int LA2_0 = input.LA(1);
-					if ( (LA2_0==COLUMN) ) {
-						int LA2_1 = input.LA(2);
-						if ( (LA2_1==INT) ) {
-							int LA2_5 = input.LA(3);
-							if ( (LA2_5==COLUMN||LA2_5==MINUS||LA2_5==TAKE) ) {
-								alt2=1;
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:84:2: (c= COLUMN )?
+					int alt4=2;
+					int LA4_0 = input.LA(1);
+					if ( (LA4_0==COLUMN) ) {
+						int LA4_1 = input.LA(2);
+						if ( (LA4_1==INT) ) {
+							int LA4_5 = input.LA(3);
+							if ( (LA4_5==COLUMN||LA4_5==MINUS||LA4_5==TAKE) ) {
+								alt4=1;
 							}
 						}
-						else if ( (LA2_1==COLUMN||LA2_1==MINUS||LA2_1==TAKE) ) {
-							alt2=1;
+						else if ( (LA4_1==COLUMN||LA4_1==MINUS||LA4_1==TAKE) ) {
+							alt4=1;
 						}
 					}
-					switch (alt2) {
+					switch (alt4) {
 						case 1 :
-							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:81:3: c= COLUMN
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:84:3: c= COLUMN
 							{
-							c=(Token)match(input,COLUMN,FOLLOW_COLUMN_in_moveFrom327); 
+							c=(Token)match(input,COLUMN,FOLLOW_COLUMN_in_moveFrom377); 
 							cc.setColFrom(c);
 							}
 							break;
 
 					}
 
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:82:2: (r= INT )?
-					int alt3=2;
-					int LA3_0 = input.LA(1);
-					if ( (LA3_0==INT) ) {
-						alt3=1;
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:85:2: (r= INT )?
+					int alt5=2;
+					int LA5_0 = input.LA(1);
+					if ( (LA5_0==INT) ) {
+						alt5=1;
 					}
-					switch (alt3) {
+					switch (alt5) {
 						case 1 :
-							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:82:3: r= INT
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:85:3: r= INT
 							{
-							r=(Token)match(input,INT,FOLLOW_INT_in_moveFrom337); 
+							r=(Token)match(input,INT,FOLLOW_INT_in_moveFrom387); 
 							cc.setRowFrom(r);
 							}
 							break;
 
 					}
 
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:83:2: ( (t= TAKE |t= MINUS ) )?
-					int alt5=2;
-					int LA5_0 = input.LA(1);
-					if ( (LA5_0==MINUS||LA5_0==TAKE) ) {
-						alt5=1;
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:86:2: ( (t= TAKE |t= MINUS ) )?
+					int alt7=2;
+					int LA7_0 = input.LA(1);
+					if ( (LA7_0==MINUS||LA7_0==TAKE) ) {
+						alt7=1;
 					}
-					switch (alt5) {
+					switch (alt7) {
 						case 1 :
-							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:83:3: (t= TAKE |t= MINUS )
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:86:3: (t= TAKE |t= MINUS )
 							{
-							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:83:3: (t= TAKE |t= MINUS )
-							int alt4=2;
-							int LA4_0 = input.LA(1);
-							if ( (LA4_0==TAKE) ) {
-								alt4=1;
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:86:3: (t= TAKE |t= MINUS )
+							int alt6=2;
+							int LA6_0 = input.LA(1);
+							if ( (LA6_0==TAKE) ) {
+								alt6=1;
 							}
-							else if ( (LA4_0==MINUS) ) {
-								alt4=2;
+							else if ( (LA6_0==MINUS) ) {
+								alt6=2;
 							}
 
 							else {
 								NoViableAltException nvae =
-									new NoViableAltException("", 4, 0, input);
+									new NoViableAltException("", 6, 0, input);
 								throw nvae;
 							}
 
-							switch (alt4) {
+							switch (alt6) {
 								case 1 :
-									// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:83:4: t= TAKE
+									// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:86:4: t= TAKE
 									{
-									t=(Token)match(input,TAKE,FOLLOW_TAKE_in_moveFrom348); 
+									t=(Token)match(input,TAKE,FOLLOW_TAKE_in_moveFrom398); 
 									}
 									break;
 								case 2 :
-									// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:83:13: t= MINUS
+									// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:86:13: t= MINUS
 									{
-									t=(Token)match(input,MINUS,FOLLOW_MINUS_in_moveFrom354); 
+									t=(Token)match(input,MINUS,FOLLOW_MINUS_in_moveFrom404); 
 									}
 									break;
 
@@ -317,20 +399,20 @@ public class chessGrammarParser extends Parser {
 					}
 					break;
 				case 2 :
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:84:2: ( (c= COLUMN t= TAKE ) )
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:87:2: ( (c= COLUMN t= TAKE ) )
 					{
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:84:2: ( (c= COLUMN t= TAKE ) )
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:84:3: (c= COLUMN t= TAKE )
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:87:2: ( (c= COLUMN t= TAKE ) )
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:87:3: (c= COLUMN t= TAKE )
 					{
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:84:3: (c= COLUMN t= TAKE )
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:84:4: c= COLUMN t= TAKE
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:87:3: (c= COLUMN t= TAKE )
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:87:4: c= COLUMN t= TAKE
 					{
-					c=(Token)match(input,COLUMN,FOLLOW_COLUMN_in_moveFrom370); 
-					t=(Token)match(input,TAKE,FOLLOW_TAKE_in_moveFrom374); 
+					c=(Token)match(input,COLUMN,FOLLOW_COLUMN_in_moveFrom420); 
+					t=(Token)match(input,TAKE,FOLLOW_TAKE_in_moveFrom424); 
 					}
 
-					cc.setTake(t);
-						   			 cc.setColFrom(c);
+					cc.setTake(t); 
+										cc.setColFrom(c);
 					}
 
 					}
@@ -351,19 +433,19 @@ public class chessGrammarParser extends Parser {
 
 
 	// $ANTLR start "moveTo"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:87:1: moveTo : c= COLUMN r= INT ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:90:1: moveTo : c= COLUMN r= INT ;
 	public final void moveTo() throws RecognitionException {
 		Token c=null;
 		Token r=null;
 
 		try {
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:87:8: (c= COLUMN r= INT )
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:88:2: c= COLUMN r= INT
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:90:8: (c= COLUMN r= INT )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:91:2: c= COLUMN r= INT
 			{
-			c=(Token)match(input,COLUMN,FOLLOW_COLUMN_in_moveTo390); 
+			c=(Token)match(input,COLUMN,FOLLOW_COLUMN_in_moveTo440); 
 			cc.setColTo(c);
-			r=(Token)match(input,INT,FOLLOW_INT_in_moveTo397); 
-			cc.setRowTo(r);
+			r=(Token)match(input,INT,FOLLOW_INT_in_moveTo447); 
+			cc.setRowTo(r); 
 					cc.setLastToken(r); 
 			}
 
@@ -381,13 +463,13 @@ public class chessGrammarParser extends Parser {
 
 
 	// $ANTLR start "enPassant"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:93:1: enPassant : EP ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:96:1: enPassant : EP ;
 	public final void enPassant() throws RecognitionException {
 		try {
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:93:10: ( EP )
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:93:12: EP
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:96:10: ( EP )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:96:12: EP
 			{
-			match(input,EP,FOLLOW_EP_in_enPassant407); 
+			match(input,EP,FOLLOW_EP_in_enPassant457); 
 			cc.setEnpassant();
 			}
 
@@ -405,25 +487,25 @@ public class chessGrammarParser extends Parser {
 
 
 	// $ANTLR start "check"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:95:1: check : PLUS ( PLUS )? ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:98:1: check : PLUS ( PLUS )? ;
 	public final void check() throws RecognitionException {
 		try {
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:95:7: ( PLUS ( PLUS )? )
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:95:9: PLUS ( PLUS )?
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:98:7: ( PLUS ( PLUS )? )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:98:9: PLUS ( PLUS )?
 			{
-			match(input,PLUS,FOLLOW_PLUS_in_check417); 
+			match(input,PLUS,FOLLOW_PLUS_in_check467); 
 			cc.setChecks();
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:96:3: ( PLUS )?
-			int alt7=2;
-			int LA7_0 = input.LA(1);
-			if ( (LA7_0==PLUS) ) {
-				alt7=1;
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:99:3: ( PLUS )?
+			int alt9=2;
+			int LA9_0 = input.LA(1);
+			if ( (LA9_0==PLUS) ) {
+				alt9=1;
 			}
-			switch (alt7) {
+			switch (alt9) {
 				case 1 :
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:96:4: PLUS
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:99:4: PLUS
 					{
-					match(input,PLUS,FOLLOW_PLUS_in_check424); 
+					match(input,PLUS,FOLLOW_PLUS_in_check474); 
 					cc.setChecks();
 					}
 					break;
@@ -446,13 +528,13 @@ public class chessGrammarParser extends Parser {
 
 
 	// $ANTLR start "checkmate"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:99:1: checkmate : HASH ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:102:1: checkmate : HASH ;
 	public final void checkmate() throws RecognitionException {
 		try {
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:99:11: ( HASH )
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:99:13: HASH
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:102:11: ( HASH )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:102:13: HASH
 			{
-			match(input,HASH,FOLLOW_HASH_in_checkmate443); 
+			match(input,HASH,FOLLOW_HASH_in_checkmate493); 
 			cc.setCheckMate();
 			}
 
@@ -470,16 +552,16 @@ public class chessGrammarParser extends Parser {
 
 
 	// $ANTLR start "promotion"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:101:1: promotion : EQUALS p= PIECE ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:104:1: promotion : EQUALS p= PIECE ;
 	public final void promotion() throws RecognitionException {
 		Token p=null;
 
 		try {
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:101:11: ( EQUALS p= PIECE )
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:101:13: EQUALS p= PIECE
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:104:11: ( EQUALS p= PIECE )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:104:13: EQUALS p= PIECE
 			{
-			match(input,EQUALS,FOLLOW_EQUALS_in_promotion453); 
-			p=(Token)match(input,PIECE,FOLLOW_PIECE_in_promotion457); 
+			match(input,EQUALS,FOLLOW_EQUALS_in_promotion503); 
+			p=(Token)match(input,PIECE,FOLLOW_PIECE_in_promotion507); 
 			cc.setPromotion(p);
 			}
 
@@ -497,31 +579,31 @@ public class chessGrammarParser extends Parser {
 
 
 	// $ANTLR start "castleRule"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:103:1: castleRule : t= CASTLE MINUS CASTLE ( MINUS CASTLE )? ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:106:1: castleRule : t= CASTLE MINUS CASTLE ( MINUS CASTLE )? ;
 	public final void castleRule() throws RecognitionException {
 		Token t=null;
 
 		try {
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:103:11: (t= CASTLE MINUS CASTLE ( MINUS CASTLE )? )
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:104:2: t= CASTLE MINUS CASTLE ( MINUS CASTLE )?
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:106:11: (t= CASTLE MINUS CASTLE ( MINUS CASTLE )? )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:107:2: t= CASTLE MINUS CASTLE ( MINUS CASTLE )?
 			{
-			t=(Token)match(input,CASTLE,FOLLOW_CASTLE_in_castleRule474); 
+			t=(Token)match(input,CASTLE,FOLLOW_CASTLE_in_castleRule524); 
 			cc.setLastToken(t);
-			match(input,MINUS,FOLLOW_MINUS_in_castleRule480); 
+			match(input,MINUS,FOLLOW_MINUS_in_castleRule530); 
 			int i=1;
-			match(input,CASTLE,FOLLOW_CASTLE_in_castleRule485); 
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:107:2: ( MINUS CASTLE )?
-			int alt8=2;
-			int LA8_0 = input.LA(1);
-			if ( (LA8_0==MINUS) ) {
-				alt8=1;
+			match(input,CASTLE,FOLLOW_CASTLE_in_castleRule535); 
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:110:2: ( MINUS CASTLE )?
+			int alt10=2;
+			int LA10_0 = input.LA(1);
+			if ( (LA10_0==MINUS) ) {
+				alt10=1;
 			}
-			switch (alt8) {
+			switch (alt10) {
 				case 1 :
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:107:3: MINUS CASTLE
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:110:3: MINUS CASTLE
 					{
-					match(input,MINUS,FOLLOW_MINUS_in_castleRule490); 
-					match(input,CASTLE,FOLLOW_CASTLE_in_castleRule492); 
+					match(input,MINUS,FOLLOW_MINUS_in_castleRule540); 
+					match(input,CASTLE,FOLLOW_CASTLE_in_castleRule542); 
 					i = 2;
 					}
 					break;
@@ -544,174 +626,62 @@ public class chessGrammarParser extends Parser {
 
 
 
-	// $ANTLR start "startRule"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:113:1: startRule : ( preamble NEWLINE preamble NEWLINE )? ( blackStartingTurn flag= ( NEWLINE | EOF ) )? ( turn ( NEWLINE | EOF ) )* ( lastTurn EOF )? ;
-	public final void startRule() throws RecognitionException {
-		Token flag=null;
-
+	// $ANTLR start "turn"
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:114:1: turn : turnNum POINT TAB ( move )? ( TAB move )? ;
+	public final void turn() throws RecognitionException {
 		try {
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:114:5: ( ( preamble NEWLINE preamble NEWLINE )? ( blackStartingTurn flag= ( NEWLINE | EOF ) )? ( turn ( NEWLINE | EOF ) )* ( lastTurn EOF )? )
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:114:7: ( preamble NEWLINE preamble NEWLINE )? ( blackStartingTurn flag= ( NEWLINE | EOF ) )? ( turn ( NEWLINE | EOF ) )* ( lastTurn EOF )?
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:115:5: ( turnNum POINT TAB ( move )? ( TAB move )? )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:115:7: turnNum POINT TAB ( move )? ( TAB move )?
 			{
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:114:7: ( preamble NEWLINE preamble NEWLINE )?
-			int alt9=2;
-			int LA9_0 = input.LA(1);
-			if ( (LA9_0==TURN) ) {
-				alt9=1;
+			pushFollow(FOLLOW_turnNum_in_turn567);
+			turnNum();
+			state._fsp--;
+
+			match(input,POINT,FOLLOW_POINT_in_turn575); 
+			match(input,TAB,FOLLOW_TAB_in_turn583); 
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:118:6: ( move )?
+			int alt11=2;
+			int LA11_0 = input.LA(1);
+			if ( (LA11_0==CASTLE||LA11_0==COLUMN||LA11_0==PIECE) ) {
+				alt11=1;
 			}
-			switch (alt9) {
+			switch (alt11) {
 				case 1 :
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:114:8: preamble NEWLINE preamble NEWLINE
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:118:7: move
 					{
-					pushFollow(FOLLOW_preamble_in_startRule517);
-					preamble();
+					pushFollow(FOLLOW_move_in_turn592);
+					move();
 					state._fsp--;
 
-					match(input,NEWLINE,FOLLOW_NEWLINE_in_startRule519); 
-					pushFollow(FOLLOW_preamble_in_startRule521);
-					preamble();
-					state._fsp--;
-
-					match(input,NEWLINE,FOLLOW_NEWLINE_in_startRule523); 
+					cc.processMove();
 					}
 					break;
 
 			}
 
-			cc.checkChessboard();
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:115:5: ( blackStartingTurn flag= ( NEWLINE | EOF ) )?
-			int alt10=2;
-			int LA10_0 = input.LA(1);
-			if ( (LA10_0==INT) ) {
-				int LA10_1 = input.LA(2);
-				if ( (LA10_1==POINT) ) {
-					int LA10_3 = input.LA(3);
-					if ( (LA10_3==TAB) ) {
-						int LA10_4 = input.LA(4);
-						if ( (LA10_4==TAB) ) {
-							alt10=1;
-						}
-					}
-				}
-			}
-			switch (alt10) {
-				case 1 :
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:115:6: blackStartingTurn flag= ( NEWLINE | EOF )
-					{
-					pushFollow(FOLLOW_blackStartingTurn_in_startRule534);
-					blackStartingTurn();
-					state._fsp--;
-
-					flag=input.LT(1);
-					if ( input.LA(1)==EOF||input.LA(1)==NEWLINE ) {
-						input.consume();
-						state.errorRecovery=false;
-					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						throw mse;
-					}
-					}
-					break;
-
-			}
-
-			cc.checkCorrectStartingTurn();
-				    					if(flag != null){
-				    					    	cc.processMove();
-				    					 	cc.nextTurn();
-				    					}		
-									
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:121:5: ( turn ( NEWLINE | EOF ) )*
-			loop11:
-			while (true) {
-				int alt11=2;
-				alt11 = dfa11.predict(input);
-				switch (alt11) {
-				case 1 :
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:121:6: turn ( NEWLINE | EOF )
-					{
-					pushFollow(FOLLOW_turn_in_startRule555);
-					turn();
-					state._fsp--;
-
-					if ( input.LA(1)==EOF||input.LA(1)==NEWLINE ) {
-						input.consume();
-						state.errorRecovery=false;
-					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						throw mse;
-					}
-					}
-					break;
-
-				default :
-					break loop11;
-				}
-			}
-
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:122:5: ( lastTurn EOF )?
+			cc.nextTurn();
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:120:6: ( TAB move )?
 			int alt12=2;
 			int LA12_0 = input.LA(1);
-			if ( (LA12_0==INT) ) {
+			if ( (LA12_0==TAB) ) {
 				alt12=1;
 			}
 			switch (alt12) {
 				case 1 :
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:122:6: lastTurn EOF
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:120:7: TAB move
 					{
-					pushFollow(FOLLOW_lastTurn_in_startRule573);
-					lastTurn();
+					match(input,TAB,FOLLOW_TAB_in_turn612); 
+					pushFollow(FOLLOW_move_in_turn620);
+					move();
 					state._fsp--;
 
-					match(input,EOF,FOLLOW_EOF_in_startRule575); 
+					cc.processMove();
 					}
 					break;
 
 			}
 
-			}
-
-		}
-		catch (RecognitionException re) {
-			reportError(re);
-			recover(input,re);
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "startRule"
-
-
-
-	// $ANTLR start "turn"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:124:1: turn : turnNum POINT TAB move TAB move ;
-	public final void turn() throws RecognitionException {
-		try {
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:125:5: ( turnNum POINT TAB move TAB move )
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:125:7: turnNum POINT TAB move TAB move
-			{
-			pushFollow(FOLLOW_turnNum_in_turn593);
-			turnNum();
-			state._fsp--;
-
-			match(input,POINT,FOLLOW_POINT_in_turn601); 
-			match(input,TAB,FOLLOW_TAB_in_turn609); 
-			pushFollow(FOLLOW_move_in_turn617);
-			move();
-			state._fsp--;
-
-			cc.processMove();
-			    		cc.nextTurn();
-			match(input,TAB,FOLLOW_TAB_in_turn627); 
-			pushFollow(FOLLOW_move_in_turn635);
-			move();
-			state._fsp--;
-
-			cc.processMove();
-			    		cc.nextTurn();
+			cc.nextTurn();
 			}
 
 		}
@@ -727,82 +697,14 @@ public class chessGrammarParser extends Parser {
 
 
 
-	// $ANTLR start "lastTurn"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:134:1: lastTurn : turnNum POINT TAB move ;
-	public final void lastTurn() throws RecognitionException {
-		try {
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:135:2: ( turnNum POINT TAB move )
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:135:4: turnNum POINT TAB move
-			{
-			pushFollow(FOLLOW_turnNum_in_lastTurn650);
-			turnNum();
-			state._fsp--;
-
-			match(input,POINT,FOLLOW_POINT_in_lastTurn659); 
-			match(input,TAB,FOLLOW_TAB_in_lastTurn668); 
-			pushFollow(FOLLOW_move_in_lastTurn677);
-			move();
-			state._fsp--;
-
-			cc.processMove();
-			    			cc.nextTurn();
-			}
-
-		}
-		catch (RecognitionException re) {
-			reportError(re);
-			recover(input,re);
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "lastTurn"
-
-
-
-	// $ANTLR start "blackStartingTurn"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:142:1: blackStartingTurn : turnNum POINT TAB TAB move ;
-	public final void blackStartingTurn() throws RecognitionException {
-		try {
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:143:5: ( turnNum POINT TAB TAB move )
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:143:7: turnNum POINT TAB TAB move
-			{
-			pushFollow(FOLLOW_turnNum_in_blackStartingTurn699);
-			turnNum();
-			state._fsp--;
-
-			match(input,POINT,FOLLOW_POINT_in_blackStartingTurn707); 
-			match(input,TAB,FOLLOW_TAB_in_blackStartingTurn715); 
-			match(input,TAB,FOLLOW_TAB_in_blackStartingTurn723); 
-			pushFollow(FOLLOW_move_in_blackStartingTurn731);
-			move();
-			state._fsp--;
-
-			cc.setBlackStarting();
-			}
-
-		}
-		catch (RecognitionException re) {
-			reportError(re);
-			recover(input,re);
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "blackStartingTurn"
-
-
-
 	// $ANTLR start "move"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:149:1: move : ( ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? ) | castleRule ) ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:124:1: move : ( ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? ) | castleRule ) ;
 	public final void move() throws RecognitionException {
 		try {
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:150:5: ( ( ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? ) | castleRule ) )
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:150:7: ( ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? ) | castleRule )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:125:5: ( ( ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? ) | castleRule ) )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:125:7: ( ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? ) | castleRule )
 			{
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:150:7: ( ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? ) | castleRule )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:125:7: ( ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? ) | castleRule )
 			int alt16=2;
 			int LA16_0 = input.LA(1);
 			if ( (LA16_0==COLUMN||LA16_0==PIECE) ) {
@@ -820,12 +722,12 @@ public class chessGrammarParser extends Parser {
 
 			switch (alt16) {
 				case 1 :
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:150:8: ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? )
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:125:8: ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? )
 					{
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:150:8: ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? )
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:150:9: ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )?
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:125:8: ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? )
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:125:9: ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )?
 					{
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:150:9: ( moveFrom )?
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:125:9: ( moveFrom )?
 					int alt13=2;
 					int LA13_0 = input.LA(1);
 					if ( (LA13_0==PIECE) ) {
@@ -839,9 +741,9 @@ public class chessGrammarParser extends Parser {
 					}
 					switch (alt13) {
 						case 1 :
-							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:150:9: moveFrom
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:125:9: moveFrom
 							{
-							pushFollow(FOLLOW_moveFrom_in_move751);
+							pushFollow(FOLLOW_moveFrom_in_move646);
 							moveFrom();
 							state._fsp--;
 
@@ -850,11 +752,11 @@ public class chessGrammarParser extends Parser {
 
 					}
 
-					pushFollow(FOLLOW_moveTo_in_move761);
+					pushFollow(FOLLOW_moveTo_in_move656);
 					moveTo();
 					state._fsp--;
 
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:152:7: ( enPassant | promotion )?
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:127:7: ( enPassant | promotion )?
 					int alt14=3;
 					int LA14_0 = input.LA(1);
 					if ( (LA14_0==EP) ) {
@@ -865,18 +767,18 @@ public class chessGrammarParser extends Parser {
 					}
 					switch (alt14) {
 						case 1 :
-							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:152:8: enPassant
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:127:8: enPassant
 							{
-							pushFollow(FOLLOW_enPassant_in_move771);
+							pushFollow(FOLLOW_enPassant_in_move666);
 							enPassant();
 							state._fsp--;
 
 							}
 							break;
 						case 2 :
-							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:152:20: promotion
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:127:20: promotion
 							{
-							pushFollow(FOLLOW_promotion_in_move775);
+							pushFollow(FOLLOW_promotion_in_move670);
 							promotion();
 							state._fsp--;
 
@@ -885,7 +787,7 @@ public class chessGrammarParser extends Parser {
 
 					}
 
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:153:7: ( check | checkmate )?
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:128:7: ( check | checkmate )?
 					int alt15=3;
 					int LA15_0 = input.LA(1);
 					if ( (LA15_0==PLUS) ) {
@@ -896,18 +798,18 @@ public class chessGrammarParser extends Parser {
 					}
 					switch (alt15) {
 						case 1 :
-							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:153:8: check
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:128:8: check
 							{
-							pushFollow(FOLLOW_check_in_move787);
+							pushFollow(FOLLOW_check_in_move682);
 							check();
 							state._fsp--;
 
 							}
 							break;
 						case 2 :
-							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:153:16: checkmate
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:128:16: checkmate
 							{
-							pushFollow(FOLLOW_checkmate_in_move791);
+							pushFollow(FOLLOW_checkmate_in_move686);
 							checkmate();
 							state._fsp--;
 
@@ -921,9 +823,9 @@ public class chessGrammarParser extends Parser {
 					}
 					break;
 				case 2 :
-					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:154:8: castleRule
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:129:8: castleRule
 					{
-					pushFollow(FOLLOW_castleRule_in_move804);
+					pushFollow(FOLLOW_castleRule_in_move699);
 					castleRule();
 					state._fsp--;
 
@@ -948,735 +850,56 @@ public class chessGrammarParser extends Parser {
 	// Delegated rules
 
 
-	protected DFA11 dfa11 = new DFA11(this);
-	static final String DFA11_eotS =
-		"\u022d\uffff";
-	static final String DFA11_eofS =
-		"\1\2\14\uffff\1\2\1\uffff\1\2\11\uffff\1\2\1\uffff\2\2\2\uffff\1\2\3\uffff"+
-		"\1\2\1\uffff\2\2\4\uffff\1\2\2\uffff\6\2\2\uffff\2\2\11\uffff\3\2\2\uffff"+
-		"\2\2\4\uffff\3\2\1\uffff\2\2\2\uffff\3\2\1\uffff\2\2\2\uffff\1\2\1\uffff"+
-		"\2\2\2\uffff\1\2\1\uffff\2\2\2\uffff\1\2\1\uffff\2\2\2\uffff\1\2\4\uffff"+
-		"\2\2\4\uffff\4\2\1\uffff\2\2\2\uffff\1\2\4\uffff\2\2\4\uffff\1\2\1\uffff"+
-		"\2\2\2\uffff\1\2\1\uffff\2\2\2\uffff\2\2\2\uffff\2\2\4\uffff\1\2\1\uffff"+
-		"\2\2\2\uffff\1\2\1\uffff\2\2\2\uffff\2\2\2\uffff\2\2\4\uffff\2\2\2\uffff"+
-		"\2\2\4\uffff\2\2\2\uffff\2\2\4\uffff\2\2\2\uffff\2\2\6\uffff\1\2\6\uffff"+
-		"\1\2\1\uffff\2\2\2\uffff\1\2\1\uffff\2\2\2\uffff\2\2\2\uffff\2\2\6\uffff"+
-		"\1\2\4\uffff\2\2\2\uffff\2\2\4\uffff\2\2\2\uffff\2\2\4\uffff\1\2\4\uffff"+
-		"\2\2\4\uffff\2\2\2\uffff\2\2\4\uffff\2\2\2\uffff\2\2\4\uffff\1\2\4\uffff"+
-		"\2\2\4\uffff\1\2\4\uffff\2\2\4\uffff\1\2\4\uffff\2\2\4\uffff\1\2\4\uffff"+
-		"\2\2\6\uffff\2\2\2\uffff\2\2\4\uffff\2\2\2\uffff\2\2\4\uffff\1\2\4\uffff"+
-		"\2\2\6\uffff\1\2\4\uffff\2\2\4\uffff\1\2\4\uffff\2\2\6\uffff\1\2\4\uffff"+
-		"\1\2\4\uffff\2\2\4\uffff\1\2\4\uffff\2\2\6\uffff\1\2\6\uffff\1\2\6\uffff"+
-		"\1\2\6\uffff\1\2\4\uffff\1\2\4\uffff\2\2\4\uffff\1\2\4\uffff\2\2\6\uffff"+
-		"\1\2\6\uffff\1\2\6\uffff\1\2\10\uffff\1\2\6\uffff\1\2\16\uffff\1\2\6\uffff"+
-		"\1\2\22\uffff";
-	static final String DFA11_minS =
-		"\1\12\1\20\1\uffff\1\22\1\4\1\6\1\12\1\13\5\6\1\7\1\4\3\6\1\12\2\6\4\12"+
-		"\1\11\1\16\1\17\1\22\2\uffff\1\13\2\6\1\12\1\11\1\16\1\17\1\22\2\uffff"+
-		"\2\12\1\7\2\12\4\7\1\17\1\22\2\uffff\1\11\1\22\4\uffff\1\4\2\uffff\2\12"+
-		"\1\7\1\17\1\22\2\uffff\1\11\1\22\4\uffff\2\7\1\11\1\16\1\17\1\22\2\uffff"+
-		"\2\7\1\11\1\16\1\17\1\22\2\uffff\1\11\1\16\1\17\1\22\2\uffff\1\11\1\16"+
-		"\1\17\1\22\2\uffff\1\11\1\16\1\17\1\22\2\uffff\1\22\4\uffff\1\17\1\22"+
-		"\4\uffff\1\22\2\7\1\11\1\16\1\17\1\22\2\uffff\1\22\4\uffff\1\17\1\22\4"+
-		"\uffff\1\11\1\16\1\17\1\22\2\uffff\1\11\1\16\1\17\1\22\2\uffff\1\17\1"+
-		"\22\2\uffff\1\11\1\22\4\uffff\1\11\1\16\1\17\1\22\2\uffff\1\11\1\16\1"+
-		"\17\1\22\2\uffff\1\17\1\22\2\uffff\1\11\1\22\4\uffff\1\17\1\22\2\uffff"+
-		"\1\11\1\22\4\uffff\1\17\1\22\2\uffff\1\11\1\22\4\uffff\1\17\1\22\2\uffff"+
-		"\1\11\1\22\6\uffff\1\22\6\uffff\1\11\1\16\1\17\1\22\2\uffff\1\11\1\16"+
-		"\1\17\1\22\2\uffff\1\17\1\22\2\uffff\1\11\1\22\6\uffff\1\22\4\uffff\1"+
-		"\17\1\22\2\uffff\1\11\1\22\4\uffff\1\17\1\22\2\uffff\1\11\1\22\4\uffff"+
-		"\1\22\4\uffff\1\17\1\22\4\uffff\1\17\1\22\2\uffff\1\11\1\22\4\uffff\1"+
-		"\17\1\22\2\uffff\1\11\1\22\4\uffff\1\22\4\uffff\1\17\1\22\4\uffff\1\22"+
-		"\4\uffff\1\17\1\22\4\uffff\1\22\4\uffff\1\17\1\22\4\uffff\1\22\4\uffff"+
-		"\1\17\1\22\6\uffff\1\17\1\22\2\uffff\1\11\1\22\4\uffff\1\17\1\22\2\uffff"+
-		"\1\11\1\22\4\uffff\1\22\4\uffff\1\17\1\22\6\uffff\1\22\4\uffff\1\17\1"+
-		"\22\4\uffff\1\22\4\uffff\1\17\1\22\6\uffff\1\22\4\uffff\1\22\4\uffff\1"+
-		"\17\1\22\4\uffff\1\22\4\uffff\1\17\1\22\6\uffff\1\22\6\uffff\1\22\6\uffff"+
-		"\1\22\6\uffff\1\22\4\uffff\1\22\4\uffff\1\17\1\22\4\uffff\1\22\4\uffff"+
-		"\1\17\1\22\6\uffff\1\22\6\uffff\1\22\6\uffff\1\22\10\uffff\1\22\6\uffff"+
-		"\1\22\16\uffff\1\22\6\uffff\1\22\22\uffff";
-	static final String DFA11_maxS =
-		"\1\12\1\20\1\uffff\1\22\1\16\2\23\1\13\2\23\3\6\1\22\1\4\1\23\2\6\1\12"+
-		"\2\6\4\12\1\22\1\16\2\22\2\uffff\1\22\2\6\1\12\1\22\1\16\2\22\2\uffff"+
-		"\2\12\1\22\2\12\6\22\2\uffff\2\22\4\uffff\1\4\2\uffff\2\12\3\22\2\uffff"+
-		"\2\22\4\uffff\3\22\1\16\2\22\2\uffff\3\22\1\16\2\22\2\uffff\1\22\1\16"+
-		"\2\22\2\uffff\1\22\1\16\2\22\2\uffff\1\22\1\16\2\22\2\uffff\1\22\4\uffff"+
-		"\2\22\4\uffff\4\22\1\16\2\22\2\uffff\1\22\4\uffff\2\22\4\uffff\1\22\1"+
-		"\16\2\22\2\uffff\1\22\1\16\2\22\2\uffff\2\22\2\uffff\2\22\4\uffff\1\22"+
-		"\1\16\2\22\2\uffff\1\22\1\16\2\22\2\uffff\2\22\2\uffff\2\22\4\uffff\2"+
-		"\22\2\uffff\2\22\4\uffff\2\22\2\uffff\2\22\4\uffff\2\22\2\uffff\2\22\6"+
-		"\uffff\1\22\6\uffff\1\22\1\16\2\22\2\uffff\1\22\1\16\2\22\2\uffff\2\22"+
-		"\2\uffff\2\22\6\uffff\1\22\4\uffff\2\22\2\uffff\2\22\4\uffff\2\22\2\uffff"+
-		"\2\22\4\uffff\1\22\4\uffff\2\22\4\uffff\2\22\2\uffff\2\22\4\uffff\2\22"+
-		"\2\uffff\2\22\4\uffff\1\22\4\uffff\2\22\4\uffff\1\22\4\uffff\2\22\4\uffff"+
-		"\1\22\4\uffff\2\22\4\uffff\1\22\4\uffff\2\22\6\uffff\2\22\2\uffff\2\22"+
-		"\4\uffff\2\22\2\uffff\2\22\4\uffff\1\22\4\uffff\2\22\6\uffff\1\22\4\uffff"+
-		"\2\22\4\uffff\1\22\4\uffff\2\22\6\uffff\1\22\4\uffff\1\22\4\uffff\2\22"+
-		"\4\uffff\1\22\4\uffff\2\22\6\uffff\1\22\6\uffff\1\22\6\uffff\1\22\6\uffff"+
-		"\1\22\4\uffff\1\22\4\uffff\2\22\4\uffff\1\22\4\uffff\2\22\6\uffff\1\22"+
-		"\6\uffff\1\22\6\uffff\1\22\10\uffff\1\22\6\uffff\1\22\16\uffff\1\22\6"+
-		"\uffff\1\22\22\uffff";
-	static final String DFA11_acceptS =
-		"\2\uffff\1\2\33\uffff\1\1\u020e\uffff";
-	static final String DFA11_specialS =
-		"\u022d\uffff}>";
-	static final String[] DFA11_transitionS = {
-			"\1\1",
-			"\1\3",
-			"",
-			"\1\4",
-			"\1\7\1\uffff\1\6\7\uffff\1\5",
-			"\1\10\3\uffff\1\11\1\13\7\uffff\1\12",
-			"\1\15\10\uffff\1\14",
-			"\1\16",
-			"\1\22\3\uffff\1\17\1\21\7\uffff\1\20",
-			"\1\25\4\uffff\1\24\7\uffff\1\23",
-			"\1\26",
-			"\1\27",
-			"\1\30",
-			"\1\31\1\32\1\34\5\uffff\1\33\2\uffff\1\36",
-			"\1\37",
-			"\1\42\1\43\1\44\1\46\1\uffff\1\41\3\uffff\1\45\2\uffff\1\36\1\40",
-			"\1\51",
-			"\1\52",
-			"\1\53",
-			"\1\54",
-			"\1\55",
-			"\1\56",
-			"\1\57",
-			"\1\60",
-			"\1\61",
-			"\1\63\5\uffff\1\62\2\uffff\1\36",
-			"\1\66",
-			"\1\67\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\74\6\uffff\1\36",
-			"\1\77",
-			"\1\100",
-			"\1\101",
-			"\1\103\5\uffff\1\102\2\uffff\1\36",
-			"\1\106",
-			"\1\107\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\114",
-			"\1\115",
-			"\1\116\1\117\1\121\5\uffff\1\120\2\uffff\1\36",
-			"\1\124",
-			"\1\125",
-			"\1\126\1\127\1\131\5\uffff\1\130\2\uffff\1\36",
-			"\1\134\1\135\1\137\5\uffff\1\136\2\uffff\1\36",
-			"\1\142\1\143\1\145\5\uffff\1\144\2\uffff\1\36",
-			"\1\150\1\151\1\153\5\uffff\1\152\2\uffff\1\36",
-			"\1\156\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\164\5\uffff\1\163\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\171",
-			"",
-			"",
-			"\1\172",
-			"\1\173",
-			"\1\174\1\175\1\177\5\uffff\1\176\2\uffff\1\36",
-			"\1\u0082\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u0088\5\uffff\1\u0087\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u008d\1\u008e\1\u0090\5\uffff\1\u008f\2\uffff\1\36",
-			"\1\u0093\1\u0094\1\u0096\5\uffff\1\u0095\2\uffff\1\36",
-			"\1\u009a\5\uffff\1\u0099\2\uffff\1\36",
-			"\1\u009d",
-			"\1\u009e\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u00a3\1\u00a4\1\u00a6\5\uffff\1\u00a5\2\uffff\1\36",
-			"\1\u00a9\1\u00aa\1\u00ac\5\uffff\1\u00ab\2\uffff\1\36",
-			"\1\u00b0\5\uffff\1\u00af\2\uffff\1\36",
-			"\1\u00b3",
-			"\1\u00b4\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u00ba\5\uffff\1\u00b9\2\uffff\1\36",
-			"\1\u00bd",
-			"\1\u00be\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u00c4\5\uffff\1\u00c3\2\uffff\1\36",
-			"\1\u00c7",
-			"\1\u00c8\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u00ce\5\uffff\1\u00cd\2\uffff\1\36",
-			"\1\u00d1",
-			"\1\u00d2\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u00d9\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"\1\u00e0\1\u00e1\1\u00e3\5\uffff\1\u00e2\2\uffff\1\36",
-			"\1\u00e6\1\u00e7\1\u00e9\5\uffff\1\u00e8\2\uffff\1\36",
-			"\1\u00ed\5\uffff\1\u00ec\2\uffff\1\36",
-			"\1\u00f0",
-			"\1\u00f1\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u00f8\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u00fe\5\uffff\1\u00fd\2\uffff\1\36",
-			"\1\u0101",
-			"\1\u0102\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u0108\5\uffff\1\u0107\2\uffff\1\36",
-			"\1\u010b",
-			"\1\u010c\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u0111\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u0117\5\uffff\1\u0116\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u011d\5\uffff\1\u011c\2\uffff\1\36",
-			"\1\u0120",
-			"\1\u0121\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u0127\5\uffff\1\u0126\2\uffff\1\36",
-			"\1\u012a",
-			"\1\u012b\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u0130\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u0136\5\uffff\1\u0135\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u013b\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u0141\5\uffff\1\u0140\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u0146\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u014c\5\uffff\1\u014b\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u0151\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u0157\5\uffff\1\u0156\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\u015f\5\uffff\1\u015e\2\uffff\1\36",
-			"\1\u0162",
-			"\1\u0163\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u0169\5\uffff\1\u0168\2\uffff\1\36",
-			"\1\u016c",
-			"\1\u016d\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u0172\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u0178\5\uffff\1\u0177\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u017f\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u0185\5\uffff\1\u0184\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u018a\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u0190\5\uffff\1\u018f\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u0197\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u019c\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u01a2\5\uffff\1\u01a1\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u01a7\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u01ad\5\uffff\1\u01ac\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u01b4\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u01bb\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u01c2\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u01c9\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\u01ce\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u01d4\5\uffff\1\u01d3\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u01d9\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"\1\u01df\5\uffff\1\u01de\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u01e6\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u01ed\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u01f4\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u01fd\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u0204\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u0213\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"\1\u021a\2\uffff\1\36",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\36",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			""
-	};
 
-	static final short[] DFA11_eot = DFA.unpackEncodedString(DFA11_eotS);
-	static final short[] DFA11_eof = DFA.unpackEncodedString(DFA11_eofS);
-	static final char[] DFA11_min = DFA.unpackEncodedStringToUnsignedChars(DFA11_minS);
-	static final char[] DFA11_max = DFA.unpackEncodedStringToUnsignedChars(DFA11_maxS);
-	static final short[] DFA11_accept = DFA.unpackEncodedString(DFA11_acceptS);
-	static final short[] DFA11_special = DFA.unpackEncodedString(DFA11_specialS);
-	static final short[][] DFA11_transition;
-
-	static {
-		int numStates = DFA11_transitionS.length;
-		DFA11_transition = new short[numStates][];
-		for (int i=0; i<numStates; i++) {
-			DFA11_transition[i] = DFA.unpackEncodedString(DFA11_transitionS[i]);
-		}
-	}
-
-	protected class DFA11 extends DFA {
-
-		public DFA11(BaseRecognizer recognizer) {
-			this.recognizer = recognizer;
-			this.decisionNumber = 11;
-			this.eot = DFA11_eot;
-			this.eof = DFA11_eof;
-			this.min = DFA11_min;
-			this.max = DFA11_max;
-			this.accept = DFA11_accept;
-			this.special = DFA11_special;
-			this.transition = DFA11_transition;
-		}
-		@Override
-		public String getDescription() {
-			return "()* loopback of 121:5: ( turn ( NEWLINE | EOF ) )*";
-		}
-	}
-
-	public static final BitSet FOLLOW_TURN_in_preamble233 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_EQUALS_in_preamble238 = new BitSet(new long[]{0x0000000000002000L});
-	public static final BitSet FOLLOW_OPEN_in_preamble242 = new BitSet(new long[]{0x0000000000004000L});
-	public static final BitSet FOLLOW_PIECE_in_preamble249 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_COLUMN_in_preamble253 = new BitSet(new long[]{0x0000000000000400L});
-	public static final BitSet FOLLOW_INT_in_preamble257 = new BitSet(new long[]{0x0000000000020000L});
-	public static final BitSet FOLLOW_SC_in_preamble259 = new BitSet(new long[]{0x0000000000004000L});
-	public static final BitSet FOLLOW_PIECE_in_preamble270 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_COLUMN_in_preamble274 = new BitSet(new long[]{0x0000000000000400L});
-	public static final BitSet FOLLOW_INT_in_preamble278 = new BitSet(new long[]{0x0000000000000020L});
-	public static final BitSet FOLLOW_CLOSE_in_preamble285 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INT_in_turnNum300 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_PIECE_in_moveFrom319 = new BitSet(new long[]{0x0000000000080C42L});
-	public static final BitSet FOLLOW_COLUMN_in_moveFrom327 = new BitSet(new long[]{0x0000000000080C02L});
-	public static final BitSet FOLLOW_INT_in_moveFrom337 = new BitSet(new long[]{0x0000000000080802L});
-	public static final BitSet FOLLOW_TAKE_in_moveFrom348 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MINUS_in_moveFrom354 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_COLUMN_in_moveFrom370 = new BitSet(new long[]{0x0000000000080000L});
-	public static final BitSet FOLLOW_TAKE_in_moveFrom374 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_COLUMN_in_moveTo390 = new BitSet(new long[]{0x0000000000000400L});
-	public static final BitSet FOLLOW_INT_in_moveTo397 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_EP_in_enPassant407 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_PLUS_in_check417 = new BitSet(new long[]{0x0000000000008002L});
-	public static final BitSet FOLLOW_PLUS_in_check424 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_HASH_in_checkmate443 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_EQUALS_in_promotion453 = new BitSet(new long[]{0x0000000000004000L});
-	public static final BitSet FOLLOW_PIECE_in_promotion457 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CASTLE_in_castleRule474 = new BitSet(new long[]{0x0000000000000800L});
-	public static final BitSet FOLLOW_MINUS_in_castleRule480 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_CASTLE_in_castleRule485 = new BitSet(new long[]{0x0000000000000802L});
-	public static final BitSet FOLLOW_MINUS_in_castleRule490 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_CASTLE_in_castleRule492 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_preamble_in_startRule517 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_NEWLINE_in_startRule519 = new BitSet(new long[]{0x0000000000100000L});
-	public static final BitSet FOLLOW_preamble_in_startRule521 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_NEWLINE_in_startRule523 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_blackStartingTurn_in_startRule534 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_set_in_startRule538 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_turn_in_startRule555 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_set_in_startRule557 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_lastTurn_in_startRule573 = new BitSet(new long[]{0x0000000000000000L});
-	public static final BitSet FOLLOW_EOF_in_startRule575 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_turnNum_in_turn593 = new BitSet(new long[]{0x0000000000010000L});
-	public static final BitSet FOLLOW_POINT_in_turn601 = new BitSet(new long[]{0x0000000000040000L});
-	public static final BitSet FOLLOW_TAB_in_turn609 = new BitSet(new long[]{0x0000000000004050L});
-	public static final BitSet FOLLOW_move_in_turn617 = new BitSet(new long[]{0x0000000000040000L});
-	public static final BitSet FOLLOW_TAB_in_turn627 = new BitSet(new long[]{0x0000000000004050L});
-	public static final BitSet FOLLOW_move_in_turn635 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_turnNum_in_lastTurn650 = new BitSet(new long[]{0x0000000000010000L});
-	public static final BitSet FOLLOW_POINT_in_lastTurn659 = new BitSet(new long[]{0x0000000000040000L});
-	public static final BitSet FOLLOW_TAB_in_lastTurn668 = new BitSet(new long[]{0x0000000000004050L});
-	public static final BitSet FOLLOW_move_in_lastTurn677 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_turnNum_in_blackStartingTurn699 = new BitSet(new long[]{0x0000000000010000L});
-	public static final BitSet FOLLOW_POINT_in_blackStartingTurn707 = new BitSet(new long[]{0x0000000000040000L});
-	public static final BitSet FOLLOW_TAB_in_blackStartingTurn715 = new BitSet(new long[]{0x0000000000040000L});
-	public static final BitSet FOLLOW_TAB_in_blackStartingTurn723 = new BitSet(new long[]{0x0000000000004050L});
-	public static final BitSet FOLLOW_move_in_blackStartingTurn731 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_moveFrom_in_move751 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_moveTo_in_move761 = new BitSet(new long[]{0x0000000000008382L});
-	public static final BitSet FOLLOW_enPassant_in_move771 = new BitSet(new long[]{0x0000000000008202L});
-	public static final BitSet FOLLOW_promotion_in_move775 = new BitSet(new long[]{0x0000000000008202L});
-	public static final BitSet FOLLOW_check_in_move787 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_checkmate_in_move791 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_castleRule_in_move804 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_preamble_in_startRule233 = new BitSet(new long[]{0x0000000000001000L});
+	public static final BitSet FOLLOW_NEWLINE_in_startRule235 = new BitSet(new long[]{0x0000000000100000L});
+	public static final BitSet FOLLOW_preamble_in_startRule237 = new BitSet(new long[]{0x0000000000001000L});
+	public static final BitSet FOLLOW_NEWLINE_in_startRule239 = new BitSet(new long[]{0x0000000000000402L});
+	public static final BitSet FOLLOW_turn_in_startRule250 = new BitSet(new long[]{0x0000000000001000L});
+	public static final BitSet FOLLOW_set_in_startRule252 = new BitSet(new long[]{0x0000000000000402L});
+	public static final BitSet FOLLOW_TURN_in_preamble283 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_EQUALS_in_preamble288 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_OPEN_in_preamble292 = new BitSet(new long[]{0x0000000000004000L});
+	public static final BitSet FOLLOW_PIECE_in_preamble299 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_COLUMN_in_preamble303 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_INT_in_preamble307 = new BitSet(new long[]{0x0000000000020000L});
+	public static final BitSet FOLLOW_SC_in_preamble309 = new BitSet(new long[]{0x0000000000004000L});
+	public static final BitSet FOLLOW_PIECE_in_preamble320 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_COLUMN_in_preamble324 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_INT_in_preamble328 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_CLOSE_in_preamble335 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT_in_turnNum350 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_PIECE_in_moveFrom369 = new BitSet(new long[]{0x0000000000080C42L});
+	public static final BitSet FOLLOW_COLUMN_in_moveFrom377 = new BitSet(new long[]{0x0000000000080C02L});
+	public static final BitSet FOLLOW_INT_in_moveFrom387 = new BitSet(new long[]{0x0000000000080802L});
+	public static final BitSet FOLLOW_TAKE_in_moveFrom398 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MINUS_in_moveFrom404 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_COLUMN_in_moveFrom420 = new BitSet(new long[]{0x0000000000080000L});
+	public static final BitSet FOLLOW_TAKE_in_moveFrom424 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_COLUMN_in_moveTo440 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_INT_in_moveTo447 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_EP_in_enPassant457 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_PLUS_in_check467 = new BitSet(new long[]{0x0000000000008002L});
+	public static final BitSet FOLLOW_PLUS_in_check474 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_HASH_in_checkmate493 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_EQUALS_in_promotion503 = new BitSet(new long[]{0x0000000000004000L});
+	public static final BitSet FOLLOW_PIECE_in_promotion507 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CASTLE_in_castleRule524 = new BitSet(new long[]{0x0000000000000800L});
+	public static final BitSet FOLLOW_MINUS_in_castleRule530 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_CASTLE_in_castleRule535 = new BitSet(new long[]{0x0000000000000802L});
+	public static final BitSet FOLLOW_MINUS_in_castleRule540 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_CASTLE_in_castleRule542 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_turnNum_in_turn567 = new BitSet(new long[]{0x0000000000010000L});
+	public static final BitSet FOLLOW_POINT_in_turn575 = new BitSet(new long[]{0x0000000000040000L});
+	public static final BitSet FOLLOW_TAB_in_turn583 = new BitSet(new long[]{0x0000000000044052L});
+	public static final BitSet FOLLOW_move_in_turn592 = new BitSet(new long[]{0x0000000000040002L});
+	public static final BitSet FOLLOW_TAB_in_turn612 = new BitSet(new long[]{0x0000000000004050L});
+	public static final BitSet FOLLOW_move_in_turn620 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_moveFrom_in_move646 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_moveTo_in_move656 = new BitSet(new long[]{0x0000000000008382L});
+	public static final BitSet FOLLOW_enPassant_in_move666 = new BitSet(new long[]{0x0000000000008202L});
+	public static final BitSet FOLLOW_promotion_in_move670 = new BitSet(new long[]{0x0000000000008202L});
+	public static final BitSet FOLLOW_check_in_move682 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_checkmate_in_move686 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_castleRule_in_move699 = new BitSet(new long[]{0x0000000000000002L});
 }

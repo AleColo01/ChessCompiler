@@ -15,7 +15,7 @@ public class Main {
 
         JFrame frame = new JFrame("Select Input File");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
+        frame.setSize(600, 300);
         frame.setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
@@ -41,7 +41,7 @@ public class Main {
 
                     try {
                         ChessGrammarLexerTester lex = new ChessGrammarLexerTester();
-                        ChessGrammarParserTester par = new ChessGrammarParserTester();
+                        ChessGrammarParserTester par = new ChessGrammarParserTester(textArea);
 
                         System.out.println("-- LEXER --");
                         System.out.println("");
@@ -54,7 +54,7 @@ public class Main {
                         if (par.startChessboard) {
                             System.out.println(GREENBACK + "Avvio Scacchiera..." + RESET);
                             Chessboard.mainMethod(filePath);
-                            frame.dispose();
+                            //frame.dispose();
                         }
                     } catch (IOException ex) {
                         ex.printStackTrace();

@@ -2,7 +2,7 @@ grammar chessGrammar;
 
 options {
   language = Java;
-  k = 15;		
+  k = 5;		
 }
 
 @lexer::header{
@@ -57,8 +57,11 @@ CLOSE	: ']';
 TURN : ('white' | 'black');
 SC : ';';
 
-
-//FRAGMENTED RULES
+startRule 
+    : (preamble NEWLINE preamble NEWLINE)? {cc.checkChessboard();}
+    (turn (NEWLINE | EOF) {cc.checkCorrectStartingTurn();})*
+    ;
+    
 preamble
 	:
 	t=TURN {cc.setPrambleStartTurn($t);}
@@ -81,12 +84,12 @@ moveFrom :
 	(c=COLUMN {cc.setColFrom($c);})?
 	(r=INT {cc.setRowFrom($r);})?
 	((t=TAKE | t=MINUS) {cc.setTake($t);})?)  |
-	((c=COLUMN t=TAKE)	{cc.setTake($t);
-	   			 cc.setColFrom($c);})
+	((c=COLUMN t=TAKE)	{cc.setTake($t); 
+					cc.setColFrom($c);})
 ;
 moveTo	: 
 	c=COLUMN {cc.setColTo($c);}
-	r=INT {cc.setRowTo($r);
+	r=INT {cc.setRowTo($r); 
 		cc.setLastToken($r); }
 ;
 
@@ -107,45 +110,17 @@ castleRule:
 	(MINUS CASTLE {i = 2;})?
 	
 	{cc.setCastle(i);};
-
-//COMPLETE RULE to check with Java class
-
-startRule 
-    : (preamble NEWLINE preamble NEWLINE)? {cc.checkChessboard();}
-    (blackStartingTurn flag=(NEWLINE | EOF))? {cc.checkCorrectStartingTurn();
-	    					if($flag != null){
-	    					    	cc.processMove();
-	    					 	cc.nextTurn();
-	    					}		
-						}
-    (turn (NEWLINE | EOF) )*
-    (lastTurn EOF)?;
     
 turn
     : turnNum 
     	POINT 
     	TAB 
-    	move {cc.processMove();
-    		cc.nextTurn();} 
-    	TAB 
-    	move {cc.processMove();
-    		cc.nextTurn();};
-    
-lastTurn
-	: turnNum 
-    		POINT 
-    		TAB 
-    		move {cc.processMove();
-    			cc.nextTurn();}
-    			;
+    	(move {cc.processMove();})?
+    		{cc.nextTurn();}
+    	(TAB 
+    	move {cc.processMove();})?
+    		{cc.nextTurn();};
 
-blackStartingTurn
-    : turnNum 
-    	POINT 
-    	TAB 
-    	TAB 
-    	move {cc.setBlackStarting();};
-    
 move
     : ((moveFrom? 
     		moveTo 

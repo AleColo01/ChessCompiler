@@ -1,7 +1,11 @@
 package testerCompilerPackage;
 
 import java.io.FileReader;
+import java.awt.Color;
+import java.awt.Font;
 import java.io.IOException;
+
+import javax.swing.JTextArea;
 
 import compilerPackage.chessGrammarLexer;
 import compilerPackage.chessGrammarParser;
@@ -11,6 +15,19 @@ import org.antlr.runtime.*;
 
 public class ChessGrammarParserTester {
 	boolean startChessboard = true;
+	JTextArea textArea;
+	
+	public ChessGrammarParserTester(){
+		textArea = null;
+
+	}
+	
+	public ChessGrammarParserTester(JTextArea ta){
+		textArea = ta;
+		Font font = new Font("Arial", Font.BOLD, 12); 
+		textArea.setFont(font); 
+		textArea.setForeground(Color.BLACK); 
+	}
 
 	public void test(String file) throws IOException {
 
@@ -39,11 +56,17 @@ public class ChessGrammarParserTester {
 			parser.startRule();
 		    
 		    semanticHandler sh = parser.getHandler();
-		    
+		    if(textArea != null) {
+		    	textArea.append("Controllo file...\n\n");	    	
+		    }
 		    if (sh.hasWarnings()) {
 		    	System.out.println(YELLOW);
-		    	for (int n = 0; n<sh.getNWarnings(); n++)	    	
+		    	for (int n = 0; n<sh.getNWarnings(); n++)	{
+		    		if(textArea != null) {
+			    		textArea.append((n+1) + " - " + sh.getWarnings().get(n) + "\n");	 
+			    	}
 		    		System.out.println ((n+1) + " - " + sh.getWarnings().get(n));
+		    	}
 		    	System.out.println(RESET);
 		    }
 		    
@@ -52,11 +75,18 @@ public class ChessGrammarParserTester {
 		    else {  
 		    	startChessboard = false;
 		    	System.out.println (RED+ sh.getErrors().get(0) + RESET);	
+		    	if(textArea != null) {
+		    		textArea.append(sh.getErrors().get(0) + "\n");
+		    		textArea.append("\n\nParsing ANTLR abortito\n\n");
+		    	}
 		    	System.out.println (REDBACK+"\n\nParsing ANTLR abortito\n\n"+RESET);
 		    }
 
 
 		} catch (Exception e) {
+			if(textArea != null) {
+				textArea.setForeground(Color.RED); 
+			}
 			startChessboard = false;
 			System.out.println (REDBACK+"\n\nTest ANTLR abortito"+RESET);
 			e.printStackTrace();
