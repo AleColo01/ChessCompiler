@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Unibg/Linguaggi formali e compilatori/Progetto Scacchi/antlr-3.4-complete.jar"/>
+	<classpathentry kind="lib" path="C:/Users/doubl/Desktop/Uni/Linguaggi Formali/antlr-3.4-complete.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

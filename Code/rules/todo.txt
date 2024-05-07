@@ -1,9 +1,4 @@
 #####ERRORI DA SISTEMARE######
-sistemare warning per cavallo, alfiere, regina... move not unique
-anche quando pedino mangia es. bxa4 la b è obbligatoria eh
-
-QUESTO SOPRA MI SEMBRA CHE LO AVESSIMO GIA FATTO MA NON RICORDO DI PRECISO
-
 
 Finire doc tecnica (non so se vanno bene i diagrammi e manca un po la parte di spiegazione della grammatica)
 Fare il jar
