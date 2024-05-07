@@ -2,6 +2,5 @@
 
 Finire doc tecnica (non so se vanno bene i diagrammi e manca un po la parte di spiegazione della grammatica)
 Fare il jar
-Dire quale è la mossa su cui il compilatore torna l'errore
-Sistemare errore del primo turno sbagliato aggiunto l'altra volta (è ancora memorizzata con castle error a caso)
-Viene controllato il caso che dopo lo scacco matto non devono piu esserci  mosse?
+Dire quale è la mossa su cui il compilatore torna l'errore ->Sistemare anche per errori lessicali, 
+																stampati anche loro nel semantichandler

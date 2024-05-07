@@ -23,6 +23,7 @@ public class semanticHandler {
 	public static int STARTING_KING_CHECK_ERROR = 22; //il re di chi non inizia è in scacco 
 	public static int STARTING_TURN_ERROR = 23; //il colore di chi iniza non è corretto 
 	public static int IMPOSSIBLE_MOVE_ERROR = 24; //la mossa è attuabili da più di un pezzo o nessuno OK 
+	public static int LAST_TURN_ERROR = 25; //la partita era già finita al turno precedente
 	
 	public static int FIRST_WARNING = 100;
 	public static int NOTATION_WARNING = 101; //presente notazione superflua OK
@@ -67,11 +68,7 @@ public class semanticHandler {
 		//String color = "bianco";
 		//if (c == 'B') color = "nero";
 		String coors = "[" + tk.getLine() + ", " + (tk.getCharPositionInLine()+1) + "]";
-		//if (tk.getType() == chessGrammarLexer.ERROR) 
 		errors.add("Errore Lessicale in " + coors + ":\t" +msg+"\t"+tk.getText());
-		//errors.add("Errore Lessicale al turno "+ turn + " del giocatore " + color +":\t" +msg+"\t"+tk.getText());
-		//else
-		//	errors.add("Errore Sintattico in " + coors + ":\t" +msg+"\t"+tk.getText());
 	}
 	
 	// gestore gli errori semantici
@@ -118,6 +115,8 @@ public class semanticHandler {
  			msg += "Il colore di chi iniza non è corretto (STARTING_TURN_ERROR)";
  		else if(errCode == IMPOSSIBLE_MOVE_ERROR)
  			msg += "Nessun pezzo può compiere questa mossa (IMPOSSIBLE_MOVE_ERROR)";
+ 		else if(errCode == LAST_TURN_ERROR)
+ 			msg += "La partita era già terminata al turno precedente (LAST_TURN_ERROR)";
 		
  		errors.add(msg);
 	}
