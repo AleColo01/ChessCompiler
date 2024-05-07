@@ -97,8 +97,19 @@ public class Chessboard {
      * NEXT MOVE BUTTON
      */
     private static void createNextMoveButton() {
-        nextMoveButton = new JButton("Next Move:");
-        nextMoveLabel = new JLabel(" ");
+    	nextMoveButton = new JButton("Next Move");
+    	nextMoveButton.setFont(new Font("Calibri", Font.BOLD, 16));
+    	nextMoveButton.setForeground(Color.WHITE);
+    	nextMoveButton.setBackground(new Color(0, 120, 215));
+    	nextMoveButton.setFocusPainted(false);
+    	nextMoveButton.setBorder(BorderFactory.createCompoundBorder(
+    	        BorderFactory.createRaisedBevelBorder(),
+    	        BorderFactory.createEmptyBorder(10, 20, 10, 20))); // Add padding and raised bevel border
+    	nextMoveButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Change cursor on hover
+
+    	nextMoveLabel = new JLabel(" ");
+    	nextMoveLabel.setFont(new Font("Calibri", Font.BOLD, 14));
+    	nextMoveLabel.setForeground(new Color(60, 60, 60)); // Dark gray text color
 
         //INIZIALIZZAZIONE DEL PULSANTE, SCRIVI E SALVA LA MOSSA
         if (nextMoveW == null) {

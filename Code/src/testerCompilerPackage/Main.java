@@ -2,20 +2,20 @@ package testerCompilerPackage;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import chessPackage.Chessboard;
 
 public class Main {
+    final String GREENBACK = "\033[42m";
+    final String RESET = "\033[0m";
 
-    public static void main(String[] args) throws IOException {
-        final String GREENBACK = "\033[42m";
-        final String RESET = "\033[0m";
-
-        JFrame frame = new JFrame("Select Input File");
+    public Main() {
+        JFrame frame = new JFrame("Chess Analyzer");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 300);
+        frame.setSize(600, 400);
         frame.setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
@@ -23,9 +23,14 @@ public class Main {
 
         JButton chooseFileButton = new JButton("Choose File");
         JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
+        textArea.setFont(new Font("Courier New", Font.PLAIN, 12));
         JScrollPane scrollPane = new JScrollPane(textArea);
 
-        panel.add(chooseFileButton, BorderLayout.NORTH);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(chooseFileButton);
+
+        panel.add(buttonPanel, BorderLayout.NORTH);
         panel.add(scrollPane, BorderLayout.CENTER);
 
         frame.add(panel);
@@ -60,6 +65,14 @@ public class Main {
                         ex.printStackTrace();
                     }
                 }
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new Main();
             }
         });
     }

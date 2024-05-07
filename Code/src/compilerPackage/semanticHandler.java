@@ -64,20 +64,27 @@ public class semanticHandler {
 // *********************** gestione degli errori
 	
 	public void handleError(String[] tokenNames, Token tk, RecognitionException e, String hdr, String msg) {
+		//String color = "bianco";
+		//if (c == 'B') color = "nero";
 		String coors = "[" + tk.getLine() + ", " + (tk.getCharPositionInLine()+1) + "]";
 		//if (tk.getType() == chessGrammarLexer.ERROR) 
-			errors.add("Errore Lessicale in " + coors + ":\t" +msg+"\t"+tk.getText());
+		errors.add("Errore Lessicale in " + coors + ":\t" +msg+"\t"+tk.getText());
+		//errors.add("Errore Lessicale al turno "+ turn + " del giocatore " + color +":\t" +msg+"\t"+tk.getText());
 		//else
 		//	errors.add("Errore Sintattico in " + coors + ":\t" +msg+"\t"+tk.getText());
 	}
 	
 	// gestore gli errori semantici
-	void addError (int errCode, Token tk) {
+	void addError (int errCode, Token tk, char c, int turn) {
+		String color = "bianco";
+		if (c == 'B') color = "nero";
+		
 		String msg = "";
 		if(tk!=null) {
 			String str = tk.getText();
 			String coors = "[" + tk.getLine() + ", " + (tk.getCharPositionInLine()+1) + "]";
-			msg = "Errore Semantico in " + coors + ":\t";
+			//msg = "Errore Semantico in " + coors + ":\t";
+			msg = "Errore Semantico al turno "+ turn + " del giocatore " + color +":\t";
 		}
 		else {
 			msg = "Errore Semantico:\t";
@@ -116,10 +123,12 @@ public class semanticHandler {
 	}
 	
 	
-	void addWarning (int warnCode, Token tk) {
+	void addWarning (int warnCode, Token tk, char c, int turn) {
+		String color = "bianco";
+		if (c == 'B') color = "nero";
 		String str = tk.getText();
 		String coors = "[" + tk.getLine() + ", " + (tk.getCharPositionInLine()+1) + "]";
-		String msg = "Warning in " + coors + ":  ";
+		String msg = "Warning al turno "+ turn + " del giocatore " + color +":\t";
 		
 		if (warnCode == NOTATION_WARNING)
 			msg += "La notazione può essere abbreviata ulteriormente";

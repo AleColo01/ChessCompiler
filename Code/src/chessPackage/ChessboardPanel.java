@@ -1,6 +1,7 @@
 package chessPackage;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -55,37 +56,29 @@ public class ChessboardPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        int squareSize = Math.min(getWidth(), getHeight()) / (size + 1); // Aggiunto 1 per il riferimento
+        int squareSize = Math.min(getWidth(), getHeight()) / (size + 1);
 
-        // Disegna il riferimento delle colonne
+        g.setFont(new Font("Arial", Font.BOLD, squareSize / 3));
         for (int col = 0; col < size; col++) {
-            g.setColor(Color.BLACK);
             char columnLetter = (char) ('a' + col);
             String columnString = Character.toString(columnLetter);
-            g.drawString(columnString, (int) ((col + 0.5f) * squareSize), size * squareSize + 20);
+            g.drawString(columnString, (col + 1) * squareSize + squareSize / 3, squareSize - squareSize / 4);
         }
 
-        // Disegna il riferimento delle righe
         for (int row = 0; row < size; row++) {
-            g.setColor(Color.BLACK);
             int rowNumber = size - row;
             String rowString = Integer.toString(rowNumber);
-            g.drawString(rowString, size * squareSize + 10, (int) ((row + 0.5f) * squareSize));
+            g.drawString(rowString, squareSize / 2, (row + 1) * squareSize + squareSize / 2);
         }
 
-        // Disegna la scacchiera
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
-                if ((row + col) % 2 == 0) {
-                    g.setColor(Color.WHITE);
-                } else {
-                    g.setColor(Color.GRAY);
-                }
-                int x = col * squareSize;
-                int y = row * squareSize;
+                Color squareColor = (row + col) % 2 == 0 ? new Color(232, 235, 239) : new Color(125, 135, 150);
+                g.setColor(squareColor);
+                int x = (col + 1) * squareSize;
+                int y = (row + 1) * squareSize;
                 g.fillRect(x, y, squareSize, squareSize);
 
-                // Disegna il pezzo se presente
                 String piece = board[row][col];
                 if (!piece.isEmpty()) {
                     BufferedImage pieceImage = pieceImageMap.get(piece);
@@ -100,6 +93,6 @@ public class ChessboardPanel extends JPanel {
     @Override
     public Dimension getPreferredSize() {
         int squareSize = Math.min(getWidth(), getHeight()) / size;
-        return new Dimension(squareSize * size, squareSize * size);
+        return new Dimension((size + 1) * squareSize, (size + 1) * squareSize);
     }
 }
