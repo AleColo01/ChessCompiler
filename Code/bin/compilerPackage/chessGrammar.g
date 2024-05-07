@@ -56,6 +56,7 @@ OPEN	: '[';
 CLOSE	: ']';
 TURN : ('white' | 'black');
 SC : ';';
+ERROR: .;
 
 startRule 
     : (preamble NEWLINE preamble NEWLINE)? {cc.checkChessboard();}

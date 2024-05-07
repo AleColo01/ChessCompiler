@@ -31,7 +31,6 @@ public class ChessGrammarLexerTester {
 					int col = tk.getCharPositionInLine()+1;
 					int type = tk.getType();
 					String text = tk.getText();
-
 					// attivo questo controllo se voglio scartare i token nascosti
 					if (tk.getChannel() != chessGrammarLexer.HIDDEN)
 						// stampo le informazioni del token corrente

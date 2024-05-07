@@ -73,7 +73,7 @@ public class compilerChecker extends Checker {
 	public void processMove(){
 		if(!error) {
 			if(lastTurn && turn == 'W'){
-				sh.addError(sh.CASTLE_ERROR, lastToken, turn, actualTurn);
+				sh.addError(sh.LAST_TURN_ERROR, lastToken, turn, actualTurn);
 				error = true;
 			}
 			
