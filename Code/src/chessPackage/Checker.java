@@ -1,19 +1,47 @@
 package chessPackage;
 
+import java.util.ArrayList; 
+
 public class Checker {
 	private String lastMove = "";
 	protected boolean kingGivedUp = false;
 	protected boolean enpassant = false;
 	protected boolean notUnique = false;
 	
+	public ArrayList<String> previousMoves1 = new ArrayList<String>();
+	public ArrayList<String> previousMoves2 = new ArrayList<String>();
+	
     public Checker() {}
 
-    public boolean movePiece(ChessboardPanel cp, String move, char turn) {    	
+    public boolean movePiece(ChessboardPanel cp, String move, char turn, int currR, int currP) {    
+    	enpassant = false;
     	/*
     	 * CASTLING: see handleCastling
     	 */
         if (move.equals("O-O") || move.equals("O-O-O")) {
             handleCastling(cp, move, turn);
+            if(move.equals("O-O")) {
+	            if(currR == currP+1 || currR == currP+2){
+	            	if(turn == 'W') {
+	            		previousMoves1.add("Ke1-f1");
+	            		previousMoves2.add("Rh1-e1");
+	            	}
+	            	if(turn == 'B') {
+	            		previousMoves1.add("Ke8-f8");
+	            		previousMoves2.add("Rh8-e8");
+	            	}
+	            }
+	            if(move.equals("O-O-O")) {
+	            	if(turn == 'W') {
+	            		previousMoves1.add("Ke1-d1");
+	            		previousMoves2.add("Ra1-e1");
+	            	}
+	            	if(turn == 'B') {
+	            		previousMoves1.add("Ke8-d8");
+	            		previousMoves2.add("Ra8-e8");
+	            	}
+	            }
+            }
             return true;
         }
 
@@ -130,13 +158,6 @@ public class Checker {
         //if we have all the information calculatemissing info doesn't call canTake -> En passant not controlled
         if(piece=='P') canTake(cp, turn, piece, fromRowIndex, fromColIndex, toRowIndex, toColIndex, false);
         
-        
-        cp.getBoard()[fromRowIndex][fromColIndex] = "";
-        if (promotion != '_') cp.getBoard()[toRowIndex][toColIndex] = promotion + "" + turn;
-        else cp.getBoard()[toRowIndex][toColIndex] = piece + "" + turn;
-        
-        cp.repaint();
-        
     	/*
     	 * SAVE LAST MOVE
     	 */
@@ -145,7 +166,68 @@ public class Checker {
         if (fromRowIndex != -1) rowFrom = (char) ('8' - fromRowIndex);
         if (toRowIndex != -1) rowTo = (char) ('8' - toRowIndex);
         lastMove = piece+""+colFrom+""+rowFrom+"-"+colTo+""+rowTo;
+        if(currR == currP+1 || currR == currP){	
+			previousMoves1.add(lastMove);
+			if(!cp.getBoard()[toRowIndex][toColIndex].equals("")) {
+				previousMoves2.add(cp.getBoard()[toRowIndex][toColIndex].charAt(0)+""+colTo+""+rowTo);
+			}else{
+				//Controllo se è stato fatto un en passant
+				if(enpassant){
+					previousMoves2.add("P"+colTo+""+rowFrom);
+				}else{
+					previousMoves2.add("");
+				}
+			}
+        }
+        
+        
+        cp.getBoard()[fromRowIndex][fromColIndex] = "";
+        if (promotion != '_') cp.getBoard()[toRowIndex][toColIndex] = promotion + "" + turn;
+        else cp.getBoard()[toRowIndex][toColIndex] = piece + "" + turn;
+        cp.repaint();
+        
         return true;
+    }
+    
+    public void showcaseLastMove(ChessboardPanel cp, int index, char turn) {
+    	String move1 = previousMoves1.get(index);
+    	String move2 = previousMoves2.get(index);
+    	
+        int fromColIndex = -1;
+        int fromRowIndex = -1;
+        int toColIndex = -1;
+        int toRowIndex = -1;
+        char piece = '_';
+    	
+    	//GESTORE MOSSA 1, sempre una mossa normale Pcr-cr
+        piece = move1.charAt(0); 
+        fromColIndex = move1.charAt(1) - 'a';
+        fromRowIndex = 7 - (Character.getNumericValue(move1.charAt(2)) - 1);
+        toColIndex = move1.charAt(4) - 'a';
+        toRowIndex = 7 - (Character.getNumericValue(move1.charAt(5)) - 1);
+    	cp.getBoard()[fromRowIndex][fromColIndex] = piece +""+ turn;     	
+    	cp.getBoard()[toRowIndex][toColIndex] = "";
+    	
+    	//GESTORE MOSSA 2
+    	if(!move2.equals("")) {
+    		if(move2.length() == 6) {
+    	        piece = move1.charAt(0); 
+    	        fromColIndex = move1.charAt(1) - 'a';
+    	        fromRowIndex = 7 - (Character.getNumericValue(move1.charAt(2)) - 1);
+    	        toColIndex = move1.charAt(4) - 'a';
+    	        toRowIndex = 7 - (Character.getNumericValue(move1.charAt(5)) - 1);
+    	    	cp.getBoard()[fromRowIndex][fromColIndex] = piece +""+ turn;     	
+    	    	cp.getBoard()[toRowIndex][toColIndex] = "";
+    		}else{
+    	        piece = move1.charAt(0); 
+    	        fromColIndex = move1.charAt(1) - 'a';
+    	        fromRowIndex = 7 - (Character.getNumericValue(move1.charAt(2)) - 1);
+    	    	cp.getBoard()[fromRowIndex][fromColIndex] = piece +""+ turn;    			
+    		}
+    	}
+
+        cp.repaint();
+    	
     }
 
     
