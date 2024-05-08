@@ -33,7 +33,7 @@ public class ChessGrammarParserTester {
 
 	  	String fileIn = file;
 	  	
-	  	//For the color on console
+	  	//colors on console
 	  	 final String RESET = "\033[0m"; 
 	     final String RED = "\033[0;31m";
 	     final String YELLOW = "\033[0;33m"; 
@@ -59,6 +59,7 @@ public class ChessGrammarParserTester {
 		    if(textArea != null) {
 		    	textArea.append("Controllo file...\n\n");	    	
 		    }
+		    //Stampo i warnings
 		    if (sh.hasWarnings()) {
 		    	System.out.println(YELLOW);
 		    	for (int n = 0; n<sh.getNWarnings(); n++)	{
@@ -70,6 +71,7 @@ public class ChessGrammarParserTester {
 		    	System.out.println(RESET);
 		    }
 		    
+		    //Stampo gli errori
 		    if (!sh.hasErrors())
 		    	System.out.println ("Parsing con ANTLR terminato con successo\n\n");
 		    else {  

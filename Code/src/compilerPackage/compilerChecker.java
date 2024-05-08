@@ -477,9 +477,6 @@ public class compilerChecker extends Checker {
 		missingRow = false;
 		turnNumber=0;
 		lastToken = null;
-		//super.notUnique=false;
-		//super.enpassant=false;
-		//super.kingGivedUp=false;
 	}
 	
 	public void setLastToken(Token t) {
