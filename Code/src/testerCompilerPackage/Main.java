@@ -59,7 +59,6 @@ public class Main {
                         if (par.startChessboard) {
                             System.out.println(GREENBACK + "Avvio Scacchiera..." + RESET);
                             Chessboard.mainMethod(filePath);
-                            //frame.dispose();
                         }
                     } catch (IOException ex) {
                         ex.printStackTrace();

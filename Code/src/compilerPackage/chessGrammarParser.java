@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 // $ANTLR 3.5.1 D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g 2024-05-08 15:14:29
+=======
+// $ANTLR 3.5.1 C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g 2024-05-08 15:14:52
+>>>>>>> Stashed changes
 
 package compilerPackage;
 import compilerPackage.*;
@@ -89,7 +93,7 @@ public class chessGrammarParser extends DebugParser {
 	}
 
 	@Override public String[] getTokenNames() { return chessGrammarParser.tokenNames; }
-	@Override public String getGrammarFileName() { return "D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g"; }
+	@Override public String getGrammarFileName() { return "C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g"; }
 
 
 	public compilerChecker cc = new compilerChecker();
@@ -115,7 +119,7 @@ public class chessGrammarParser extends DebugParser {
 
 
 	// $ANTLR start "startRule"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:61:1: startRule : ( preamble NEWLINE preamble NEWLINE )? ( turn ( NEWLINE | EOF ) )* ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:61:1: startRule : ( preamble NEWLINE preamble NEWLINE )? ( turn ( NEWLINE | EOF ) )* ;
 	public final void startRule() throws RecognitionException {
 		try { dbg.enterRule(getGrammarFileName(), "startRule");
 		if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -123,6 +127,7 @@ public class chessGrammarParser extends DebugParser {
 		dbg.location(61, 0);
 
 		try {
+<<<<<<< Updated upstream
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:62:5: ( ( preamble NEWLINE preamble NEWLINE )? ( turn ( NEWLINE | EOF ) )* )
 			dbg.enterAlt(1);
 
@@ -130,6 +135,12 @@ public class chessGrammarParser extends DebugParser {
 			{
 			dbg.location(62,7);
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:62:7: ( preamble NEWLINE preamble NEWLINE )?
+=======
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:62:5: ( ( preamble NEWLINE preamble NEWLINE )? ( turn ( NEWLINE | EOF ) )* )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:62:7: ( preamble NEWLINE preamble NEWLINE )? ( turn ( NEWLINE | EOF ) )*
+			{
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:62:7: ( preamble NEWLINE preamble NEWLINE )?
+>>>>>>> Stashed changes
 			int alt1=2;
 			try { dbg.enterSubRule(1);
 			try { dbg.enterDecision(1, decisionCanBacktrack[1]);
@@ -142,9 +153,13 @@ public class chessGrammarParser extends DebugParser {
 
 			switch (alt1) {
 				case 1 :
+<<<<<<< Updated upstream
 					dbg.enterAlt(1);
 
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:62:8: preamble NEWLINE preamble NEWLINE
+=======
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:62:8: preamble NEWLINE preamble NEWLINE
+>>>>>>> Stashed changes
 					{
 					dbg.location(62,8);
 					pushFollow(FOLLOW_preamble_in_startRule239);
@@ -161,12 +176,18 @@ public class chessGrammarParser extends DebugParser {
 					break;
 
 			}
+<<<<<<< Updated upstream
 			} finally {dbg.exitSubRule(1);}
 			dbg.location(62,44);
 			cc.checkChessboard();dbg.location(63,5);
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:63:5: ( turn ( NEWLINE | EOF ) )*
 			try { dbg.enterSubRule(2);
 
+=======
+
+			cc.checkChessboard();
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:63:5: ( turn ( NEWLINE | EOF ) )*
+>>>>>>> Stashed changes
 			loop2:
 			while (true) {
 				int alt2=2;
@@ -181,9 +202,13 @@ public class chessGrammarParser extends DebugParser {
 
 				switch (alt2) {
 				case 1 :
+<<<<<<< Updated upstream
 					dbg.enterAlt(1);
 
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:63:6: turn ( NEWLINE | EOF )
+=======
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:63:6: turn ( NEWLINE | EOF )
+>>>>>>> Stashed changes
 					{
 					dbg.location(63,6);
 					pushFollow(FOLLOW_turn_in_startRule256);
@@ -234,7 +259,7 @@ public class chessGrammarParser extends DebugParser {
 
 
 	// $ANTLR start "preamble"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:66:1: preamble : t= TURN EQUALS OPEN (p= PIECE c= COLUMN r= INT SC )* (p1= PIECE c1= COLUMN r1= INT ) CLOSE ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:66:1: preamble : t= TURN EQUALS OPEN (p= PIECE c= COLUMN r= INT SC )* (p1= PIECE c1= COLUMN r1= INT ) CLOSE ;
 	public final void preamble() throws RecognitionException {
 		Token t=null;
 		Token p=null;
@@ -250,6 +275,7 @@ public class chessGrammarParser extends DebugParser {
 		dbg.location(66, 0);
 
 		try {
+<<<<<<< Updated upstream
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:67:2: (t= TURN EQUALS OPEN (p= PIECE c= COLUMN r= INT SC )* (p1= PIECE c1= COLUMN r1= INT ) CLOSE )
 			dbg.enterAlt(1);
 
@@ -263,6 +289,16 @@ public class chessGrammarParser extends DebugParser {
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:71:2: (p= PIECE c= COLUMN r= INT SC )*
 			try { dbg.enterSubRule(3);
 
+=======
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:67:2: (t= TURN EQUALS OPEN (p= PIECE c= COLUMN r= INT SC )* (p1= PIECE c1= COLUMN r1= INT ) CLOSE )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:68:2: t= TURN EQUALS OPEN (p= PIECE c= COLUMN r= INT SC )* (p1= PIECE c1= COLUMN r1= INT ) CLOSE
+			{
+			t=(Token)match(input,TURN,FOLLOW_TURN_in_preamble289); 
+			cc.setPrambleStartTurn(t);
+			match(input,EQUALS,FOLLOW_EQUALS_in_preamble294); 
+			match(input,OPEN,FOLLOW_OPEN_in_preamble298); 
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:71:2: (p= PIECE c= COLUMN r= INT SC )*
+>>>>>>> Stashed changes
 			loop3:
 			while (true) {
 				int alt3=2;
@@ -289,9 +325,13 @@ public class chessGrammarParser extends DebugParser {
 
 				switch (alt3) {
 				case 1 :
+<<<<<<< Updated upstream
 					dbg.enterAlt(1);
 
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:71:3: p= PIECE c= COLUMN r= INT SC
+=======
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:71:3: p= PIECE c= COLUMN r= INT SC
+>>>>>>> Stashed changes
 					{
 					dbg.location(71,4);
 					p=(Token)match(input,PIECE,FOLLOW_PIECE_in_preamble305); dbg.location(71,12);
@@ -306,12 +346,18 @@ public class chessGrammarParser extends DebugParser {
 					break loop3;
 				}
 			}
+<<<<<<< Updated upstream
 			} finally {dbg.exitSubRule(3);}
 			dbg.location(72,2);
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:72:2: (p1= PIECE c1= COLUMN r1= INT )
 			dbg.enterAlt(1);
 
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:72:3: p1= PIECE c1= COLUMN r1= INT
+=======
+
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:72:2: (p1= PIECE c1= COLUMN r1= INT )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:72:3: p1= PIECE c1= COLUMN r1= INT
+>>>>>>> Stashed changes
 			{
 			dbg.location(72,5);
 			p1=(Token)match(input,PIECE,FOLLOW_PIECE_in_preamble326); dbg.location(72,14);
@@ -346,7 +392,7 @@ public class chessGrammarParser extends DebugParser {
 
 
 	// $ANTLR start "turnNum"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:76:1: turnNum : v= INT ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:76:1: turnNum : v= INT ;
 	public final void turnNum() throws RecognitionException {
 		Token v=null;
 
@@ -356,10 +402,15 @@ public class chessGrammarParser extends DebugParser {
 		dbg.location(76, 0);
 
 		try {
+<<<<<<< Updated upstream
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:76:9: (v= INT )
 			dbg.enterAlt(1);
 
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:77:2: v= INT
+=======
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:76:9: (v= INT )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:77:2: v= INT
+>>>>>>> Stashed changes
 			{
 			dbg.location(77,3);
 			v=(Token)match(input,INT,FOLLOW_INT_in_turnNum356); dbg.location(77,8);
@@ -392,7 +443,7 @@ public class chessGrammarParser extends DebugParser {
 
 
 	// $ANTLR start "moveFrom"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:83:1: moveFrom : ( (p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )? ) | ( (c= COLUMN t= TAKE ) ) );
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:83:1: moveFrom : ( (p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )? ) | ( (c= COLUMN t= TAKE ) ) );
 	public final void moveFrom() throws RecognitionException {
 		Token p=null;
 		Token c=null;
@@ -405,7 +456,7 @@ public class chessGrammarParser extends DebugParser {
 		dbg.location(83, 0);
 
 		try {
-			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:83:10: ( (p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )? ) | ( (c= COLUMN t= TAKE ) ) )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:83:10: ( (p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )? ) | ( (c= COLUMN t= TAKE ) ) )
 			int alt8=2;
 			try { dbg.enterDecision(8, decisionCanBacktrack[8]);
 
@@ -428,6 +479,7 @@ public class chessGrammarParser extends DebugParser {
 
 			switch (alt8) {
 				case 1 :
+<<<<<<< Updated upstream
 					dbg.enterAlt(1);
 
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:84:2: (p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )? )
@@ -442,6 +494,16 @@ public class chessGrammarParser extends DebugParser {
 					p=(Token)match(input,PIECE,FOLLOW_PIECE_in_moveFrom375); dbg.location(84,11);
 					cc.setPiece(p);dbg.location(85,2);
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:85:2: (c= COLUMN )?
+=======
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:84:2: (p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )? )
+					{
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:84:2: (p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )? )
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:84:3: p= PIECE (c= COLUMN )? (r= INT )? ( (t= TAKE |t= MINUS ) )?
+					{
+					p=(Token)match(input,PIECE,FOLLOW_PIECE_in_moveFrom375); 
+					cc.setPiece(p);
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:85:2: (c= COLUMN )?
+>>>>>>> Stashed changes
 					int alt4=2;
 					try { dbg.enterSubRule(4);
 					try { dbg.enterDecision(4, decisionCanBacktrack[4]);
@@ -463,9 +525,13 @@ public class chessGrammarParser extends DebugParser {
 
 					switch (alt4) {
 						case 1 :
+<<<<<<< Updated upstream
 							dbg.enterAlt(1);
 
 							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:85:3: c= COLUMN
+=======
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:85:3: c= COLUMN
+>>>>>>> Stashed changes
 							{
 							dbg.location(85,4);
 							c=(Token)match(input,COLUMN,FOLLOW_COLUMN_in_moveFrom383); dbg.location(85,12);
@@ -474,9 +540,14 @@ public class chessGrammarParser extends DebugParser {
 							break;
 
 					}
+<<<<<<< Updated upstream
 					} finally {dbg.exitSubRule(4);}
 					dbg.location(86,2);
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:86:2: (r= INT )?
+=======
+
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:86:2: (r= INT )?
+>>>>>>> Stashed changes
 					int alt5=2;
 					try { dbg.enterSubRule(5);
 					try { dbg.enterDecision(5, decisionCanBacktrack[5]);
@@ -489,9 +560,13 @@ public class chessGrammarParser extends DebugParser {
 
 					switch (alt5) {
 						case 1 :
+<<<<<<< Updated upstream
 							dbg.enterAlt(1);
 
 							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:86:3: r= INT
+=======
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:86:3: r= INT
+>>>>>>> Stashed changes
 							{
 							dbg.location(86,4);
 							r=(Token)match(input,INT,FOLLOW_INT_in_moveFrom393); dbg.location(86,9);
@@ -500,9 +575,14 @@ public class chessGrammarParser extends DebugParser {
 							break;
 
 					}
+<<<<<<< Updated upstream
 					} finally {dbg.exitSubRule(5);}
 					dbg.location(87,2);
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:87:2: ( (t= TAKE |t= MINUS ) )?
+=======
+
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:87:2: ( (t= TAKE |t= MINUS ) )?
+>>>>>>> Stashed changes
 					int alt7=2;
 					try { dbg.enterSubRule(7);
 					try { dbg.enterDecision(7, decisionCanBacktrack[7]);
@@ -515,12 +595,18 @@ public class chessGrammarParser extends DebugParser {
 
 					switch (alt7) {
 						case 1 :
+<<<<<<< Updated upstream
 							dbg.enterAlt(1);
 
 							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:87:3: (t= TAKE |t= MINUS )
 							{
 							dbg.location(87,3);
 							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:87:3: (t= TAKE |t= MINUS )
+=======
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:87:3: (t= TAKE |t= MINUS )
+							{
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:87:3: (t= TAKE |t= MINUS )
+>>>>>>> Stashed changes
 							int alt6=2;
 							try { dbg.enterSubRule(6);
 							try { dbg.enterDecision(6, decisionCanBacktrack[6]);
@@ -544,18 +630,26 @@ public class chessGrammarParser extends DebugParser {
 
 							switch (alt6) {
 								case 1 :
+<<<<<<< Updated upstream
 									dbg.enterAlt(1);
 
 									// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:87:4: t= TAKE
+=======
+									// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:87:4: t= TAKE
+>>>>>>> Stashed changes
 									{
 									dbg.location(87,5);
 									t=(Token)match(input,TAKE,FOLLOW_TAKE_in_moveFrom404); 
 									}
 									break;
 								case 2 :
+<<<<<<< Updated upstream
 									dbg.enterAlt(2);
 
 									// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:87:13: t= MINUS
+=======
+									// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:87:13: t= MINUS
+>>>>>>> Stashed changes
 									{
 									dbg.location(87,14);
 									t=(Token)match(input,MINUS,FOLLOW_MINUS_in_moveFrom410); 
@@ -577,6 +671,7 @@ public class chessGrammarParser extends DebugParser {
 					}
 					break;
 				case 2 :
+<<<<<<< Updated upstream
 					dbg.enterAlt(2);
 
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:88:2: ( (c= COLUMN t= TAKE ) )
@@ -592,6 +687,15 @@ public class chessGrammarParser extends DebugParser {
 					dbg.enterAlt(1);
 
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:88:4: c= COLUMN t= TAKE
+=======
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:88:2: ( (c= COLUMN t= TAKE ) )
+					{
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:88:2: ( (c= COLUMN t= TAKE ) )
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:88:3: (c= COLUMN t= TAKE )
+					{
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:88:3: (c= COLUMN t= TAKE )
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:88:4: c= COLUMN t= TAKE
+>>>>>>> Stashed changes
 					{
 					dbg.location(88,5);
 					c=(Token)match(input,COLUMN,FOLLOW_COLUMN_in_moveFrom426); dbg.location(88,14);
@@ -629,7 +733,7 @@ public class chessGrammarParser extends DebugParser {
 
 
 	// $ANTLR start "moveTo"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:91:1: moveTo : c= COLUMN r= INT ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:91:1: moveTo : c= COLUMN r= INT ;
 	public final void moveTo() throws RecognitionException {
 		Token c=null;
 		Token r=null;
@@ -640,10 +744,15 @@ public class chessGrammarParser extends DebugParser {
 		dbg.location(91, 0);
 
 		try {
+<<<<<<< Updated upstream
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:91:8: (c= COLUMN r= INT )
 			dbg.enterAlt(1);
 
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:92:2: c= COLUMN r= INT
+=======
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:91:8: (c= COLUMN r= INT )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:92:2: c= COLUMN r= INT
+>>>>>>> Stashed changes
 			{
 			dbg.location(92,3);
 			c=(Token)match(input,COLUMN,FOLLOW_COLUMN_in_moveTo446); dbg.location(92,11);
@@ -676,7 +785,7 @@ public class chessGrammarParser extends DebugParser {
 
 
 	// $ANTLR start "enPassant"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:97:1: enPassant : EP ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:97:1: enPassant : EP ;
 	public final void enPassant() throws RecognitionException {
 		try { dbg.enterRule(getGrammarFileName(), "enPassant");
 		if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -684,10 +793,15 @@ public class chessGrammarParser extends DebugParser {
 		dbg.location(97, 0);
 
 		try {
+<<<<<<< Updated upstream
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:97:10: ( EP )
 			dbg.enterAlt(1);
 
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:97:12: EP
+=======
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:97:10: ( EP )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:97:12: EP
+>>>>>>> Stashed changes
 			{
 			dbg.location(97,12);
 			match(input,EP,FOLLOW_EP_in_enPassant463); dbg.location(97,15);
@@ -717,7 +831,7 @@ public class chessGrammarParser extends DebugParser {
 
 
 	// $ANTLR start "check"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:99:1: check : PLUS ( PLUS )? ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:99:1: check : PLUS ( PLUS )? ;
 	public final void check() throws RecognitionException {
 		try { dbg.enterRule(getGrammarFileName(), "check");
 		if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -725,6 +839,7 @@ public class chessGrammarParser extends DebugParser {
 		dbg.location(99, 0);
 
 		try {
+<<<<<<< Updated upstream
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:99:7: ( PLUS ( PLUS )? )
 			dbg.enterAlt(1);
 
@@ -734,6 +849,14 @@ public class chessGrammarParser extends DebugParser {
 			match(input,PLUS,FOLLOW_PLUS_in_check473); dbg.location(99,14);
 			cc.setChecks();dbg.location(100,3);
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:100:3: ( PLUS )?
+=======
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:99:7: ( PLUS ( PLUS )? )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:99:9: PLUS ( PLUS )?
+			{
+			match(input,PLUS,FOLLOW_PLUS_in_check473); 
+			cc.setChecks();
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:100:3: ( PLUS )?
+>>>>>>> Stashed changes
 			int alt9=2;
 			try { dbg.enterSubRule(9);
 			try { dbg.enterDecision(9, decisionCanBacktrack[9]);
@@ -746,9 +869,13 @@ public class chessGrammarParser extends DebugParser {
 
 			switch (alt9) {
 				case 1 :
+<<<<<<< Updated upstream
 					dbg.enterAlt(1);
 
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:100:4: PLUS
+=======
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:100:4: PLUS
+>>>>>>> Stashed changes
 					{
 					dbg.location(100,4);
 					match(input,PLUS,FOLLOW_PLUS_in_check480); dbg.location(100,9);
@@ -784,7 +911,7 @@ public class chessGrammarParser extends DebugParser {
 
 
 	// $ANTLR start "checkmate"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:103:1: checkmate : HASH ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:103:1: checkmate : HASH ;
 	public final void checkmate() throws RecognitionException {
 		try { dbg.enterRule(getGrammarFileName(), "checkmate");
 		if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -792,10 +919,15 @@ public class chessGrammarParser extends DebugParser {
 		dbg.location(103, 0);
 
 		try {
+<<<<<<< Updated upstream
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:103:11: ( HASH )
 			dbg.enterAlt(1);
 
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:103:13: HASH
+=======
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:103:11: ( HASH )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:103:13: HASH
+>>>>>>> Stashed changes
 			{
 			dbg.location(103,13);
 			match(input,HASH,FOLLOW_HASH_in_checkmate499); dbg.location(103,18);
@@ -825,7 +957,7 @@ public class chessGrammarParser extends DebugParser {
 
 
 	// $ANTLR start "promotion"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:105:1: promotion : EQUALS p= PIECE ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:105:1: promotion : EQUALS p= PIECE ;
 	public final void promotion() throws RecognitionException {
 		Token p=null;
 
@@ -835,10 +967,15 @@ public class chessGrammarParser extends DebugParser {
 		dbg.location(105, 0);
 
 		try {
+<<<<<<< Updated upstream
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:105:11: ( EQUALS p= PIECE )
 			dbg.enterAlt(1);
 
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:105:13: EQUALS p= PIECE
+=======
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:105:11: ( EQUALS p= PIECE )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:105:13: EQUALS p= PIECE
+>>>>>>> Stashed changes
 			{
 			dbg.location(105,13);
 			match(input,EQUALS,FOLLOW_EQUALS_in_promotion509); dbg.location(105,21);
@@ -869,7 +1006,7 @@ public class chessGrammarParser extends DebugParser {
 
 
 	// $ANTLR start "castleRule"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:107:1: castleRule : t= CASTLE MINUS CASTLE ( MINUS CASTLE )? ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:107:1: castleRule : t= CASTLE MINUS CASTLE ( MINUS CASTLE )? ;
 	public final void castleRule() throws RecognitionException {
 		Token t=null;
 
@@ -879,6 +1016,7 @@ public class chessGrammarParser extends DebugParser {
 		dbg.location(107, 0);
 
 		try {
+<<<<<<< Updated upstream
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:107:11: (t= CASTLE MINUS CASTLE ( MINUS CASTLE )? )
 			dbg.enterAlt(1);
 
@@ -891,6 +1029,17 @@ public class chessGrammarParser extends DebugParser {
 			int i=1;dbg.location(110,2);
 			match(input,CASTLE,FOLLOW_CASTLE_in_castleRule541); dbg.location(111,2);
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:111:2: ( MINUS CASTLE )?
+=======
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:107:11: (t= CASTLE MINUS CASTLE ( MINUS CASTLE )? )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:108:2: t= CASTLE MINUS CASTLE ( MINUS CASTLE )?
+			{
+			t=(Token)match(input,CASTLE,FOLLOW_CASTLE_in_castleRule530); 
+			cc.setLastToken(t);
+			match(input,MINUS,FOLLOW_MINUS_in_castleRule536); 
+			int i=1;
+			match(input,CASTLE,FOLLOW_CASTLE_in_castleRule541); 
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:111:2: ( MINUS CASTLE )?
+>>>>>>> Stashed changes
 			int alt10=2;
 			try { dbg.enterSubRule(10);
 			try { dbg.enterDecision(10, decisionCanBacktrack[10]);
@@ -903,9 +1052,13 @@ public class chessGrammarParser extends DebugParser {
 
 			switch (alt10) {
 				case 1 :
+<<<<<<< Updated upstream
 					dbg.enterAlt(1);
 
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:111:3: MINUS CASTLE
+=======
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:111:3: MINUS CASTLE
+>>>>>>> Stashed changes
 					{
 					dbg.location(111,3);
 					match(input,MINUS,FOLLOW_MINUS_in_castleRule546); dbg.location(111,9);
@@ -943,7 +1096,7 @@ public class chessGrammarParser extends DebugParser {
 
 
 	// $ANTLR start "turn"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:115:1: turn : turnNum POINT TAB ( move )? ( TAB move )? ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:115:1: turn : turnNum POINT TAB ( move )? ( TAB move )? ;
 	public final void turn() throws RecognitionException {
 		try { dbg.enterRule(getGrammarFileName(), "turn");
 		if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -951,19 +1104,31 @@ public class chessGrammarParser extends DebugParser {
 		dbg.location(115, 0);
 
 		try {
+<<<<<<< Updated upstream
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:116:5: ( turnNum POINT TAB ( move )? ( TAB move )? )
 			dbg.enterAlt(1);
 
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:116:7: turnNum POINT TAB ( move )? ( TAB move )?
+=======
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:116:5: ( turnNum POINT TAB ( move )? ( TAB move )? )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:116:7: turnNum POINT TAB ( move )? ( TAB move )?
+>>>>>>> Stashed changes
 			{
 			dbg.location(116,7);
 			pushFollow(FOLLOW_turnNum_in_turn573);
 			turnNum();
 			state._fsp--;
+<<<<<<< Updated upstream
 			dbg.location(117,6);
 			match(input,POINT,FOLLOW_POINT_in_turn581); dbg.location(118,6);
 			match(input,TAB,FOLLOW_TAB_in_turn589); dbg.location(119,6);
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:119:6: ( move )?
+=======
+
+			match(input,POINT,FOLLOW_POINT_in_turn581); 
+			match(input,TAB,FOLLOW_TAB_in_turn589); 
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:119:6: ( move )?
+>>>>>>> Stashed changes
 			int alt11=2;
 			try { dbg.enterSubRule(11);
 			try { dbg.enterDecision(11, decisionCanBacktrack[11]);
@@ -976,9 +1141,13 @@ public class chessGrammarParser extends DebugParser {
 
 			switch (alt11) {
 				case 1 :
+<<<<<<< Updated upstream
 					dbg.enterAlt(1);
 
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:119:7: move
+=======
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:119:7: move
+>>>>>>> Stashed changes
 					{
 					dbg.location(119,7);
 					pushFollow(FOLLOW_move_in_turn598);
@@ -990,10 +1159,16 @@ public class chessGrammarParser extends DebugParser {
 					break;
 
 			}
+<<<<<<< Updated upstream
 			} finally {dbg.exitSubRule(11);}
 			dbg.location(120,7);
 			cc.nextTurn();dbg.location(121,6);
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:121:6: ( TAB move )?
+=======
+
+			cc.nextTurn();
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:121:6: ( TAB move )?
+>>>>>>> Stashed changes
 			int alt12=2;
 			try { dbg.enterSubRule(12);
 			try { dbg.enterDecision(12, decisionCanBacktrack[12]);
@@ -1006,9 +1181,13 @@ public class chessGrammarParser extends DebugParser {
 
 			switch (alt12) {
 				case 1 :
+<<<<<<< Updated upstream
 					dbg.enterAlt(1);
 
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:121:7: TAB move
+=======
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:121:7: TAB move
+>>>>>>> Stashed changes
 					{
 					dbg.location(121,7);
 					match(input,TAB,FOLLOW_TAB_in_turn618); dbg.location(122,6);
@@ -1049,7 +1228,7 @@ public class chessGrammarParser extends DebugParser {
 
 
 	// $ANTLR start "move"
-	// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:125:1: move : ( ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? ) | castleRule ) ;
+	// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:125:1: move : ( ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? ) | castleRule ) ;
 	public final void move() throws RecognitionException {
 		try { dbg.enterRule(getGrammarFileName(), "move");
 		if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -1057,6 +1236,7 @@ public class chessGrammarParser extends DebugParser {
 		dbg.location(125, 0);
 
 		try {
+<<<<<<< Updated upstream
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:126:5: ( ( ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? ) | castleRule ) )
 			dbg.enterAlt(1);
 
@@ -1064,6 +1244,12 @@ public class chessGrammarParser extends DebugParser {
 			{
 			dbg.location(126,7);
 			// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:126:7: ( ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? ) | castleRule )
+=======
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:126:5: ( ( ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? ) | castleRule ) )
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:126:7: ( ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? ) | castleRule )
+			{
+			// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:126:7: ( ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? ) | castleRule )
+>>>>>>> Stashed changes
 			int alt16=2;
 			try { dbg.enterSubRule(16);
 			try { dbg.enterDecision(16, decisionCanBacktrack[16]);
@@ -1087,6 +1273,7 @@ public class chessGrammarParser extends DebugParser {
 
 			switch (alt16) {
 				case 1 :
+<<<<<<< Updated upstream
 					dbg.enterAlt(1);
 
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:126:8: ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? )
@@ -1099,6 +1286,14 @@ public class chessGrammarParser extends DebugParser {
 					{
 					dbg.location(126,9);
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:126:9: ( moveFrom )?
+=======
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:126:8: ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? )
+					{
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:126:8: ( ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )? )
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:126:9: ( moveFrom )? moveTo ( enPassant | promotion )? ( check | checkmate )?
+					{
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:126:9: ( moveFrom )?
+>>>>>>> Stashed changes
 					int alt13=2;
 					try { dbg.enterSubRule(13);
 					try { dbg.enterDecision(13, decisionCanBacktrack[13]);
@@ -1117,9 +1312,13 @@ public class chessGrammarParser extends DebugParser {
 
 					switch (alt13) {
 						case 1 :
+<<<<<<< Updated upstream
 							dbg.enterAlt(1);
 
 							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:126:9: moveFrom
+=======
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:126:9: moveFrom
+>>>>>>> Stashed changes
 							{
 							dbg.location(126,9);
 							pushFollow(FOLLOW_moveFrom_in_move652);
@@ -1135,8 +1334,13 @@ public class chessGrammarParser extends DebugParser {
 					pushFollow(FOLLOW_moveTo_in_move662);
 					moveTo();
 					state._fsp--;
+<<<<<<< Updated upstream
 					dbg.location(128,7);
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:128:7: ( enPassant | promotion )?
+=======
+
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:128:7: ( enPassant | promotion )?
+>>>>>>> Stashed changes
 					int alt14=3;
 					try { dbg.enterSubRule(14);
 					try { dbg.enterDecision(14, decisionCanBacktrack[14]);
@@ -1152,9 +1356,13 @@ public class chessGrammarParser extends DebugParser {
 
 					switch (alt14) {
 						case 1 :
+<<<<<<< Updated upstream
 							dbg.enterAlt(1);
 
 							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:128:8: enPassant
+=======
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:128:8: enPassant
+>>>>>>> Stashed changes
 							{
 							dbg.location(128,8);
 							pushFollow(FOLLOW_enPassant_in_move672);
@@ -1164,9 +1372,13 @@ public class chessGrammarParser extends DebugParser {
 							}
 							break;
 						case 2 :
+<<<<<<< Updated upstream
 							dbg.enterAlt(2);
 
 							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:128:20: promotion
+=======
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:128:20: promotion
+>>>>>>> Stashed changes
 							{
 							dbg.location(128,20);
 							pushFollow(FOLLOW_promotion_in_move676);
@@ -1177,9 +1389,14 @@ public class chessGrammarParser extends DebugParser {
 							break;
 
 					}
+<<<<<<< Updated upstream
 					} finally {dbg.exitSubRule(14);}
 					dbg.location(129,7);
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:129:7: ( check | checkmate )?
+=======
+
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:129:7: ( check | checkmate )?
+>>>>>>> Stashed changes
 					int alt15=3;
 					try { dbg.enterSubRule(15);
 					try { dbg.enterDecision(15, decisionCanBacktrack[15]);
@@ -1195,9 +1412,13 @@ public class chessGrammarParser extends DebugParser {
 
 					switch (alt15) {
 						case 1 :
+<<<<<<< Updated upstream
 							dbg.enterAlt(1);
 
 							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:129:8: check
+=======
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:129:8: check
+>>>>>>> Stashed changes
 							{
 							dbg.location(129,8);
 							pushFollow(FOLLOW_check_in_move688);
@@ -1207,9 +1428,13 @@ public class chessGrammarParser extends DebugParser {
 							}
 							break;
 						case 2 :
+<<<<<<< Updated upstream
 							dbg.enterAlt(2);
 
 							// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:129:16: checkmate
+=======
+							// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:129:16: checkmate
+>>>>>>> Stashed changes
 							{
 							dbg.location(129,16);
 							pushFollow(FOLLOW_checkmate_in_move692);
@@ -1227,9 +1452,13 @@ public class chessGrammarParser extends DebugParser {
 					}
 					break;
 				case 2 :
+<<<<<<< Updated upstream
 					dbg.enterAlt(2);
 
 					// D:\\Unibg\\Linguaggi formali e compilatori\\Progetto Scacchi\\ChessCompiler\\Code\\src\\compilerPackage\\chessGrammar.g:130:8: castleRule
+=======
+					// C:\\Users\\doubl\\Desktop\\Uni\\Linguaggi Formali\\Progetto\\Chess\\Code\\src\\compilerPackage\\chessGrammar.g:130:8: castleRule
+>>>>>>> Stashed changes
 					{
 					dbg.location(130,8);
 					pushFollow(FOLLOW_castleRule_in_move705);

@@ -4,12 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-
+/*
+ * CLASSE CHE GESTISCE LA SCACCHIERA VIRTUALE E 
+ * L'AVANZAMENTO MANUALE DELLA PARTITA
+ * 
+ */
 public class Chessboard {
     private static ChessboardPanel chessboardPanel;
     private static BufferedReader moveReader;
     private static JButton nextMoveButton;
-    private static JLabel nextMoveLabel; // Added label to display next move
+    private static JLabel nextMoveLabel; 
     private static JFrame frame;
     private static char turn = 'W';
     private static String turnNumber = "1";
@@ -21,28 +25,30 @@ public class Chessboard {
     private static boolean preamble = false;
 
     /*
-     * MAIN
+     * METODO PRINCIPALE
      */
     public static void mainMethod(String inputFile) {
     	setEmptyChessboard();
         try {
+        	//legge la prima mossa del file
             moveReader = new BufferedReader(new FileReader(inputFile));
             
-            //HERE ADD PREAMBLE CHESSBOARD
             try {
-            	String firstLine = moveReader.readLine(); //skip two lines
+            	String firstLine = moveReader.readLine();
             	if(firstLine.charAt(0) == '1'){
             			preamble = false;
             	}
             	else if(firstLine!=null) {
             		preamble = true; 
             		
+            		//GESTIONE DEL PREAMBOLO
                 	for(int i = 0; i<2; i++) {
                         String PreambleTurn = firstLine.substring(0, 5);
                         if(i==0) {
                         	turn = PreambleTurn.toUpperCase().charAt(0);
                         }
                         firstLine = firstLine.substring(7,firstLine.length()-1);
+                        //legge le informazioni del preambolo e le carica nella scacchiera
                         String[] infos = firstLine.split(";");
                         for (String info : infos) {
                         	setUpChessboard(info,PreambleTurn);
@@ -52,11 +58,13 @@ public class Chessboard {
             	}
             	
             	if(firstLine!=null) {
-                String[] parts = firstLine.split("\t");
-                turnNumber = parts[0];
-                nextMoveW = parts[1];
-                if(parts.length==3)
-                	nextMoveB = parts[2];
+            		//ogni riga è divisa in numero del turno, mossa del bianco ed eventuale mossa del nero
+            		//qui viene precaricata solo la prima mossa
+	                String[] parts = firstLine.split("\t");
+	                turnNumber = parts[0];
+	                nextMoveW = parts[1];
+	                if(parts.length==3)
+	                	nextMoveB = parts[2];
             	}
             } catch (IOException ex) {
                 System.err.println("Error reading move: " + ex.getMessage());
@@ -68,6 +76,7 @@ public class Chessboard {
             System.exit(1);
         }
 
+        //carica l'interfaccia dopo che il resto è stato caricato correttamente
         SwingUtilities.invokeLater(() -> {
             chessboardPanel = createAndShowGUI();
             if(nextMoveB == null)
@@ -79,6 +88,7 @@ public class Chessboard {
      * SET UP CHESSBOARD
      */    
     private static void setUpChessboard(String info,String t) {
+    	//ogni pezzo viene tradotto dal preambolo alla scacchiera
     	char turn = 'B';
     	if(t.equals("white")) turn = 'W';
     	
@@ -97,6 +107,7 @@ public class Chessboard {
      * NEXT MOVE BUTTON
      */
     private static void createNextMoveButton() {
+    	//DESIGN
     	nextMoveButton = new JButton("Next Move");
     	nextMoveButton.setFont(new Font("Calibri", Font.BOLD, 16));
     	nextMoveButton.setForeground(Color.WHITE);
@@ -104,14 +115,14 @@ public class Chessboard {
     	nextMoveButton.setFocusPainted(false);
     	nextMoveButton.setBorder(BorderFactory.createCompoundBorder(
     	        BorderFactory.createRaisedBevelBorder(),
-    	        BorderFactory.createEmptyBorder(10, 20, 10, 20))); // Add padding and raised bevel border
-    	nextMoveButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Change cursor on hover
+    	        BorderFactory.createEmptyBorder(10, 20, 10, 20))); 
+    	nextMoveButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
 
     	nextMoveLabel = new JLabel(" ");
     	nextMoveLabel.setFont(new Font("Calibri", Font.BOLD, 14));
-    	nextMoveLabel.setForeground(new Color(60, 60, 60)); // Dark gray text color
+    	nextMoveLabel.setForeground(new Color(60, 60, 60)); 
 
-        //INIZIALIZZAZIONE DEL PULSANTE, SCRIVI E SALVA LA MOSSA
+        //INIZIALIZZAZIONE DEL PULSANTE, SCRIVE E SALVA LA MOSSA
         if (nextMoveW == null) {
             nextMoveLabel.setText("No more moves.");
         } else {
@@ -122,7 +133,7 @@ public class Chessboard {
         	}
         }
 
-
+        //VIENE LANCIATO QUANDO IL PULSANTE è PREMUTO
         nextMoveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -220,6 +231,7 @@ public class Chessboard {
         return chessboardPanel;
     }
     
+    //SVUOTA LA SCACCHIERA
     private static void setEmptyChessboard() {
         for (int i = 0; i < initialBoard.length; i++) {
             for (int j = 0; j < initialBoard[i].length; j++) {

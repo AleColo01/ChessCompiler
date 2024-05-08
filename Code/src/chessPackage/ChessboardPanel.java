@@ -53,24 +53,30 @@ public class ChessboardPanel extends JPanel {
         }
     }
 
+    /**
+ 	 * DISEGNO DELLA SCACCHIERA
+ 	 */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         int squareSize = Math.min(getWidth(), getHeight()) / (size + 1);
 
+        //Stampa etichette colonna
         g.setFont(new Font("Arial", Font.BOLD, squareSize / 3));
         for (int col = 0; col < size; col++) {
             char columnLetter = (char) ('a' + col);
             String columnString = Character.toString(columnLetter);
             g.drawString(columnString, (col + 1) * squareSize + squareSize / 3, squareSize - squareSize / 4);
         }
-
+        
+        //Stampa etichette riga
         for (int row = 0; row < size; row++) {
             int rowNumber = size - row;
             String rowString = Integer.toString(rowNumber);
             g.drawString(rowString, squareSize / 2, (row + 1) * squareSize + squareSize / 2);
         }
 
+        //Stampa caselle di colore diverso in base alla posizione 
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 Color squareColor = (row + col) % 2 == 0 ? new Color(232, 235, 239) : new Color(125, 135, 150);
@@ -80,6 +86,7 @@ public class ChessboardPanel extends JPanel {
                 g.fillRect(x, y, squareSize, squareSize);
 
                 String piece = board[row][col];
+                //Stampa il pezzo nella casella
                 if (!piece.isEmpty()) {
                     BufferedImage pieceImage = pieceImageMap.get(piece);
                     if (pieceImage != null) {
@@ -90,6 +97,9 @@ public class ChessboardPanel extends JPanel {
         }
     }
 
+    /**
+ 	 * DIMENSIONI DELLA SCACCHIERA
+ 	 */
     @Override
     public Dimension getPreferredSize() {
         int squareSize = Math.min(getWidth(), getHeight()) / size;
