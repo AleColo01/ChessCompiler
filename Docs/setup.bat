@@ -1,0 +1,1 @@
+jarfix.exe /64

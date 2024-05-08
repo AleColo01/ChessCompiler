@@ -1,6 +1,1 @@
 #####ERRORI DA SISTEMARE######
-
-Finire doc tecnica (non so se vanno bene i diagrammi e manca un po la parte di spiegazione della grammatica)
-Fare il jar
-Dire quale è la mossa su cui il compilatore torna l'errore ->Sistemare anche per errori lessicali, 
-																stampati anche loro nel semantichandler
