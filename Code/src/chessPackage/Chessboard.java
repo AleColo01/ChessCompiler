@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.util.ArrayList;
 
 public class Chessboard {
     private static ChessboardPanel chessboardPanel;
@@ -12,16 +13,11 @@ public class Chessboard {
     private static JLabel nextMoveLabel;
     private static JFrame frame;
     private static char turn = 'W';
-    private static String turnNumber = "1";
-    private static String nextMoveW = null;
-    private static String nextMoveB = null;
+    private static int turnNumber = 1;
     private static Checker chk = new Checker();
-    private static int currentReading = 0;
-    private static int currentPrinting = 0;
-    
-    private static String tempMoveW = null;
-    private static String tempMoveB = null; 
+    private static int currentPrinting = 0; 
 
+    public static ArrayList<String> allMoves = new ArrayList<String>();
     private static String[][] initialBoard = new String[8][8];
     private static boolean preamble = false;
 
@@ -32,6 +28,7 @@ public class Chessboard {
 
             try {
                 String firstLine = moveReader.readLine();
+                
                 if (firstLine.charAt(0) == '1') {
                     preamble = false;
                 } else if (firstLine != null) {
@@ -45,19 +42,27 @@ public class Chessboard {
                         String[] infos = firstLine.split(";");
                         for (String info : infos) {
                             setUpChessboard(info, PreambleTurn);
-                        }
+                        }     
                         firstLine = moveReader.readLine();
                     }
                 }
-
-                if (firstLine != null) {
-                    String[] parts = firstLine.split("\t");
-                    currentReading += 2;        
-                    turnNumber = parts[0];
-                    nextMoveW = parts[1];
+                
+                String[] parts = firstLine.split("\t");  
+                if(turn =='W') allMoves.add(parts[1]);
+                if (parts.length == 3)
+                	allMoves.add(parts[2]);
+                
+                String line = moveReader.readLine();  
+                while(line != null) {
+                    parts = line.split("\t");  
+                    allMoves.add(parts[1]);
                     if (parts.length == 3)
-                        nextMoveB = parts[2];
-                }
+                    	allMoves.add(parts[2]);
+                    line = moveReader.readLine();  
+                }              
+                
+                System.out.println(allMoves.toString());
+                                    
             } catch (IOException ex) {
                 System.err.println("Error reading move: " + ex.getMessage());
             }
@@ -70,8 +75,6 @@ public class Chessboard {
 
         SwingUtilities.invokeLater(() -> {
             chessboardPanel = createAndShowGUI();
-            if (nextMoveB == null)
-                chessboardPanel.gameEnded = true;
         });
     }
 
@@ -105,87 +108,24 @@ public class Chessboard {
         nextMoveLabel.setFont(new Font("Calibri", Font.BOLD, 14));
         nextMoveLabel.setForeground(new Color(60, 60, 60));
 
-        if (nextMoveW == null) {
+        if (allMoves.get(0).equals("")) {
             nextMoveLabel.setText("No more moves.");
         } else {
-            if (nextMoveW.equals("")) {
-                nextMoveLabel.setText(turnNumber + " " + nextMoveB);
-            } else {
-                nextMoveLabel.setText(turnNumber + " " + nextMoveW);
-            }
+            nextMoveLabel.setText("1. " + allMoves.get(0));
         }
 
         nextMoveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	
-                if (nextMoveW != null || nextMoveB != null) {
-                	currentPrinting++;
-
-                    try {
-                        if (turn == 'W') {
-                            chk.movePiece(chessboardPanel, nextMoveW, turn, currentReading, currentPrinting);                           
-                        }
-                        else
-                            if (nextMoveB != null) {
-                                chk.movePiece(chessboardPanel, nextMoveB, turn, currentReading, currentPrinting);                            
-                            }
-
-                        if (turn == 'W') {
-                            turn = 'B';
-
-                        } else {
-                            turn = 'W';
-                            if(currentReading == currentPrinting){
-	                            String line = moveReader.readLine();
-	                            currentReading += 2;                                         
-	                            String[] parts = null;
-	                            nextMoveW = null;
-	                            nextMoveB = null;
-	                            if (line != null) {
-	                                parts = line.split("\t");
-	                                turnNumber = parts[0];
-	                                nextMoveW = parts[1];
-	                                tempMoveW = parts[1];
-	                                if (parts.length == 3) {
-	                                	nextMoveB = parts[2];
-	                                	tempMoveB = parts[2];
-	                                }
-	                                    
-	                                else
-	                                    chessboardPanel.gameEnded = true;
-	                            }
-                            }
-
-                        	if(nextMoveW == null && tempMoveW != null) {
-                        		nextMoveW = tempMoveW;
-                        		tempMoveW = null;
-                            }
-                            if(nextMoveB == null && tempMoveB != null) {
-                        		nextMoveB = tempMoveB; 
-                        		tempMoveB = null;
-                            }                             
-                        }                   
-
-                        if (nextMoveW == null && nextMoveB == null) {
-                            nextMoveLabel.setText("No more moves.");
-                        } else {
-                            if (turn == 'W')
-                                nextMoveLabel.setText(turnNumber + " " + nextMoveW);
-                            else
-                                if (nextMoveB == null) {
-                                    nextMoveLabel.setText("No more moves.");
-                                } else {
-                                    nextMoveLabel.setText(turnNumber + " " + nextMoveB);
-                                }
-                        }
-
-                    } catch (IOException ex) {
-                        System.err.println("Error reading move: " + ex.getMessage());
-                    }
-                }
-                
-                
-
+            	if (allMoves.size() > currentPrinting) {
+            		chk.movePiece(chessboardPanel, allMoves.get(currentPrinting), turn, currentPrinting);  
+            		if(turn == 'B') turnNumber += 1;
+            		turn = chk.oppositeTurn(turn);
+            		currentPrinting++;
+            		if(allMoves.size() > currentPrinting)
+            			nextMoveLabel.setText(turnNumber + ". " + allMoves.get(currentPrinting));
+            		else
+            			nextMoveLabel.setText("No more moves");
+            	}             
             }
         });
         
@@ -209,14 +149,14 @@ public class Chessboard {
         previousMoveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	if(currentPrinting >0) {
-                	if(turn=='W') {
-                		nextMoveW = chk.previousMoves1.get(currentPrinting-2);
-                		nextMoveB = chk.previousMoves1.get(currentPrinting-1);
-                	}
-                	currentPrinting--;
+            		if(turn == 'W') turnNumber -= 1;
                 	turn = chk.oppositeTurn(turn);
+                	currentPrinting--;
                 	chk.showcaseLastMove(chessboardPanel,currentPrinting,turn);
-
+            		if(allMoves.size() > currentPrinting)
+            			nextMoveLabel.setText(turnNumber + ". " + allMoves.get(currentPrinting));
+            		else
+            			nextMoveLabel.setText("No more moves");
             	}
             }
         });

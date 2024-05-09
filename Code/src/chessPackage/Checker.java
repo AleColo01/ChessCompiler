@@ -13,32 +13,32 @@ public class Checker {
 	
     public Checker() {}
 
-    public boolean movePiece(ChessboardPanel cp, String move, char turn, int currR, int currP) {    
+    public boolean movePiece(ChessboardPanel cp, String move, char turn, int currP) {    
     	enpassant = false;
     	/*
     	 * CASTLING: see handleCastling
     	 */
         if (move.equals("O-O") || move.equals("O-O-O")) {
             handleCastling(cp, move, turn);
-            if(move.equals("O-O")) {
-	            if(currR == currP+1 || currR == currP+2){
+            if(previousMoves1.size() == currP) {
+            	if(move.equals("O-O")){
 	            	if(turn == 'W') {
-	            		previousMoves1.add("Ke1-f1");
-	            		previousMoves2.add("Rh1-e1");
+	            		previousMoves1.add("Ke1-g1");
+	            		previousMoves2.add("Rh1-f1");
 	            	}
 	            	if(turn == 'B') {
-	            		previousMoves1.add("Ke8-f8");
-	            		previousMoves2.add("Rh8-e8");
+	            		previousMoves1.add("Ke8-g8");
+	            		previousMoves2.add("Rh8-f8");
 	            	}
 	            }
 	            if(move.equals("O-O-O")) {
 	            	if(turn == 'W') {
-	            		previousMoves1.add("Ke1-d1");
-	            		previousMoves2.add("Ra1-e1");
+	            		previousMoves1.add("Ke1-c1");
+	            		previousMoves2.add("Ra1-d1");
 	            	}
 	            	if(turn == 'B') {
-	            		previousMoves1.add("Ke8-d8");
-	            		previousMoves2.add("Ra8-e8");
+	            		previousMoves1.add("Ke8-c8");
+	            		previousMoves2.add("Ra8-d8");
 	            	}
 	            }
             }
@@ -166,7 +166,7 @@ public class Checker {
         if (fromRowIndex != -1) rowFrom = (char) ('8' - fromRowIndex);
         if (toRowIndex != -1) rowTo = (char) ('8' - toRowIndex);
         lastMove = piece+""+colFrom+""+rowFrom+"-"+colTo+""+rowTo;
-        if(currR == currP+1 || currR == currP){	
+        if(previousMoves1.size() == currP){	
 			previousMoves1.add(lastMove);
 			if(!cp.getBoard()[toRowIndex][toColIndex].equals("")) {
 				previousMoves2.add(cp.getBoard()[toRowIndex][toColIndex].charAt(0)+""+colTo+""+rowTo);
@@ -211,18 +211,18 @@ public class Checker {
     	//GESTORE MOSSA 2
     	if(!move2.equals("")) {
     		if(move2.length() == 6) {
-    	        piece = move1.charAt(0); 
-    	        fromColIndex = move1.charAt(1) - 'a';
-    	        fromRowIndex = 7 - (Character.getNumericValue(move1.charAt(2)) - 1);
-    	        toColIndex = move1.charAt(4) - 'a';
-    	        toRowIndex = 7 - (Character.getNumericValue(move1.charAt(5)) - 1);
+    	        piece = move2.charAt(0); 
+    	        fromColIndex = move2.charAt(1) - 'a';
+    	        fromRowIndex = 7 - (Character.getNumericValue(move2.charAt(2)) - 1);
+    	        toColIndex = move2.charAt(4) - 'a';
+    	        toRowIndex = 7 - (Character.getNumericValue(move2.charAt(5)) - 1);
     	    	cp.getBoard()[fromRowIndex][fromColIndex] = piece +""+ turn;     	
     	    	cp.getBoard()[toRowIndex][toColIndex] = "";
     		}else{
-    	        piece = move1.charAt(0); 
-    	        fromColIndex = move1.charAt(1) - 'a';
-    	        fromRowIndex = 7 - (Character.getNumericValue(move1.charAt(2)) - 1);
-    	    	cp.getBoard()[fromRowIndex][fromColIndex] = piece +""+ turn;    			
+    	        piece = move2.charAt(0); 
+    	        fromColIndex = move2.charAt(1) - 'a';
+    	        fromRowIndex = 7 - (Character.getNumericValue(move2.charAt(2)) - 1);
+    	    	cp.getBoard()[fromRowIndex][fromColIndex] = piece +""+ oppositeTurn(turn);    			
     		}
     	}
 
