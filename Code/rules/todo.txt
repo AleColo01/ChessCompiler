@@ -1,9 +1,8 @@
 #####ERRORI DA SISTEMARE######
-grafica
-elenco mosse a parte
-sisteamre files da fare vedere
-
-promozione quando si va indietro
 qualche test
+
+sisteamre files da fare vedere
+documentazione con parti nuove e cambiare immagini
+ricreare jar
+
 dire cosa dire
-documentazione con parti nuove

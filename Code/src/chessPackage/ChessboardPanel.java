@@ -24,6 +24,7 @@ public class ChessboardPanel extends JPanel {
 
     public ChessboardPanel(String[][] board) {
         this.board = board;
+        
         loadPieceImages();
     }
 

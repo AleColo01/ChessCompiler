@@ -15,7 +15,7 @@ public class Chessboard {
     private static char turn = 'W';
     private static int turnNumber = 1;
     private static Checker chk = new Checker();
-    private static int currentPrinting = 0; 
+    private static int currentPrinting = 0;
 
     public static ArrayList<String> allMoves = new ArrayList<String>();
     private static String[][] initialBoard = new String[8][8];
@@ -94,18 +94,16 @@ public class Chessboard {
 
 
     private static void createNextMoveButton(JPanel buttonPanel) {
-        nextMoveButton = new JButton("Next Move");
-        nextMoveButton.setFont(new Font("Calibri", Font.BOLD, 16));
-        nextMoveButton.setForeground(Color.WHITE);
-        nextMoveButton.setBackground(new Color(0, 120, 215));
+        nextMoveButton = new JButton(">>");
+        nextMoveButton.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        nextMoveButton.setForeground(Color.BLACK);
+        nextMoveButton.setBackground(Color.GRAY);
         nextMoveButton.setFocusPainted(false);
-        nextMoveButton.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createRaisedBevelBorder(),
-                BorderFactory.createEmptyBorder(10, 20, 10, 20)));
+        nextMoveButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         nextMoveButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         nextMoveLabel = new JLabel(" ");
-        nextMoveLabel.setFont(new Font("Calibri", Font.BOLD, 14));
+        nextMoveLabel.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
         nextMoveLabel.setForeground(new Color(60, 60, 60));
 
         if (allMoves.get(0).equals("")) {
@@ -136,14 +134,12 @@ public class Chessboard {
     }
 
     private static void createPreviousMoveButton(JPanel buttonPanel) {
-        JButton previousMoveButton = new JButton("Previous Move");
-        previousMoveButton.setFont(new Font("Calibri", Font.BOLD, 16));
-        previousMoveButton.setForeground(Color.WHITE);
-        previousMoveButton.setBackground(new Color(0, 120, 215));
+        JButton previousMoveButton = new JButton("<<");
+        previousMoveButton.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
+        previousMoveButton.setForeground(Color.BLACK);
+        previousMoveButton.setBackground(Color.GRAY);
         previousMoveButton.setFocusPainted(false);
-        previousMoveButton.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createRaisedBevelBorder(),
-                BorderFactory.createEmptyBorder(10, 20, 10, 20)));
+        previousMoveButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         previousMoveButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         previousMoveButton.addActionListener(new ActionListener() {
@@ -186,16 +182,23 @@ public class Chessboard {
 
         ChessboardPanel chessboardPanel = new ChessboardPanel(initialBoard);
         chessboardPanel.setSize(new Dimension(400, 400));
-        
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         createPreviousMoveButton(buttonPanel);
         createNextMoveButton(buttonPanel);
+
+        JPanel rightPanel = new JPanel(new BorderLayout());      
+        printMoves(rightPanel);
+        rightPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+
         
         frame.add(chessboardPanel, BorderLayout.CENTER);
+        frame.add(rightPanel, BorderLayout.EAST);
 
         frame.pack();
         frame.setVisible(true);
-
+        
         return chessboardPanel;
     }
 
@@ -205,5 +208,41 @@ public class Chessboard {
                 initialBoard[i][j] = "";
             }
         }
+    }
+    
+    private static void printMoves(JPanel rightPanel) {
+    	char currentTurn = turn;
+    	int currentNum = 1;
+    	boolean temp = true;
+    	JTextArea movesTextArea = new JTextArea();
+    	movesTextArea.setEditable(false);
+    	
+    	movesTextArea.setMargin(new Insets(0, 10, 10, 0));
+
+    	Font font = movesTextArea.getFont();
+    	movesTextArea.setFont(new Font(font.getName(), Font.PLAIN, 16));
+    	movesTextArea.append("MOVES LIST \n");
+    	
+    	for (String move : allMoves) {
+    	    if(currentTurn == 'W' || temp) {
+    	    	temp = false;
+    	        movesTextArea.append(currentNum + ".");   
+    	    }
+    	    movesTextArea.append("\t"+move);
+    	    if(currentTurn == 'B') {
+    	        movesTextArea.append("\n");
+    	        currentNum++;
+    	    }
+    	    currentTurn = chk.oppositeTurn(currentTurn);
+    	}
+
+    	// Includi movesTextArea all'interno di uno JScrollPane
+ 
+    	JScrollPane scrollPane = new JScrollPane(movesTextArea);
+    	scrollPane.setPreferredSize(new Dimension(400, 400));
+    	scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+    	scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+    	rightPanel.add(scrollPane, BorderLayout.SOUTH);
     }
 }

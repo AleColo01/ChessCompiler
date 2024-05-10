@@ -166,8 +166,10 @@ public class Checker {
         if (fromRowIndex != -1) rowFrom = (char) ('8' - fromRowIndex);
         if (toRowIndex != -1) rowTo = (char) ('8' - toRowIndex);
         lastMove = piece+""+colFrom+""+rowFrom+"-"+colTo+""+rowTo;
+        
         if(previousMoves1.size() == currP){	
-			previousMoves1.add(lastMove);
+        	previousMoves1.add(lastMove);
+    	
 			if(!cp.getBoard()[toRowIndex][toColIndex].equals("")) {
 				previousMoves2.add(cp.getBoard()[toRowIndex][toColIndex].charAt(0)+""+colTo+""+rowTo);
 			}else{
@@ -192,7 +194,7 @@ public class Checker {
     public void showcaseLastMove(ChessboardPanel cp, int index, char turn) {
     	String move1 = previousMoves1.get(index);
     	String move2 = previousMoves2.get(index);
-    	
+
         int fromColIndex = -1;
         int fromRowIndex = -1;
         int toColIndex = -1;
@@ -224,6 +226,10 @@ public class Checker {
     	        fromRowIndex = 7 - (Character.getNumericValue(move2.charAt(2)) - 1);
     	    	cp.getBoard()[fromRowIndex][fromColIndex] = piece +""+ oppositeTurn(turn);    			
     		}
+    	}
+    	
+    	if(index-1 >= 0) {
+    		lastMove = previousMoves1.get(index-1);	
     	}
 
         cp.repaint();

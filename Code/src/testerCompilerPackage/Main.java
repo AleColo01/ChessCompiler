@@ -14,18 +14,26 @@ public class Main {
 
     public Main() {
         JFrame frame = new JFrame("Chess Analyzer");
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 400);
         frame.setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
+
         panel.setLayout(new BorderLayout());
 
         JButton chooseFileButton = new JButton("Choose File");
+        chooseFileButton.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
         JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
-        textArea.setFont(new Font("Courier New", Font.PLAIN, 12));
+        textArea.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+        textArea.setMargin(new Insets(10, 10, 10, 10));
+        textArea.setBorder(BorderFactory.createEtchedBorder(0));
         JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+       
+        
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(chooseFileButton);
