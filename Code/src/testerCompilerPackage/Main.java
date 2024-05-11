@@ -11,6 +11,7 @@ import chessPackage.Chessboard;
 public class Main {
     final String GREENBACK = "\033[42m";
     final String RESET = "\033[0m";
+    private int game = 0;
 
     public Main() {
         JFrame frame = new JFrame("Chess Analyzer");
@@ -46,9 +47,13 @@ public class Main {
 
         chooseFileButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
+                JFileChooser fileChooser = new JFileChooser("../Code/GameFiles");
                 int returnValue = fileChooser.showOpenDialog(frame);
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
+                	if(game == 1) {
+                    	Chessboard.closeChessboard();
+                    	game = game - 1;
+                    }
                     File selectedFile = fileChooser.getSelectedFile();
                     String filePath = selectedFile.getAbsolutePath();
 
@@ -66,6 +71,7 @@ public class Main {
 
                         if (par.startChessboard) {
                             System.out.println(GREENBACK + "Avvio Scacchiera..." + RESET);
+                            game++;
                             Chessboard.mainMethod(filePath);
                         }
                     } catch (IOException ex) {

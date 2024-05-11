@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class Chessboard {
     private static ChessboardPanel chessboardPanel;
+    private static JTextArea movesTextArea = new JTextArea();
     private static BufferedReader moveReader;
     private static JButton nextMoveButton;
     private static JLabel nextMoveLabel;
@@ -61,7 +62,6 @@ public class Chessboard {
                     line = moveReader.readLine();  
                 }              
                 
-                System.out.println(allMoves.toString());
                                     
             } catch (IOException ex) {
                 System.err.println("Error reading move: " + ex.getMessage());
@@ -78,6 +78,12 @@ public class Chessboard {
         });
     }
 
+    public static void closeChessboard() {
+    	allMoves.clear();
+    	movesTextArea.setText("");
+    	frame.dispose();
+    }
+    
     private static void setUpChessboard(String info, String t) {
         char turn = 'B';
         if (t.equals("white")) turn = 'W';
@@ -164,8 +170,6 @@ public class Chessboard {
 
     private static ChessboardPanel createAndShowGUI() {
         frame = new JFrame("Chessboard");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         if (!preamble) {
             String[][] TMPinitialBoard = {
                     {"RB", "NB", "BB", "QB", "KB", "BB", "NB", "RB"},
@@ -214,7 +218,6 @@ public class Chessboard {
     	char currentTurn = turn;
     	int currentNum = 1;
     	boolean temp = true;
-    	JTextArea movesTextArea = new JTextArea();
     	movesTextArea.setEditable(false);
     	
     	movesTextArea.setMargin(new Insets(0, 10, 10, 0));
@@ -244,5 +247,6 @@ public class Chessboard {
     	scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
     	rightPanel.add(scrollPane, BorderLayout.SOUTH);
+    	movesTextArea.setCaretPosition(0);
     }
 }
