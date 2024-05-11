@@ -1,4 +1,6 @@
 #####ERRORI DA SISTEMARE######
 
-documentazione con parti nuove e cambiare immagini
-dire cosa dire
+Controllare documentazione (magari aggiungere come funzione la roba del jar che hai fatto (setup...))
+Trasformare la doc in pdfff
+
+Dire cosa dire

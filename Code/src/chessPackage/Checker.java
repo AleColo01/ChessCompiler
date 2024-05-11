@@ -241,9 +241,7 @@ public class Checker {
     	lastMove = move;
     }
     
-	/*
-	 * HANDLE CASTLING 
-	 */
+	
     public void handleCastling(ChessboardPanel cp, String move, char turn) {
         if (move.equals("O-O")) { //short castle
             if (turn == 'W') { // white side
