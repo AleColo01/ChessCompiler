@@ -141,7 +141,7 @@ public class compilerChecker extends Checker {
 						error = true;
 					}
 				}
-				if((take == 0 && !cp.getBoard()[rowTo][colTo].equals(""))){
+				if(((take == 0 || take == '-') && !cp.getBoard()[rowTo][colTo].equals(""))){
 					sh.addError(sh.TAKE_NOT_CORRECT_ERROR, lastToken, turn, actualTurn);
 					error = true;
 				}
@@ -227,15 +227,6 @@ public class compilerChecker extends Checker {
 	    	if (promotion != 0) cp.getBoard()[rowTo][colTo] = promotion + "" + turn;
 	        else cp.getBoard()[rowTo][colTo] = piece + "" + turn;
 		}
-		
-		//STAMPA SCACCHIERA
-//		for (int r = 0; r < 8; r++) {
-//            for (int c = 0; c < 8; c++) {
-//            	System.out.print(cp.getBoard()[r][c]);
-//            	System.out.print(" | ");
-//            }
-//            System.out.println("");
-//        }	
 	}
 	
 	

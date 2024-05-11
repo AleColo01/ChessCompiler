@@ -72,8 +72,10 @@ public class ChessGrammarParserTester {
 		    }
 		    
 		    //Stampo gli errori
-		    if (!sh.hasErrors())
-		    	System.out.println ("Parsing con ANTLR terminato con successo\n\n");
+		    if (!sh.hasErrors()) {
+		    	System.out.println ("Parsing con ANTLR terminato con successo\n");
+		    	textArea.append("File corretto, avvio scacchiera...\n\n\n");	
+		    }
 		    else {  
 		    	startChessboard = false;
 		    	System.out.println (RED+ sh.getErrors().get(0) + RESET);	
