@@ -82,6 +82,12 @@ public class Chessboard {
     	allMoves.clear();
     	movesTextArea.setText("");
     	frame.dispose();
+    	currentPrinting = 0;
+    	chk.previousMoves1.clear();
+    	chk.previousMoves2.clear();
+        turn = 'W';
+        turnNumber = 1;
+        preamble = false;
     }
     
     private static void setUpChessboard(String info, String t) {
